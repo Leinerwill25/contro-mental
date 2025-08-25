@@ -16,9 +16,9 @@ export default function Home() {
 		},
 		{
 			id: 2,
-			title: 'Libro Prohibido el 2022 - La Verdad',
-			subtitle: 'Second Pearl Harbor - COVID 19 - Elecciones USA 2020',
-			price: '24.50',
+			title: 'Mentoría Y Sistema Internacional Método Bértoli',
+			subtitle: 'Control Mental Alpha - Cumple Tus Deseos',
+			price: '250.00',
 			image: '/pexels-dom-j-7304-45717.jpg',
 			info: 'Investigación profunda y contundente.',
 		},
@@ -26,9 +26,9 @@ export default function Home() {
 			id: 3,
 			title: 'Metodo Control Mental Alpha',
 			subtitle: 'Como Tener Exito en el Amor y Como Aprende Seduccion Subliminal',
-			price: '14.00',
+			price: '180.00',
 			image: '/pexels-pixabay-415078.jpg',
-			info: 'Técnicas prácticas y ejercicios paso a paso.',
+			info: 'Idiomas: English Y Español.',
 		},
 	];
 
