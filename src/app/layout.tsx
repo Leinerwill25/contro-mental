@@ -5,8 +5,8 @@ import Footer from '@/components/Footer';
 import type { ReactNode } from 'react';
 
 export const metadata = {
-	title: 'Tu Librería - Landing',
-	description: 'Landing profesional de libros — Compra y descubre títulos seleccionados.',
+	title: 'Corporación Ejecutiva Internacional',
+	description: 'Landing profesional — Compra y descubre',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

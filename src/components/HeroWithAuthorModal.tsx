@@ -28,6 +28,7 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 	const triggerRef = useRef<HTMLButtonElement | null>(null);
 	const modalRef = useRef<HTMLDivElement | null>(null);
 	const previouslyFocused = useRef<HTMLElement | null>(null);
+	const scrollYRef = useRef<number | null>(null);
 
 	const openModal = useCallback(() => {
 		previouslyFocused.current = document.activeElement as HTMLElement | null;
@@ -36,25 +37,28 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 
 	const closeModal = useCallback(() => {
 		setIsOpen(false);
-		setTimeout(() => previouslyFocused.current?.focus(), 0);
+		// restore focus to the trigger (or previously focused element)
+		setTimeout(() => {
+			(previouslyFocused.current ?? triggerRef.current)?.focus();
+		}, 0);
 	}, []);
 
-	// Scroll lock while modal open
+	// Scroll lock while modal open (robust handling)
 	useEffect(() => {
 		if (typeof window === 'undefined') return;
+
 		if (isOpen) {
-			const scrollY = window.scrollY;
+			scrollYRef.current = window.scrollY;
 			document.body.style.position = 'fixed';
-			document.body.style.top = `-${scrollY}px`;
+			document.body.style.top = `-${scrollYRef.current}px`;
 			document.body.style.width = '100%';
 		} else {
-			const top = document.body.style.top;
-			if (top) {
-				const scrollY = parseInt(top || '0') * -1;
+			if (scrollYRef.current != null) {
 				document.body.style.position = '';
 				document.body.style.top = '';
 				document.body.style.width = '';
-				window.scrollTo(0, scrollY);
+				window.scrollTo(0, scrollYRef.current);
+				scrollYRef.current = null;
 			} else {
 				document.body.style.position = '';
 				document.body.style.top = '';
@@ -62,13 +66,14 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 			}
 		}
 		return () => {
+			// cleanup safe-guards
 			document.body.style.position = '';
 			document.body.style.top = '';
 			document.body.style.width = '';
 		};
 	}, [isOpen]);
 
-	// Focus trap + ESC
+	// Focus trap + ESC handling
 	useEffect(() => {
 		if (!isOpen) return;
 
@@ -79,7 +84,7 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 			} else if (e.key === 'Tab') {
 				const modal = modalRef.current;
 				if (!modal) return;
-				const focusables = modal.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])');
+				const focusables = Array.from(modal.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])')).filter((el) => el.offsetParent !== null); // only visible
 				if (focusables.length === 0) return;
 				const first = focusables[0];
 				const last = focusables[focusables.length - 1];
@@ -101,7 +106,7 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 		setTimeout(() => {
 			const modal = modalRef.current;
 			if (!modal) return;
-			const focusable = modal.querySelector<HTMLElement>('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])');
+			const focusable = (modal.querySelector<HTMLElement>('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])') as HTMLElement) ?? modal;
 			(focusable ?? modal).focus();
 		}, 10);
 
@@ -181,54 +186,37 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 				</div>
 			</section>
 
-			{/* Modal del autor (responsive: full-screen on mobile, md+ keeps original grid) */}
+			{/* Modal del autor (responsive) */}
 			{isOpen && (
 				<div id="author-modal" role="dialog" aria-modal="true" aria-labelledby="author-modal-title" className="fixed inset-0 z-50 flex items-center justify-center px-0 md:px-4">
 					{/* overlay */}
 					<div onClick={closeModal} className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity" aria-hidden="true" />
 
-					{/* PANEL:
-              - Mobile: full-screen, no rounding, header sticky, footer sticky.
-              - md+: previous max-w, rounded-2xl, grid layout preserved.
-          */}
-					<div
+					{/* panel */}
+					<aside
 						ref={modalRef}
 						role="document"
 						tabIndex={-1}
 						style={{ zIndex: 60 }}
-						className="
-              relative
-              w-full
-              h-full
-              md:h-auto
-              md:max-w-3xl
-              md:mx-auto
-              bg-white
-              md:rounded-2xl
-              shadow-2xl
-              ring-1 ring-slate-100
-              overflow-hidden
-            ">
-						{/* Mobile header (visible on mobile, hidden on md+) */}
-						<div className="md:hidden sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-100 flex items-center justify-between px-4 py-3">
-							<div>
+						className="relative w-full h-full md:h-auto md:max-w-3xl md:mx-auto bg-white md:rounded-2xl shadow-2xl ring-1 ring-slate-100 overflow-hidden transform transition-all duration-300 ease-out
+									animate-fade-in">
+						{/* mobile header */}
+						<header className="md:hidden sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-100 flex items-center justify-between px-4 py-3">
+							<div className="flex flex-col">
 								<h3 className="text-base font-semibold text-slate-900">{SAMPLE_AUTHOR.name}</h3>
 								{SAMPLE_AUTHOR.title && <p className="text-xs text-slate-600 mt-0.5">{SAMPLE_AUTHOR.title}</p>}
 							</div>
 
-							<button onClick={closeModal} aria-label="Cerrar" className="inline-flex items-center justify-center rounded-md p-2 text-slate-700 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-[#0B2342]">
+							<button onClick={closeModal} aria-label="Cerrar modal" className="inline-flex items-center justify-center rounded-md p-2 text-slate-700 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-[#0B2342]">
 								<X className="w-5 h-5" />
 							</button>
-						</div>
+						</header>
 
-						{/* Content area:
-                - Mobile: column, scrollable.
-                - md+: grid 1/3 + 2/3 preserved.
-            */}
+						{/* content */}
 						<div className="h-full md:h-auto overflow-y-auto">
-							<div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 md:p-8">
+							<main className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 md:p-8" id="author-modal-main">
 								{/* Photo column */}
-								<div className="md:col-span-1">
+								<figure className="md:col-span-1">
 									<div className="w-full rounded-xl overflow-hidden border border-slate-100 bg-neutral-50">
 										<div className="relative w-full h-44 md:h-56">
 											{SAMPLE_AUTHOR.photo ? (
@@ -244,11 +232,27 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 											)}
 										</div>
 									</div>
-								</div>
+
+									{/* small contact block for md+ under photo (keeps corporate feel) */}
+									<div className="hidden md:block mt-4">
+										{SAMPLE_AUTHOR.email && (
+											<a className="inline-flex items-center gap-2 text-sm text-slate-700" href={`mailto:${SAMPLE_AUTHOR.email}`}>
+												<Mail className="w-4 h-4" />
+												{SAMPLE_AUTHOR.email}
+											</a>
+										)}
+										{SAMPLE_AUTHOR.linkedin && (
+											<a className="inline-flex items-center gap-2 text-sm text-slate-700 mt-2 block" href={SAMPLE_AUTHOR.linkedin} target="_blank" rel="noreferrer noopener">
+												<Linkedin className="w-4 h-4" />
+												Perfil LinkedIn
+											</a>
+										)}
+									</div>
+								</figure>
 
 								{/* Content column */}
-								<div className="md:col-span-2 flex flex-col">
-									{/* Desktop close sits top-right for md+, mobile uses header close */}
+								<section className="md:col-span-2 flex flex-col" aria-labelledby="author-modal-title">
+									{/* desktop header & close */}
 									<div className="hidden md:flex items-start justify-between">
 										<div>
 											<h2 id="author-modal-title" className="text-lg md:text-2xl font-semibold text-slate-900">
@@ -258,16 +262,18 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 										</div>
 
 										<div>
-											<button onClick={closeModal} aria-label="Cerrar" className="inline-flex items-center justify-center rounded-md p-2 text-slate-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-[#0B2342]">
+											<button onClick={closeModal} aria-label="Cerrar modal" className="inline-flex items-center justify-center rounded-md p-2 text-slate-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-[#0B2342]">
 												<X className="w-5 h-5" />
 											</button>
 										</div>
 									</div>
 
+									{/* body */}
 									<div className="mt-4 text-sm text-slate-700 leading-relaxed space-y-4">
 										<p>{SAMPLE_AUTHOR.bio}</p>
 
-										<div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+										{/* contact links (mobile visible here too) */}
+										<div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:hidden">
 											{SAMPLE_AUTHOR.email && (
 												<a className="inline-flex items-center gap-2 text-sm text-slate-700" href={`mailto:${SAMPLE_AUTHOR.email}`}>
 													<Mail className="w-4 h-4" />
@@ -283,6 +289,7 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 											)}
 										</div>
 
+										{/* actions */}
 										<div className="mt-2 flex flex-wrap gap-3">
 											<a href="#contacto" className="inline-flex items-center px-4 py-2 rounded-md bg-[#0B2342] text-white font-medium shadow-sm hover:opacity-95 transition">
 												Contactar
@@ -293,20 +300,20 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 											</button>
 										</div>
 									</div>
-								</div>
-							</div>
+								</section>
+							</main>
 						</div>
 
-						{/* Mobile sticky footer (visible on mobile only) */}
-						<div className="md:hidden sticky bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-t border-slate-100 px-4 py-3 flex items-center gap-3">
+						{/* mobile sticky footer */}
+						<footer className="md:hidden sticky bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-t border-slate-100 px-4 py-3 flex items-center gap-3">
 							<a href="#contacto" className="flex-1 inline-flex items-center justify-center px-4 py-3 rounded-md bg-[#0B2342] text-white font-medium">
 								Contactar
 							</a>
 							<button onClick={closeModal} className="inline-flex items-center justify-center px-4 py-3 rounded-md border border-slate-200 text-sm text-slate-700">
 								Cerrar
 							</button>
-						</div>
-					</div>
+						</footer>
+					</aside>
 				</div>
 			)}
 		</>

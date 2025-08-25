@@ -33,7 +33,7 @@ export default function NavbarImproved() {
 			<div className="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
 				{/* Logo */}
 				<Link href="/" className="flex items-center gap-3" aria-label="Inicio - Corporación Ejecutiva Internacional">
-					<Image src="/como.png" alt="Logo - Corporación Ejecutiva Internacional" width={44} height={44} priority />
+					<Image src="/grok.png" alt="Logo - Corporación Ejecutiva Internacional" width={44} height={44} priority />
 					<span className="font-semibold text-lg text-white tracking-tight">Corporación Ejecutiva Internacional</span>
 				</Link>
 

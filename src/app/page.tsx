@@ -3,6 +3,7 @@ import React from 'react';
 import HeroWithAuthorModal from '@/components/HeroWithAuthorModal';
 import BookCarousel from '@/components/BookCarousel'; // ajusta si tu archivo se llama distinto
 import QuienesSomos from '@/components/QuienesSomos';
+import SupportAnimalsBanner from '@/components/SupportAnimalsBanner';
 
 export default function Home() {
 	const books = [
@@ -17,15 +18,15 @@ export default function Home() {
 		{
 			id: 2,
 			title: 'Mentoría Y Sistema Internacional Método Bértoli',
-			subtitle: 'Control Mental Alpha - Cumple Tus Deseos',
+			subtitle: 'Control Mental Alpha - Tu Mente Cumple Tus Deseos - Duración: 34 Dias, Resultados Inmediatos Garantizados. Control Mental Externo Individual y/o Masivo. Aprende a Materializar tus Deseos.',
 			price: '250.00',
 			image: '/pexels-dom-j-7304-45717.jpg',
 			info: 'Investigación profunda y contundente.',
 		},
 		{
 			id: 3,
-			title: 'Metodo Control Mental Alpha',
-			subtitle: 'Como Tener Exito en el Amor y Como Aprende Seduccion Subliminal',
+			title: 'Como Tener Exito en el Amor y Como Aprende Seduccion Subliminal',
+			subtitle: 'Metodo Control Mental Alpha',
 			price: '180.00',
 			image: '/pexels-pixabay-415078.jpg',
 			info: 'Idiomas: English Y Español.',
@@ -43,6 +44,7 @@ export default function Home() {
 					<QuienesSomos />
 				</div>
 			</section>
+			<SupportAnimalsBanner />
 
 			{/* LIBROS - carrusel */}
 			<section id="libros" className="py-16">
