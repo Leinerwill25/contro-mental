@@ -118,7 +118,7 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 	// const cardBase = 'bg-yellow-200 rounded-2xl border border-slate-100 p-4 shadow-sm';
 
 	// Opción A — Corporativa / elegante (recomendado)
-	const cardBase = 'bg-yellow-200/80 rounded-2xl border border-slate-100 p-6 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-indigo-100';
+	const cardBase = 'bg-yellow-300/80 rounded-2xl border border-slate-100 p-6 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-indigo-100';
 
 	// Opción B — Cálida, con personalidad (amarillo pero sobrio)
 	// const cardBase = 'bg-gradient-to-b from-yellow-50 to-yellow-100 rounded-2xl border border-amber-200 p-6 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-amber-200';
@@ -147,7 +147,7 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 						<p className="mt-6 text-lg text-slate-100 max-w-xl leading-relaxed">Somos Una Empresa Que Ofrece A Su Público Conocimientos Que Brindan A Su Clientela La Oportunidad De Tener Mayor Éxito En Sus Vidas Mediante Nuestras Mentorias Internacionales, Las Cuales Son Acompañadas De Métodos Y Sistemas Personalizados, Coaching Individuales, Todo Short-Time con Resultados Tangibles y Concretos.</p>
 
 						<ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-slate-100">
-							{['Conocer Y Aplicar Las Ondas Electricas De Tu Mente', 'Conocer y Aplicar Técnica Alpha De Relajación En Casos Especiales', 'Conocer y Aplicar Propiedad Mental De Visualización y Clarividencia ', 'Eliminar De Tu Vida El Stress Mas La Angustia y La Ansiedad', 'Aplicar Técnica Alpha De Análisis Del Ser Humano', 'Ubicación Alpha De Tu Vida En El Espacio Tiempo y Como Inmediatamente Mejorar', 'El Mas Importante Mover Objetos Y Materializar Un Deseo'].map((item) => (
+							{['Conocer Y Aplicar Las Ondas Electricas De Tu Mente', 'Conocer y Aplicar Técnica Alpha De Relajación En Casos Especiales', 'Conocer y Aplicar Propiedad Mental De Visualización y Clarividencia ', 'Eliminar De Tu Vida El Stress Mas La Angustia y La Ansiedad', 'Aplicar Técnica Alpha De Análisis Del Ser Humano', 'Ubicación Alpha De Tu Vida En El Espacio Tiempo y Como Inmediatamente Mejorar', 'El Mas Importante: Mover Objetos Y Materializar Un Deseo'].map((item) => (
 								<li key={item} className="flex items-start gap-3">
 									<span
 										className="flex-shrink-0 w-9 h-9 rounded-full bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-200
@@ -162,7 +162,7 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 						</ul>
 
 						<div className="mt-6 flex flex-wrap gap-3 items-center">
-							<a href="#libros" className="inline-flex items-center px-6 py-3 rounded-md bg-white text-[#07203a] font-semibold shadow hover:translate-y-[-2px] transition-transform">
+							<a href="#libros" className="inline-flex items-center px-6 py-3 rounded-md bg-yellow-400 text-[#07203a] font-semibold shadow hover:translate-y-[-2px] transition-transform">
 								Control Mental Alpha Al Éxito Viene Con El Libro
 							</a>
 
@@ -178,14 +178,14 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 							{/* Top-left card */}
 							<div aria-hidden className={`absolute -top-6 -left-6 z-50 w-40 md:w-43 h-32 ${cardBase} text-slate-900`}>
 								<div className="text-sm font-semibold">Elimina:</div>
-								<div className="mt-1 text-xs text-slate-800">Tus principales bloqueos mentales mediante técnicas prácticas.</div>
+								<div className="text-xs font-semibold text-slate-800">Tus principales bloqueos mentales mediante técnicas prácticas.</div>
 							</div>
 
 							{/* Right card */}
 							<div aria-hidden className={`absolute -right-6 top-16 z-50 w-40 md:w-48 h-20 ${cardBase} text-slate-900 flex items-center justify-center`}>
 								<div>
 									<div className="text-sm font-semibold">Aprende:</div>
-									<div className="text-xs text-slate-800">A conectar con el núcleo mental de forma efectiva.</div>
+									<div className="text-xs font-semibold text-slate-800">A conectar con el núcleo mental de forma efectiva.</div>
 								</div>
 							</div>
 
@@ -200,7 +200,7 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 							<div className="absolute left-1/2 transform -translate-x-1/2 md:translate-x-0 md:left-auto md:right-6 bottom-[-48px] md:bottom-[-72px] z-50 w-[86%] md:w-[58%]">
 								<div className={`${cardBase} text-slate-900`}>
 									<p className="text-sm font-semibold">Aumento mínimo:</p>
-									<p className="mt-1 text-xs text-slate-800">Aumentar Totalmente tu Concentración, eliminar el stress y a traces de la infinita energía mental cambiar tu entorno físico y materializar tus deseos.</p>
+									<p className="mt-1 text-xs font-semibold text-slate-800">Aumentar Totalmente tu Concentración, eliminar el stress y a traces de la infinita energía mental cambiar tu entorno físico y materializar tus deseos.</p>
 								</div>
 							</div>
 						</div>

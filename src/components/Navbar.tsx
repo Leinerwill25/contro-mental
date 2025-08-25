@@ -51,7 +51,7 @@ export default function NavbarImproved() {
 						</a>
 					))}
 
-					<Link href="#comprar" className="inline-flex items-center px-5 py-2 rounded-lg bg-white text-[#0B2342] text-sm font-semibold shadow-sm hover:shadow-md transform-gpu hover:-translate-y-0.5 transition" aria-label="Comprar ahora">
+					<Link href="#comprar" className="inline-flex items-center px-5 py-2 rounded-lg bg-yellow-300 text-[#0B2342] text-sm font-semibold shadow-sm hover:shadow-md transform-gpu hover:-translate-y-0.5 transition" aria-label="Comprar ahora">
 						Comprar
 					</Link>
 				</nav>
