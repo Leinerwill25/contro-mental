@@ -23,7 +23,7 @@ const SAMPLE_AUTHOR: Author = {
 	linkedin: 'https://linkedin.com/in/alejandro-ramirez',
 };
 
-export default function HeroWithAuthorModal(): JSX.Element {
+export default function HeroWithAuthorModal(): React.ReactElement {
 	const [isOpen, setIsOpen] = useState(false);
 	const triggerRef = useRef<HTMLButtonElement | null>(null);
 	const modalRef = useRef<HTMLDivElement | null>(null);
@@ -120,7 +120,7 @@ export default function HeroWithAuthorModal(): JSX.Element {
 					<div className="flex-1 pt-10">
 						<h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
 							Programa Internacional Bértoli
-							<span className="block text-accent-200 mt-2 text-lg font-medium">"Control Mental Alpha"</span>
+							<span className="block text-accent-200 mt-2 text-lg font-medium">&quot;Control Mental Alpha&quot;</span>
 						</h1>
 
 						<p className="mt-6 text-lg text-slate-100 max-w-xl leading-relaxed">Sistema short-time que activa tu potencial mental y proporciona resultados rápidos y aplicables. Aprende técnicas probadas para mejorar concentración, reducir estrés y alcanzar objetivos con mayor claridad.</p>

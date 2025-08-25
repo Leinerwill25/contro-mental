@@ -14,7 +14,7 @@ const NAV_ITEMS = [
 	{ href: '#contacto', label: 'Contacto' },
 ];
 
-export default function NavbarImproved(): JSX.Element {
+export default function NavbarImproved() {
 	const [open, setOpen] = useState(false);
 	const pathname = usePathname();
 
