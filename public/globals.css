@@ -1,0 +1,26 @@
+/* app/globals.css (Tailwind v4 - opción recomendada) */
+/* En lugar de @tailwind base */
+@import 'tailwindcss/preflight';
+
+/* En lugar de @tailwind components */
+@import 'tailwindcss/theme';
+
+/* En lugar de @tailwind utilities */
+@import 'tailwindcss/utilities';
+
+:root {
+	--color-primary: #111827;
+	--color-accent: #b98b1f;
+}
+
+body {
+	font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background: white;
+	color: var(--color-primary);
+}
+
+.hero-title {
+	@apply text-4xl md:text-6xl font-semibold;
+}
