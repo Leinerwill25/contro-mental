@@ -115,7 +115,16 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 	}, [isOpen, closeModal]);
 
 	// Re-usable card base for a clean corporate look
-	const cardBase = 'bg-white rounded-2xl border border-slate-100 p-4 shadow-sm';
+	// const cardBase = 'bg-yellow-200 rounded-2xl border border-slate-100 p-4 shadow-sm';
+
+	// Opción A — Corporativa / elegante (recomendado)
+	const cardBase = 'bg-yellow-200/80 rounded-2xl border border-slate-100 p-6 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-indigo-100';
+
+	// Opción B — Cálida, con personalidad (amarillo pero sobrio)
+	// const cardBase = 'bg-gradient-to-b from-yellow-50 to-yellow-100 rounded-2xl border border-amber-200 p-6 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-amber-200';
+
+	// Opción C — Premium (acento dorado / llamativo)
+	// const cardBase = 'bg-white/95 rounded-2xl border border-amber-400 p-6 shadow-[0_10px_30px_rgba(15,23,42,0.12)] hover:shadow-[0_18px_40px_rgba(15,23,42,0.16)] transform hover:-translate-y-1 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-amber-200';
 
 	return (
 		<>
@@ -125,15 +134,28 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 					<div className="flex-1 pt-10">
 						<h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
 							Programa Internacional Bértoli
-							<span className="block text-accent-200 mt-2 text-lg font-medium">&quot;Control Mental Alpha&quot;</span>
+							<span className="block text-accent-200 mt-2 text-3xl font-medium">&quot;Control Mental Alpha&quot;</span>
+							<span
+								className=" font-semibold text-lg tracking-tight
+               bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-200
+               bg-clip-text text-transparent
+               drop-shadow-[0_6px_18px_rgba(245,158,11,0.20)]">
+								Cumple Tus Deseos
+							</span>
 						</h1>
 
-						<p className="mt-6 text-lg text-slate-100 max-w-xl leading-relaxed">Sistema short-time que activa tu potencial mental y proporciona resultados rápidos y aplicables. Aprende técnicas probadas para mejorar concentración, reducir estrés y alcanzar objetivos con mayor claridad.</p>
+						<p className="mt-6 text-lg text-slate-100 max-w-xl leading-relaxed">Somos Una Empresa Que Ofrece A Su Público Conocimientos Que Brindan A Su Clientela La Oportunidad De Tener Mayor Éxito En Sus Vidas Mediante Nuestras Mentorias Internacionales, Las Cuales Son Acompañadas De Métodos Y Sistemas Personalizados, Coaching Individuales, Todo Short-Time con Resultados Tangibles y Concretos.</p>
 
 						<ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-slate-100">
-							{['Aplicación práctica de ondas mentales', 'Técnicas Alpha de relajación profunda', 'Visualización y clarividencia dirigida', 'Reducción efectiva del estrés y la ansiedad', 'Técnicas de análisis del ser humano', 'Mejora de la toma de decisiones y el foco'].map((item) => (
+							{['Conocer Y Aplicar Las Ondas Electricas De Tu Mente', 'Conocer y Aplicar Técnica Alpha De Relajación En Casos Especiales', 'Conocer y Aplicar Propiedad Mental De Visualización y Clarividencia ', 'Eliminar De Tu Vida El Stress Mas La Angustia y La Ansiedad', 'Aplicar Técnica Alpha De Análisis Del Ser Humano', 'Ubicación Alpha De Tu Vida En El Espacio Tiempo y Como Inmediatamente Mejorar', 'El Mas Importante Mover Objetos Y Materializar Un Deseo'].map((item) => (
 								<li key={item} className="flex items-start gap-3">
-									<span className="flex-shrink-0 w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white font-semibold">✓</span>
+									<span
+										className="flex-shrink-0 w-9 h-9 rounded-full bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-200
+               bg-clip-text text-transparent
+               drop-shadow-[0_6px_18px_rgba(245,158,11,0.20)] flex items-center justify-center text-lg tracking-tight
+               ">
+										✓
+									</span>
 									<span className="leading-tight">{item}</span>
 								</li>
 							))}
@@ -141,7 +163,7 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 
 						<div className="mt-6 flex flex-wrap gap-3 items-center">
 							<a href="#libros" className="inline-flex items-center px-6 py-3 rounded-md bg-white text-[#07203a] font-semibold shadow hover:translate-y-[-2px] transition-transform">
-								Ver libro
+								Control Mental Alpha Al Éxito Viene Con El Libro
 							</a>
 
 							<button ref={triggerRef} onClick={openModal} className="inline-flex items-center px-6 py-3 rounded-md border border-white/20 bg-transparent text-white font-medium shadow-sm hover:bg-white/5 transition" aria-haspopup="dialog" aria-expanded={isOpen} aria-controls="author-modal">
@@ -154,31 +176,31 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 					<div className="w-full md:w-1/2 relative">
 						<div className="relative mx-auto md:mx-0 w-[92%] md:w-full lg:w-[95%] transform transition-shadow duration-300">
 							{/* Top-left card */}
-							<div aria-hidden className={`absolute -top-6 -left-6 z-50 w-40 md:w-43 h-30 ${cardBase} text-slate-900`}>
+							<div aria-hidden className={`absolute -top-6 -left-6 z-50 w-40 md:w-43 h-32 ${cardBase} text-slate-900`}>
 								<div className="text-sm font-semibold">Elimina:</div>
-								<div className="mt-1 text-xs text-slate-500">Tus principales bloqueos mentales mediante técnicas prácticas.</div>
+								<div className="mt-1 text-xs text-slate-800">Tus principales bloqueos mentales mediante técnicas prácticas.</div>
 							</div>
 
 							{/* Right card */}
 							<div aria-hidden className={`absolute -right-6 top-16 z-50 w-40 md:w-48 h-20 ${cardBase} text-slate-900 flex items-center justify-center`}>
 								<div>
 									<div className="text-sm font-semibold">Aprende:</div>
-									<div className="text-xs text-slate-500">A conectar con el núcleo mental de forma efectiva.</div>
+									<div className="text-xs text-slate-800">A conectar con el núcleo mental de forma efectiva.</div>
 								</div>
 							</div>
 
 							{/* Imagen principal */}
 							<div className="relative rounded-xl overflow-hidden shadow-2xl border border-slate-800/20 bg-white z-40">
 								<div className="w-full h-64 md:h-80 lg:h-96 relative">
-									<Image src="/pexels-divinetechygirl-1181355.jpg" alt="Libros y formación" fill style={{ objectFit: 'cover' }} className="block" priority />
+									<Image src="/pexels-kampus-8428080.jpg" alt="Libros y formación" fill style={{ objectFit: 'cover' }} className="block" priority />
 								</div>
 							</div>
 
 							{/* Bottom floating card */}
 							<div className="absolute left-1/2 transform -translate-x-1/2 md:translate-x-0 md:left-auto md:right-6 bottom-[-48px] md:bottom-[-72px] z-50 w-[86%] md:w-[58%]">
 								<div className={`${cardBase} text-slate-900`}>
-									<p className="text-sm font-semibold">Aumento mínimo esperado</p>
-									<p className="mt-1 text-xs text-slate-500">Hasta 3x en capacidad de análisis, comprensión y resolución práctica.</p>
+									<p className="text-sm font-semibold">Aumento mínimo:</p>
+									<p className="mt-1 text-xs text-slate-800">Aumentar Totalmente tu Concentración, eliminar el stress y a traces de la infinita energía mental cambiar tu entorno físico y materializar tus deseos.</p>
 								</div>
 							</div>
 						</div>
@@ -239,12 +261,6 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 											<a className="inline-flex items-center gap-2 text-sm text-slate-700" href={`mailto:${SAMPLE_AUTHOR.email}`}>
 												<Mail className="w-4 h-4" />
 												{SAMPLE_AUTHOR.email}
-											</a>
-										)}
-										{SAMPLE_AUTHOR.linkedin && (
-											<a className="inline-flex items-center gap-2 text-sm text-slate-700 mt-2 block" href={SAMPLE_AUTHOR.linkedin} target="_blank" rel="noreferrer noopener">
-												<Linkedin className="w-4 h-4" />
-												Perfil LinkedIn
 											</a>
 										)}
 									</div>

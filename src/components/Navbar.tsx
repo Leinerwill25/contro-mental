@@ -34,7 +34,13 @@ export default function NavbarImproved() {
 				{/* Logo */}
 				<Link href="/" className="flex items-center gap-3" aria-label="Inicio - Corporación Ejecutiva Internacional">
 					<Image src="/grok.png" alt="Logo - Corporación Ejecutiva Internacional" width={44} height={44} priority />
-					<span className="font-semibold text-lg text-white tracking-tight">Corporación Ejecutiva Internacional</span>
+					<span
+						className="font-semibold text-lg tracking-tight
+               bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-200
+               bg-clip-text text-transparent
+               drop-shadow-[0_6px_18px_rgba(245,158,11,0.20)]">
+						Corporación Ejecutiva Internacional
+					</span>
 				</Link>
 
 				{/* Desktop nav */}

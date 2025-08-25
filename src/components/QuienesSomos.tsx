@@ -22,25 +22,25 @@ const defaultTeam: TeamMember[] = [
 	{
 		name: 'Dr. Jesus',
 		role: 'Gerencia',
-		image: '/pexels-mastercowley-1300402.jpg',
+		image: '/Jesus.png',
 		description: 'Especialista en desarrollo de estrategias empresariales y dirección de proyectos.',
 	},
 	{
 		name: 'Dr. Tullio',
 		role: 'Gerencia',
-		image: '/pexels-justin-shaifer-501272-1222271.jpg',
+		image: '/Tullio.jpg',
 		description: 'Con visión estratégica para el crecimiento sostenible y expansión internacional.',
 	},
 	{
 		name: 'Erica',
 		role: 'Directora de Control',
-		image: '/pexels-olly-733872.jpg',
+		image: '/Erica.png',
 		description: 'Coordina procesos internos y asegura eficiencia en cada área de la empresa.',
 	},
 	{
 		name: 'Lourdes',
 		role: 'Directora de Internet',
-		image: '/pexels-danxavier-1239291.jpg',
+		image: '/Lourdes.jpg',
 		description: 'Especialista en innovación digital y estrategias de transformación tecnológica.',
 	},
 	{
