@@ -17,7 +17,7 @@ type Author = {
 const SAMPLE_AUTHOR: Author = {
 	name: 'Jaime Bértoli',
 	title: 'Escritor e Investigador',
-	bio: 'Con más de 28 años como profesor y conferencista internacional en Control Mental ALPHA, me dedico a enseñar el método Bértoli en varios países. Es un sistema short-time que produce cambios rápidos y sostenibles, permitiendo aplicar la energía mental para transformar tu entorno y alcanzar objetivos concretos.',
+	bio: 'Despues de años viajando por este mundo de Díos en más de 16 países brindando mis conocimientos en marketing, control mental alpha y mátematicas no lineales a las empresas y a veces personalmente a los dueños de las mismas empresas, de tener 5 libros escritos, tres con ediciones internacionales, despues de ser asesor de dos campañas presidenciales las dos con éxitos presidenciales de los candidatos, de estudios en dos universidades y de un curso especial internacional en una marina de guerra, y de 28 añis investigando la mente humana estoy seguro que si te sientes persona frustrada, apresada, en una vida de stress y angustia, puedo ayudarte a cambiar y a mejorar tu vida. A que aprendas a manejar y dirigir el tesoro más valioso que tienes, ese tesoro es tu mente y su energía infinita, la mente humana crea físicamente tus deseos.',
 	photo: '/author-photo.jpg',
 	email: 'alejandro@ejemplo.com',
 	linkedin: 'https://linkedin.com/in/alejandro-ramirez',
@@ -167,7 +167,7 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 							</a>
 
 							<button ref={triggerRef} onClick={openModal} className="inline-flex items-center px-6 py-3 rounded-md border border-white/20 bg-transparent text-white font-medium shadow-sm hover:bg-white/5 transition" aria-haspopup="dialog" aria-expanded={isOpen} aria-controls="author-modal">
-								Sobre el autor
+								Trayectoría Del Autor Del Método Internacional Bértoli
 							</button>
 						</div>
 					</div>
@@ -308,7 +308,7 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 										{/* actions */}
 										<div className="mt-2 flex flex-wrap gap-3">
 											<a href="#contacto" className="inline-flex items-center px-4 py-2 rounded-md bg-[#0B2342] text-white font-medium shadow-sm hover:opacity-95 transition">
-												Contactar
+												Adquirir El Método Mental Alpha
 											</a>
 
 											<button onClick={closeModal} className="inline-flex items-center px-4 py-2 rounded-md border border-slate-200 text-sm text-slate-700 hover:bg-slate-100 transition">
