@@ -16,8 +16,8 @@ type Author = {
 
 const SAMPLE_AUTHOR: Author = {
 	name: 'Jaime Bértoli',
-	title: 'Escritor e Investigador',
-	bio: 'Despues de años viajando por este mundo de Díos en más de 16 países brindando mis conocimientos en marketing, control mental alpha y mátematicas no lineales a las empresas y a veces personalmente a los dueños de las mismas empresas, de tener 5 libros escritos, tres con ediciones internacionales, despues de ser asesor de dos campañas presidenciales las dos con éxitos presidenciales de los candidatos, de estudios en dos universidades y de un curso especial internacional en una marina de guerra, y de 28 añis investigando la mente humana estoy seguro que si te sientes persona frustrada, apresada, en una vida de stress y angustia, puedo ayudarte a cambiar y a mejorar tu vida. A que aprendas a manejar y dirigir el tesoro más valioso que tienes, ese tesoro es tu mente y su energía infinita, la mente humana crea físicamente tus deseos.',
+	title: 'Escr`1itor e Investigador',
+	bio: 'Despues de años viajando por este mundo de Díos en más de 16 países brindando mis conocimientos en marketing, control mental ALPHA y mátematicas no lineales a las empresas y a veces personalmente a los dueños de las mismas empresas, de tener 5 libros escritos, tres con ediciones internacionales, despues de ser asesor de dos campañas presidenciales las dos con éxitos presidenciales de los candidatos, de estudios en dos universidades y de un curso especial internacional en una marina de guerra, y de 28 añis investigando la mente humana estoy seguro que si te sientes persona frustrada, apresada, en una vida de stress y angustia, puedo ayudarte a cambiar y a mejorar tu vida. A que aprendas a manejar y dirigir el tesoro más valioso que tienes, ese tesoro es tu mente y su energía infinita, la mente humana crea físicamente tus deseos.',
 	photo: '/author-photo.jpg',
 	email: 'alejandro@ejemplo.com',
 	linkedin: 'https://linkedin.com/in/alejandro-ramirez',
@@ -134,9 +134,9 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 					<div className="flex-1 pt-10">
 						<h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
 							Programa Internacional Bértoli
-							<span className="block text-accent-200 mt-2 text-3xl font-medium">&quot;Control Mental Alpha&quot;</span>
+							<span className="block text-accent-200 mt-2 text-3xl font-medium">&quot;Control Mental ALPHA&quot;</span>
 							<span
-								className=" font-semibold text-lg tracking-tight
+								className=" font-semibold text-2xl tracking-tight
                bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-200
                bg-clip-text text-transparent
                drop-shadow-[0_6px_18px_rgba(245,158,11,0.20)]">
@@ -146,8 +146,11 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 
 						<p className="mt-6 text-lg text-slate-100 max-w-xl leading-relaxed">Somos Una Empresa Que Ofrece A Su Público Conocimientos Que Brindan A Su Clientela La Oportunidad De Tener Mayor Éxito En Sus Vidas Mediante Nuestras Mentorias Internacionales, Las Cuales Son Acompañadas De Métodos Y Sistemas Personalizados, Coaching Individuales, Todo Short-Time con Resultados Tangibles y Concretos.</p>
 
-						<ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-slate-100">
-							{['Conocer Y Aplicar Las Ondas Electricas De Tu Mente', 'Conocer y Aplicar Técnica Alpha De Relajación En Casos Especiales', 'Conocer y Aplicar Propiedad Mental De Visualización y Clarividencia ', 'Eliminar De Tu Vida El Stress Mas La Angustia y La Ansiedad', 'Aplicar Técnica Alpha De Análisis Del Ser Humano', 'Ubicación Alpha De Tu Vida En El Espacio Tiempo y Como Inmediatamente Mejorar', 'El Mas Importante: Mover Objetos Y Materializar Un Deseo'].map((item) => (
+						<ul
+							className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 text-base bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-200
+               bg-clip-text text-transparent
+               drop-shadow-[0_6px_18px_rgba(245,158,11,0.20)]">
+							{['Conocer Y Aplicar Las Ondas Electricas De Tu Mente', 'Conocer y Aplicar Técnica ALPHA De Relajación En Casos Especiales', 'Conocer y Aplicar Propiedad Mental De Visualización y Clarividencia ', 'Eliminar De Tu Vida El Stress Mas La Angustia y La Ansiedad', 'Aplicar Técnica ALPHA De Análisis Del Ser Humano', 'Ubicación ALPHA De Tu Vida En El Espacio Tiempo y Como Inmediatamente Mejorar', 'El Mas Importante: Mover Objetos Y Materializar Un Deseo'].map((item) => (
 								<li key={item} className="flex items-start gap-3">
 									<span
 										className="flex-shrink-0 w-9 h-9 rounded-full bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-200
@@ -163,7 +166,7 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 
 						<div className="mt-6 flex flex-wrap gap-3 items-center">
 							<a href="#libros" className="inline-flex items-center px-6 py-3 rounded-md bg-yellow-400 text-[#07203a] font-semibold shadow hover:translate-y-[-2px] transition-transform">
-								Control Mental Alpha Al Éxito Viene Con El Libro
+								Cumple Tus Deseos Obsequía El Libro ALPHA Al Éxito
 							</a>
 
 							<button ref={triggerRef} onClick={openModal} className="inline-flex items-center px-6 py-3 rounded-md border border-white/20 bg-transparent text-white font-medium shadow-sm hover:bg-white/5 transition" aria-haspopup="dialog" aria-expanded={isOpen} aria-controls="author-modal">
@@ -199,8 +202,8 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 							{/* Bottom floating card */}
 							<div className="absolute left-1/2 transform -translate-x-1/2 md:translate-x-0 md:left-auto md:right-6 bottom-[-48px] md:bottom-[-72px] z-50 w-[86%] md:w-[58%]">
 								<div className={`${cardBase} text-slate-900`}>
-									<p className="text-sm font-semibold">Aumento mínimo:</p>
-									<p className="mt-1 text-xs font-semibold text-slate-800">Aumentar Totalmente tu Concentración, eliminar el stress y a traces de la infinita energía mental cambiar tu entorno físico y materializar tus deseos.</p>
+									<p className="text-sm font-semibold">Aumento mínimo 300%:</p>
+									<p className="mt-1 text-xs font-semibold text-slate-800">Tu energía mental, eliminación completa del stress y la angustia, vas a poder a través de tu infinita energía mental. cambiar tu entorno físico, materializando tus deseos.</p>
 								</div>
 							</div>
 						</div>
@@ -308,7 +311,7 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 										{/* actions */}
 										<div className="mt-2 flex flex-wrap gap-3">
 											<a href="#contacto" className="inline-flex items-center px-4 py-2 rounded-md bg-[#0B2342] text-white font-medium shadow-sm hover:opacity-95 transition">
-												Adquirir El Método Mental Alpha
+												Adquirir El Método Mental ALPHA
 											</a>
 
 											<button onClick={closeModal} className="inline-flex items-center px-4 py-2 rounded-md border border-slate-200 text-sm text-slate-700 hover:bg-slate-100 transition">

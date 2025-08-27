@@ -39,7 +39,7 @@ export default function NavbarImproved() {
                bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-200
                bg-clip-text text-transparent
                drop-shadow-[0_6px_18px_rgba(245,158,11,0.20)]">
-						Corporación Ejecutiva Internacional
+						CORPORACIÓN EJECUTIVA INTERNACIONAL
 					</span>
 				</Link>
 

@@ -34,7 +34,7 @@ export default function Footer() {
 								<span className="font-semibold bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-200 text-lg">CEI</span>
 							</div>
 							<div>
-								<h3 className="text-xl font-extrabold tracking-tight text-white">Corporación Ejecutiva Internacional</h3>
+								<h3 className="text-xl font-extrabold tracking-tight text-white"> CORPORACIÓN EJECUTIVA INTERNACIONAL</h3>
 								<p className="mt-1 text-sm text-slate-300">Consultoría · Mentorías · Estrategias corporativas</p>
 							</div>
 						</div>
