@@ -4,6 +4,7 @@ import HeroWithAuthorModal from '@/components/HeroWithAuthorModal';
 import BookCarousel from '@/components/BookCarousel'; // ajusta si tu archivo se llama distinto
 import QuienesSomos from '@/components/QuienesSomos';
 import SupportAnimalsBanner from '@/components/SupportAnimalsBanner';
+import TarjetaTuristica from '@/components/TarjetaTuristica';
 
 export default function Home() {
 	const books = [
@@ -53,6 +54,11 @@ export default function Home() {
 
 					{/* Si quieres autoplay: <BookCarousel books={books} autoplay={5000} /> */}
 					<BookCarousel books={books} />
+				</div>
+			</section>
+			<section id="quienes-somos" className="py-16 bg-gray-50">
+				<div className="max-w-6xl mx-auto px-6">
+					<TarjetaTuristica />
 				</div>
 			</section>
 		</>
