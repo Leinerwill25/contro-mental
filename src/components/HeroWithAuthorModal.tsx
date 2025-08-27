@@ -16,7 +16,7 @@ type Author = {
 
 const SAMPLE_AUTHOR: Author = {
 	name: 'Jaime Bértoli',
-	title: 'Escr`1itor e Investigador',
+	title: 'Escritor e Investigador',
 	bio: 'Despues de años viajando por este mundo de Díos en más de 16 países brindando mis conocimientos en marketing, control mental ALPHA y mátematicas no lineales a las empresas y a veces personalmente a los dueños de las mismas empresas, de tener 5 libros escritos, tres con ediciones internacionales, despues de ser asesor de dos campañas presidenciales las dos con éxitos presidenciales de los candidatos, de estudios en dos universidades y de un curso especial internacional en una marina de guerra, y de 28 añis investigando la mente humana estoy seguro que si te sientes persona frustrada, apresada, en una vida de stress y angustia, puedo ayudarte a cambiar y a mejorar tu vida. A que aprendas a manejar y dirigir el tesoro más valioso que tienes, ese tesoro es tu mente y su energía infinita, la mente humana crea físicamente tus deseos.',
 	photo: '/author-photo.jpg',
 	email: 'alejandro@ejemplo.com',
@@ -169,7 +169,7 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 								Cumple Tus Deseos Obsequía El Libro ALPHA Al Éxito
 							</a>
 
-							<button ref={triggerRef} onClick={openModal} className="inline-flex items-center px-6 py-3 rounded-md border border-white/20 bg-transparent text-white font-medium shadow-sm hover:bg-white/5 transition" aria-haspopup="dialog" aria-expanded={isOpen} aria-controls="author-modal">
+							<button ref={triggerRef} onClick={openModal} className="inline-flex items-center px-6 py-3 rounded-md border border-yellow-400 bg-transparent text-white font-medium shadow-sm hover:bg-white/5 transition" aria-haspopup="dialog" aria-expanded={isOpen} aria-controls="author-modal">
 								Trayectoría Del Autor Del Método Internacional Bértoli
 							</button>
 						</div>

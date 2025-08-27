@@ -10,8 +10,8 @@ import { usePathname } from 'next/navigation';
 
 const NAV_ITEMS = [
 	{ href: '#libros', label: '¿Quiénes Somos?' },
-	{ href: '#autor', label: 'Resultados' },
-	{ href: '#contacto', label: 'Contacto' },
+	{ href: '#autor', label: 'Sistema Internacional Turístico' },
+	{ href: '#contacto', label: 'Pre-Fundación Patitas En La Calle' },
 ];
 
 export default function NavbarImproved() {
@@ -52,7 +52,7 @@ export default function NavbarImproved() {
 					))}
 
 					<Link href="#comprar" className="inline-flex items-center px-5 py-2 rounded-lg bg-yellow-300 text-[#0B2342] text-sm font-semibold shadow-sm hover:shadow-md transform-gpu hover:-translate-y-0.5 transition" aria-label="Comprar ahora">
-						Comprar
+						Adquirir Productos
 					</Link>
 				</nav>
 

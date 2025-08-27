@@ -17,9 +17,9 @@ const defaultTeam: TeamMember[] = [
 	{ name: 'Dr. Tullio', role: 'Gerencia', image: '/Tullio.jpg', description: 'Experto en gestión operativa y planeación empresarial.' },
 	{ name: 'Erica', role: 'Directora de Control', image: '/Erica.png', description: 'Supervisa procesos y asegura el cumplimiento organizacional.' },
 	{ name: 'Lourdes', role: 'Directora de Internet', image: '/Lourdes.jpg', description: 'Encargada de innovación tecnológica y transformación digital.' },
-	{ name: 'María', role: 'Directora de Comunicación y Marketing', image: '/pexels-olly-774909.jpg', description: 'Diseña estrategias de comunicación efectivas y modernas.' },
-	{ name: 'Carlos', role: 'Director Financiero', image: '/pexels-mastercowley-1300402.jpg', description: 'Gestor financiero enfocado en la sostenibilidad y el control.' },
-	{ name: 'Sofía', role: 'Directora de Talento Humano', image: '/pexels-olly-733872.jpg', description: 'Impulsa el desarrollo del talento humano con visión global.' },
+	{ name: 'Luishaidy Gil', role: 'Directora', image: '/pexels-olly-774909.jpg', description: 'Diseña estrategias de comunicación efectivas y modernas.' },
+	{ name: 'Dereck Ruiz', role: 'Director Desarrollo Web', image: '/pexels-mastercowley-1300402.jpg', description: 'Desarrollador web enfocado en la sostenibilidad y el control.' },
+	{ name: 'Veronica Salazar', role: 'Gerencia', image: '/pexels-olly-733872.jpg', description: 'Impulsa el desarrollo del talento humano con visión global.' },
 ];
 
 const containerVariants: Variants = {
@@ -41,7 +41,25 @@ export default function QuienesSomos({ team = defaultTeam }: { team?: TeamMember
 					<h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#05295B]">
 						<span className="inline-block bg-clip-text text-transparent bg-gradient-to-r from-[#073B7A] via-[#1F6FB8] to-[#F6C23E]">CORPORACIÓN EJECUTIVA INTERNACIONAL</span>
 					</h2>
-					<p className="mt-4 text-md md:text-lg text-slate-600 max-w-3xl mx-auto">Equipo ejecutivo — liderazgo probado, visión estratégica y ejecución.</p>
+					{/* Texto principal */}
+					<p className="mt-4 text-md md:text-lg text-slate-600 max-w-3xl mx-auto">Nuestro Equipo Ejecutivo: Experiencia y Juventud Brindando Éxitos En Más De 12 Países</p>
+
+					{/* Texto con nombres resaltados */}
+					<p className="mt-3 text-sm md:text-base text-slate-700 max-w-3xl mx-auto leading-relaxed">
+						Justo es nombrar a&nbsp;
+						<span title="Veronica Salazar" className="inline-block px-2 py-0.5 rounded-md bg-indigo-50 border border-indigo-100 text-indigo-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105">
+							Veronica Salazar
+						</span>
+						&nbsp;— integra y eficiente, venezolana gerenciando maravillosamente. &nbsp;
+						<span title="Dereck Leinerwill Ruiz" className="inline-block px-2 py-0.5 rounded-md bg-indigo-50 border border-indigo-100 text-indigo-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105">
+							Dereck Leinerwill Ruiz
+						</span>
+						&nbsp;— desarrollador web y genio en el mundo del internet. &nbsp;
+						<span title="Luishaidy Gil" className="inline-block px-2 py-0.5 rounded-md bg-indigo-50 border border-indigo-100 text-indigo-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105">
+							Luishaidy Gil
+						</span>
+						&nbsp;— excelencia y juventud como directora. Ahora ellos no están más; Dios mediante esperamos tener la suerte de volver pronto a tenerlos en nuestra familia empresarial.
+					</p>
 					<div className="mt-6 flex items-center justify-center gap-3">
 						<span className="inline-block w-32 h-1 rounded-full bg-gradient-to-r from-[#073B7A] via-[#1F6FB8] to-[#F6C23E] shadow-sm" />
 					</div>
