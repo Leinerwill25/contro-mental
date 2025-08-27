@@ -9,9 +9,9 @@ import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 
 const NAV_ITEMS = [
-	{ href: '#libros', label: '¿Quiénes Somos?' },
-	{ href: '#autor', label: 'Sistema Internacional Turístico' },
-	{ href: '#contacto', label: 'Pre-Fundación Patitas En La Calle' },
+	{ href: '#quienes-somos', label: '¿Quiénes Somos?' },
+	{ href: '#tarjeta-turistica', label: 'Sistema Internacional Turístico' },
+	{ href: '#animal-help', label: 'Pre-Fundación Patitas En La Calle' },
 ];
 
 export default function NavbarImproved() {
@@ -51,7 +51,7 @@ export default function NavbarImproved() {
 						</a>
 					))}
 
-					<Link href="#comprar" className="inline-flex items-center px-5 py-2 rounded-lg bg-yellow-300 text-[#0B2342] text-sm font-semibold shadow-sm hover:shadow-md transform-gpu hover:-translate-y-0.5 transition" aria-label="Comprar ahora">
+					<Link href="#libro" className="inline-flex items-center px-5 py-2 rounded-lg bg-yellow-300 text-[#0B2342] text-sm font-semibold shadow-sm hover:shadow-md transform-gpu hover:-translate-y-0.5 transition" aria-label="Comprar ahora">
 						Adquirir Productos
 					</Link>
 				</nav>

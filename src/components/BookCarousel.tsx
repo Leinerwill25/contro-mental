@@ -46,7 +46,7 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 	const book = books[current];
 
 	return (
-		<section className="w-full max-w-7xl mx-auto p-6 md:p-10">
+		<section id="libro" className="w-full max-w-7xl mx-auto p-6 md:p-10">
 			{/* Outer frame: thin accent border to match diagram */}
 			<div className="relative bg-gradient-to-b from-white via-white/95 to-slate-50 border-2 border-slate-100 rounded-3xl p-6 md:p-8 shadow-lg overflow-visible">
 				<div className="flex flex-col md:flex-row items-center gap-8 md:gap-10">

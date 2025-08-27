@@ -5,6 +5,7 @@ import BookCarousel from '@/components/BookCarousel'; // ajusta si tu archivo se
 import QuienesSomos from '@/components/QuienesSomos';
 import SupportAnimalsBanner from '@/components/SupportAnimalsBanner';
 import TarjetaTuristica from '@/components/TarjetaTuristica';
+import AnimalHelpBanner from '@/components/AnimalHelpBanner';
 
 export default function Home() {
 	const books = [
@@ -46,6 +47,7 @@ export default function Home() {
 				</div>
 			</section>
 			<SupportAnimalsBanner />
+			<AnimalHelpBanner />
 
 			{/* LIBROS - carrusel */}
 			<section id="libros" className="py-16">

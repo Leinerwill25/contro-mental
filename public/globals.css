@@ -12,6 +12,9 @@
 	--color-primary: #111827;
 	--color-accent: #b98b1f;
 }
+html {
+	scroll-behavior: smooth;
+}
 
 body {
 	font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;

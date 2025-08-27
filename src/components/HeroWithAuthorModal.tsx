@@ -15,10 +15,10 @@ type Author = {
 };
 
 const SAMPLE_AUTHOR: Author = {
-	name: 'Jaime Bértoli',
-	title: 'Escritor e Investigador',
+	name: 'Jaime Bértoli Castagneto',
+	title: 'Escritor e Investigador Social',
 	bio: 'Despues de años viajando por este mundo de Díos en más de 16 países brindando mis conocimientos en marketing, control mental ALPHA y mátematicas no lineales a las empresas y a veces personalmente a los dueños de las mismas empresas, de tener 5 libros escritos, tres con ediciones internacionales, despues de ser asesor de dos campañas presidenciales las dos con éxitos presidenciales de los candidatos, de estudios en dos universidades y de un curso especial internacional en una marina de guerra, y de 28 añis investigando la mente humana estoy seguro que si te sientes persona frustrada, apresada, en una vida de stress y angustia, puedo ayudarte a cambiar y a mejorar tu vida. A que aprendas a manejar y dirigir el tesoro más valioso que tienes, ese tesoro es tu mente y su energía infinita, la mente humana crea físicamente tus deseos.',
-	photo: '/author-photo.jpg',
+	photo: '/pexels-cottonbro-4865536.jpg',
 	email: 'alejandro@ejemplo.com',
 	linkedin: 'https://linkedin.com/in/alejandro-ramirez',
 };
@@ -114,18 +114,6 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 		return () => window.removeEventListener('keydown', onKey);
 	}, [isOpen, closeModal]);
 
-	// Re-usable card base for a clean corporate look
-	// const cardBase = 'bg-yellow-200 rounded-2xl border border-slate-100 p-4 shadow-sm';
-
-	// Opción A — Corporativa / elegante (recomendado)
-	const cardBase = 'bg-yellow-300/80 rounded-2xl border border-slate-100 p-6 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-indigo-100';
-
-	// Opción B — Cálida, con personalidad (amarillo pero sobrio)
-	// const cardBase = 'bg-gradient-to-b from-yellow-50 to-yellow-100 rounded-2xl border border-amber-200 p-6 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-amber-200';
-
-	// Opción C — Premium (acento dorado / llamativo)
-	// const cardBase = 'bg-white/95 rounded-2xl border border-amber-400 p-6 shadow-[0_10px_30px_rgba(15,23,42,0.12)] hover:shadow-[0_18px_40px_rgba(15,23,42,0.16)] transform hover:-translate-y-1 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-amber-200';
-
 	return (
 		<>
 			<section className="relative bg-gradient-to-r from-[#0B2342] to-[#133A66] text-white py-20">
@@ -179,13 +167,13 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 					<div className="w-full md:w-1/2 relative">
 						<div className="relative mx-auto md:mx-0 w-[92%] md:w-full lg:w-[95%] transform transition-shadow duration-300">
 							{/* Top-left card */}
-							<div aria-hidden className={`absolute -top-6 -left-6 z-50 w-40 md:w-43 h-32 ${cardBase} text-slate-900`}>
+							<div aria-hidden className="absolute -top-6 -left-6 z-50 w-40 md:w-43 h-32 bg-amber-50/90 rounded-2xl p-4 text-slate-900 shadow-lg">
 								<div className="text-sm font-semibold">Elimina:</div>
 								<div className="text-xs font-semibold text-slate-800">Tus principales bloqueos mentales mediante técnicas prácticas.</div>
 							</div>
 
 							{/* Right card */}
-							<div aria-hidden className={`absolute -right-6 top-16 z-50 w-40 md:w-48 h-20 ${cardBase} text-slate-900 flex items-center justify-center`}>
+							<div aria-hidden className="absolute -right-6 top-16 z-50 w-40 md:w-48 h-20 bg-amber-50/90 rounded-2xl p-3 text-slate-900 flex items-center justify-center shadow-lg">
 								<div>
 									<div className="text-sm font-semibold">Aprende:</div>
 									<div className="text-xs font-semibold text-slate-800">A conectar con el núcleo mental de forma efectiva.</div>
@@ -201,7 +189,7 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 
 							{/* Bottom floating card */}
 							<div className="absolute left-1/2 transform -translate-x-1/2 md:translate-x-0 md:left-auto md:right-6 bottom-[-48px] md:bottom-[-72px] z-50 w-[86%] md:w-[58%]">
-								<div className={`${cardBase} text-slate-900`}>
+								<div className="bg-amber-50/95 rounded-2xl p-6 text-slate-900 shadow-lg">
 									<p className="text-sm font-semibold">Aumento mínimo 300%:</p>
 									<p className="mt-1 text-xs font-semibold text-slate-800">Tu energía mental, eliminación completa del stress y la angustia, vas a poder a través de tu infinita energía mental. cambiar tu entorno físico, materializando tus deseos.</p>
 								</div>
@@ -213,41 +201,35 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 
 			{/* Modal del autor (responsive) */}
 			{isOpen && (
-				<div id="author-modal" role="dialog" aria-modal="true" aria-labelledby="author-modal-title" className="fixed inset-0 z-50 flex items-center justify-center px-0 md:px-4">
+				<div id="author-modal" role="dialog" aria-modal="true" aria-labelledby="author-modal-title" className="fixed inset-0 z-[150] flex items-center justify-center px-4">
 					{/* overlay */}
-					<div onClick={closeModal} className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity" aria-hidden="true" />
+					<div onClick={closeModal} className="fixed inset-0 bg-black/70 backdrop-blur-sm transition-opacity" aria-hidden="true" />
 
 					{/* panel */}
-					<aside
-						ref={modalRef}
-						role="document"
-						tabIndex={-1}
-						style={{ zIndex: 60 }}
-						className="relative w-full h-full md:h-auto md:max-w-3xl md:mx-auto bg-white md:rounded-2xl shadow-2xl ring-1 ring-slate-100 overflow-hidden transform transition-all duration-300 ease-out
-									animate-fade-in">
-						{/* mobile header */}
-						<header className="md:hidden sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-100 flex items-center justify-between px-4 py-3">
+					<aside ref={modalRef} role="document" tabIndex={-1} style={{ zIndex: 60 }} className="relative w-full h-full md:h-auto md:max-w-3xl md:mx-auto bg-gradient-to-br from-slate-900 to-slate-800 md:rounded-2xl shadow-2xl ring-1 ring-amber-600/10 overflow-hidden transform transition-all duration-300 ease-out">
+						{/* mobile header (dark, gold close) */}
+						<header className="md:hidden sticky top-0 z-50 bg-gradient-to-r from-slate-900 to-slate-800 border-b border-slate-700 flex items-center justify-between px-4 py-3">
 							<div className="flex flex-col">
-								<h3 className="text-base font-semibold text-slate-900">{SAMPLE_AUTHOR.name}</h3>
-								{SAMPLE_AUTHOR.title && <p className="text-xs text-slate-600 mt-0.5">{SAMPLE_AUTHOR.title}</p>}
+								<h3 className="text-base font-semibold text-amber-200">{SAMPLE_AUTHOR.name}</h3>
+								{SAMPLE_AUTHOR.title && <p className="text-xs text-amber-100/80 mt-0.5">{SAMPLE_AUTHOR.title}</p>}
 							</div>
 
-							<button onClick={closeModal} aria-label="Cerrar modal" className="inline-flex items-center justify-center rounded-md p-2 text-slate-700 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-[#0B2342]">
+							<button onClick={closeModal} aria-label="Cerrar modal" className="inline-flex items-center justify-center rounded-md p-2 text-amber-200 hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-amber-300">
 								<X className="w-5 h-5" />
 							</button>
 						</header>
 
 						{/* content */}
 						<div className="h-full md:h-auto overflow-y-auto">
-							<main className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 md:p-8" id="author-modal-main">
+							<main className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4 md:p-8" id="author-modal-main">
 								{/* Photo column */}
 								<figure className="md:col-span-1">
-									<div className="w-full rounded-xl overflow-hidden border border-slate-100 bg-neutral-50">
-										<div className="relative w-full h-44 md:h-56">
+									<div className="w-full rounded-xl overflow-hidden border border-amber-500/10 bg-gradient-to-b from-slate-800 to-slate-900 p-2">
+										<div className="relative w-full h-44 md:h-56 rounded-xl overflow-hidden">
 											{SAMPLE_AUTHOR.photo ? (
-												<Image src={SAMPLE_AUTHOR.photo} alt={`${SAMPLE_AUTHOR.name} - foto`} fill style={{ objectFit: 'cover' }} />
+												<Image src={SAMPLE_AUTHOR.photo} alt={`${SAMPLE_AUTHOR.name} - foto`} fill style={{ objectFit: 'cover' }} className="block" />
 											) : (
-												<div className="w-full h-full flex items-center justify-center text-2xl text-slate-700 font-semibold">
+												<div className="w-full h-full flex items-center justify-center text-2xl text-amber-300 font-semibold bg-slate-800">
 													{SAMPLE_AUTHOR.name
 														.split(' ')
 														.map((n) => n[0])
@@ -261,8 +243,8 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 									{/* small contact block for md+ under photo (keeps corporate feel) */}
 									<div className="hidden md:block mt-4">
 										{SAMPLE_AUTHOR.email && (
-											<a className="inline-flex items-center gap-2 text-sm text-slate-700" href={`mailto:${SAMPLE_AUTHOR.email}`}>
-												<Mail className="w-4 h-4" />
+											<a className="inline-flex items-center gap-2 text-sm text-amber-200 hover:underline" href={`mailto:${SAMPLE_AUTHOR.email}`}>
+												<Mail className="w-4 h-4 text-amber-200" />
 												{SAMPLE_AUTHOR.email}
 											</a>
 										)}
@@ -274,35 +256,36 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 									{/* desktop header & close */}
 									<div className="hidden md:flex items-start justify-between">
 										<div>
-											<h2 id="author-modal-title" className="text-lg md:text-2xl font-semibold text-slate-900">
+											<h2 id="author-modal-title" className="text-xl md:text-2xl font-semibold text-amber-200">
 												{SAMPLE_AUTHOR.name}
 											</h2>
-											{SAMPLE_AUTHOR.title && <p className="mt-1 text-sm text-slate-600">{SAMPLE_AUTHOR.title}</p>}
+											{SAMPLE_AUTHOR.title && <p className="mt-1 text-sm text-amber-100/80">{SAMPLE_AUTHOR.title}</p>}
 										</div>
 
 										<div>
-											<button onClick={closeModal} aria-label="Cerrar modal" className="inline-flex items-center justify-center rounded-md p-2 text-slate-600 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-[#0B2342]">
+											<button onClick={closeModal} aria-label="Cerrar modal" className="inline-flex items-center justify-center rounded-md p-2 text-amber-200 hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-amber-300">
 												<X className="w-5 h-5" />
 											</button>
 										</div>
 									</div>
 
-									{/* body */}
-									<div className="mt-4 text-sm text-slate-700 leading-relaxed space-y-4">
-										<p>{SAMPLE_AUTHOR.bio}</p>
+									{/* body: párrafo en dorado (legible sobre fondo oscuro) */}
+									<div className="mt-4 text-sm leading-relaxed space-y-4">
+										<p className="text-amber-200/95 prose max-w-none">{SAMPLE_AUTHOR.bio}</p>
+										<p className="text-amber-200/95 prose max-w-none">EMPIEZA A CAMBIAR TU VIDA LAS CASUALIDADES NO EXISTEN Y HOY DIA EL DESTINO TE BRINDA UNA OPORTUNIDAD</p>
 
 										{/* contact links (mobile visible here too) */}
 										<div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:hidden">
 											{SAMPLE_AUTHOR.email && (
-												<a className="inline-flex items-center gap-2 text-sm text-slate-700" href={`mailto:${SAMPLE_AUTHOR.email}`}>
-													<Mail className="w-4 h-4" />
+												<a className="inline-flex items-center gap-2 text-sm text-amber-200 hover:underline" href={`mailto:${SAMPLE_AUTHOR.email}`}>
+													<Mail className="w-4 h-4 text-amber-200" />
 													{SAMPLE_AUTHOR.email}
 												</a>
 											)}
 
 											{SAMPLE_AUTHOR.linkedin && (
-												<a className="inline-flex items-center gap-2 text-sm text-slate-700" href={SAMPLE_AUTHOR.linkedin} target="_blank" rel="noreferrer noopener">
-													<Linkedin className="w-4 h-4" />
+												<a className="inline-flex items-center gap-2 text-sm text-amber-200 hover:underline" href={SAMPLE_AUTHOR.linkedin} target="_blank" rel="noreferrer noopener">
+													<Linkedin className="w-4 h-4 text-amber-200" />
 													Perfil LinkedIn
 												</a>
 											)}
@@ -310,11 +293,11 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 
 										{/* actions */}
 										<div className="mt-2 flex flex-wrap gap-3">
-											<a href="#contacto" className="inline-flex items-center px-4 py-2 rounded-md bg-[#0B2342] text-white font-medium shadow-sm hover:opacity-95 transition">
-												Adquirir El Método Mental ALPHA
+											<a href="#contacto" className="inline-flex items-center px-4 py-2 rounded-md bg-amber-400 text-[#07203a] font-medium shadow-sm hover:opacity-95 transition">
+												Empieza A Cambiar Tu Vida — Contactar
 											</a>
 
-											<button onClick={closeModal} className="inline-flex items-center px-4 py-2 rounded-md border border-slate-200 text-sm text-slate-700 hover:bg-slate-100 transition">
+											<button onClick={closeModal} className="inline-flex items-center px-4 py-2 rounded-md border border-amber-300 text-sm text-amber-100 hover:bg-white/5 transition">
 												Cerrar
 											</button>
 										</div>
@@ -324,11 +307,11 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 						</div>
 
 						{/* mobile sticky footer */}
-						<footer className="md:hidden sticky bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-t border-slate-100 px-4 py-3 flex items-center gap-3">
-							<a href="#contacto" className="flex-1 inline-flex items-center justify-center px-4 py-3 rounded-md bg-[#0B2342] text-white font-medium">
+						<footer className="md:hidden sticky bottom-0 left-0 right-0 z-50 bg-gradient-to-r from-slate-900 to-slate-800 border-t border-slate-700 px-4 py-3 flex items-center gap-3">
+							<a href="#contacto" className="flex-1 inline-flex items-center justify-center px-4 py-3 rounded-md bg-amber-400 text-[#07203a] font-medium">
 								Contactar
 							</a>
-							<button onClick={closeModal} className="inline-flex items-center justify-center px-4 py-3 rounded-md border border-slate-200 text-sm text-slate-700">
+							<button onClick={closeModal} className="inline-flex items-center justify-center px-4 py-3 rounded-md border border-amber-300 text-sm text-amber-100">
 								Cerrar
 							</button>
 						</footer>

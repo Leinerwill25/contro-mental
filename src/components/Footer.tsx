@@ -40,18 +40,6 @@ export default function Footer() {
 						</div>
 
 						<p className="mt-4 text-sm text-slate-300 leading-relaxed max-w-sm">Edición seleccionada — Atención profesional. Acompañamos a líderes y equipos a desarrollar estrategias con impacto real y crecimiento sostenible.</p>
-
-						<div className="mt-4 flex items-center gap-3">
-							<a aria-label="Facebook" href="#" className="p-2 rounded-md bg-white/5 hover:bg-white/8 transition focus:outline-none focus:ring-4 focus:ring-[#0B2342]/30">
-								<Facebook className="w-5 h-5 text-amber-300" />
-							</a>
-							<a aria-label="Instagram" href="#" className="p-2 rounded-md bg-white/5 hover:bg-white/8 transition focus:outline-none focus:ring-4 focus:ring-[#0B2342]/30">
-								<Instagram className="w-5 h-5 text-amber-300" />
-							</a>
-							<a aria-label="Twitter" href="#" className="p-2 rounded-md bg-white/5 hover:bg-white/8 transition focus:outline-none focus:ring-4 focus:ring-[#0B2342]/30">
-								<Twitter className="w-5 h-5 text-amber-300" />
-							</a>
-						</div>
 					</div>
 
 					{/* Navigation columns */}
@@ -85,7 +73,7 @@ export default function Footer() {
 							</h4>
 							<ul className="mt-4 space-y-2 text-sm text-slate-300">
 								<li>
-									<Link href="#libros" className="hover:text-white focus:outline-none focus:ring-4 focus:ring-[#0B2342]/25 rounded">
+									<Link href="#libro" className="hover:text-white focus:outline-none focus:ring-4 focus:ring-[#0B2342]/25 rounded">
 										Libros
 									</Link>
 								</li>
@@ -95,7 +83,7 @@ export default function Footer() {
 									</Link>
 								</li>
 								<li>
-									<Link href="#contacto" className="hover:text-white focus:outline-none focus:ring-4 focus:ring-[#0B2342]/25 rounded">
+									<Link href="mailto:Corporacion2025intl@gmail.com" className="hover:text-white focus:outline-none focus:ring-4 focus:ring-[#0B2342]/25 rounded">
 										Contacto
 									</Link>
 								</li>
@@ -116,8 +104,8 @@ export default function Footer() {
 							</div>
 							<div className="flex items-center gap-2">
 								<Mail className="w-4 h-4 text-amber-300" />
-								<a href="mailto:email@tulibreria.com" className="hover:text-white focus:outline-none focus:ring-4 focus:ring-[#0B2342]/25 rounded">
-									email@tulibreria.com
+								<a href="mailto:Corporacion2025intl@gmail.com" className="hover:text-white focus:outline-none focus:ring-4 focus:ring-[#0B2342]/25 rounded">
+									Corporacion2025intl@gmail.com
 								</a>
 							</div>
 							<div className="flex items-center gap-2">

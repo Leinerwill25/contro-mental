@@ -22,6 +22,7 @@ export default function TarjetaTuristica({ ticketImage = 'pexels-pixabay-210742.
 	const paraCls = `${enterBase} delay-150 ${mounted ? 'opacity-100' : 'opacity-0'}`;
 	const cardCls = `${enterBase} delay-100 ${mounted ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`;
 	const bannerCls = `${enterBase} delay-200 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`;
+
 	const flags = [
 		{ src: '/descarga (1).png', name: 'Venezuela' },
 		{ src: '/descarga.png', name: 'España' },
@@ -29,8 +30,14 @@ export default function TarjetaTuristica({ ticketImage = 'pexels-pixabay-210742.
 		{ src: '/descarga (4).png', name: 'Perú' },
 		{ src: '/descarga (3).png', name: 'Colombia' },
 	];
+
+	// mailto links pre-filled (puedes ajustar asunto / cuerpo)
+	const mailtoMoreInfo = `mailto:${email}?subject=${encodeURIComponent('Información - Tarjeta Turística Internacional')}&body=${encodeURIComponent('Hola,\n\nQuisiera recibir más información sobre la Tarjeta Turística Internacional. Por favor, indíquenme los requisitos y beneficios.\n\nGracias.')}`;
+
+	const mailtoAffiliate = `mailto:${email}?subject=${encodeURIComponent('Afiliación - Tarjeta Turística Internacional')}&body=${encodeURIComponent('Hola,\n\nEstoy interesado en afiliar mi negocio / registrarme como beneficiario. Por favor, envíenme los pasos a seguir y condiciones.\n\nSaludos.')}`;
+
 	return (
-		<section className="w-full max-w-5xl mx-auto p-6 md:p-10 bg-slate-900 text-slate-100 rounded-2xl shadow-2xl border border-slate-800">
+		<section id="tarjeta-turistica" className="w-full max-w-5xl mx-auto p-6 md:p-10 bg-slate-900 text-slate-100 rounded-2xl shadow-2xl border border-slate-800">
 			{/* Encabezado principal con estilo corporativo */}
 			<header className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-0">
 				<div className="flex items-center gap-4">
@@ -130,8 +137,14 @@ export default function TarjetaTuristica({ ticketImage = 'pexels-pixabay-210742.
 						</div>
 
 						<div className="mt-4 flex items-center justify-center gap-3">
-							<button className="px-4 py-2 rounded-md bg-amber-400 text-slate-900 font-semibold text-sm shadow hover:brightness-95 transition">Más info</button>
-							<button className="px-3 py-2 rounded-md border border-slate-700 text-slate-200 text-sm hover:bg-slate-800 transition">Afiliate</button>
+							{/* Enlaces mailto para abrir el cliente de correo */}
+							<a href={mailtoMoreInfo} className="px-4 py-2 rounded-md bg-amber-400 text-slate-900 font-semibold text-sm shadow hover:brightness-95 transition inline-flex items-center justify-center" aria-label="Enviar correo para más información">
+								Más info
+							</a>
+
+							<a href={mailtoAffiliate} className="px-3 py-2 rounded-md border border-slate-700 text-slate-200 text-sm hover:bg-slate-800 transition inline-flex items-center justify-center" aria-label="Enviar correo para afiliarse">
+								Afiliate
+							</a>
 						</div>
 					</div>
 

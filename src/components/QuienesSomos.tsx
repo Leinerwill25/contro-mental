@@ -12,14 +12,14 @@ type TeamMember = {
 };
 
 const defaultTeam: TeamMember[] = [
-	{ name: 'Jaime', role: 'Presidencia', image: '/pexels-olly-874158.jpg', description: 'Liderazgo visionario, con amplia experiencia en dirección estratégica.' },
+	{ name: 'Jaime Bertoli Castagneto', role: 'Presidencia', image: '/pexels-cottonbro-4865536.jpg', description: 'Liderazgo visionario, con amplia experiencia en dirección estratégica.' },
 	{ name: 'Dr. Jesus', role: 'Gerencia', image: '/Jesus.png', description: 'Comprometido con la excelencia y el crecimiento sostenible.' },
 	{ name: 'Dr. Tullio', role: 'Gerencia', image: '/Tullio.jpg', description: 'Experto en gestión operativa y planeación empresarial.' },
 	{ name: 'Erica', role: 'Directora de Control', image: '/Erica.png', description: 'Supervisa procesos y asegura el cumplimiento organizacional.' },
 	{ name: 'Lourdes', role: 'Directora de Internet', image: '/Lourdes.jpg', description: 'Encargada de innovación tecnológica y transformación digital.' },
-	{ name: 'Luishaidy Gil', role: 'Directora', image: '/pexels-olly-774909.jpg', description: 'Diseña estrategias de comunicación efectivas y modernas.' },
-	{ name: 'Dereck Ruiz', role: 'Director Desarrollo Web', image: '/pexels-mastercowley-1300402.jpg', description: 'Desarrollador web enfocado en la sostenibilidad y el control.' },
-	{ name: 'Veronica Salazar', role: 'Gerencia', image: '/pexels-olly-733872.jpg', description: 'Impulsa el desarrollo del talento humano con visión global.' },
+	{ name: 'Luishaidy Gil', role: 'Directora', image: '/1077063.png', description: 'Diseña estrategias de comunicación efectivas y modernas.' },
+	{ name: 'Dereck Ruiz', role: 'Director Desarrollo Web', image: '/pexels-djordje-petrovic-590080-2102416.jpg', description: 'Desarrollador web enfocado en la sostenibilidad y el control.' },
+	{ name: 'Veronica Salazar', role: 'Gerencia', image: '/1077063.png', description: 'Impulsa el desarrollo del talento humano con visión global.' },
 ];
 
 const containerVariants: Variants = {
