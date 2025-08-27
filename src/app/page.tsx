@@ -12,7 +12,7 @@ export default function Home() {
 			title: 'Obra Literaria - Second Pearl Harbor',
 			subtitle: 'Temas: El Verdadero Posible Origen del COVID 19 - El Posible Robo De Las Elecciones de E.E.U.U 2020 - El Inminente Peligro De Guerra Mundial Hoy - Como Operan Los Servicios de Inteligencia.',
 			price: '16.00',
-			image: '/pexels-pixabay-159866.jpg',
+			image: '/caratula.png',
 			info: 'Edición en digital - Record De Ventas Historico.',
 		},
 		{
@@ -20,16 +20,16 @@ export default function Home() {
 			title: 'Mentoría Y Sistema Internacional Método Bértoli',
 			subtitle: 'Control Mental Alpha - Tu Mente Cumple Tus Deseos - Duración: 34 Dias, Resultados Inmediatos Garantizados. Control Mental Externo Individual y/o Masivo. Aprende a Materializar tus Deseos.',
 			price: '250.00',
-			image: '/pexels-dom-j-7304-45717.jpg',
+			image: '/pexels-timur-weber-8560658.jpg',
 			info: 'Investigación profunda y contundente.',
 		},
 		{
 			id: 3,
-			title: 'Como Tener Exito en el Amor y Como Aprende Seduccion Subliminal',
-			subtitle: 'Metodo Control Mental Alpha',
+			title: 'Como Tener Éxito En El Amor, Aprende Seducción Subliminal',
+			subtitle: 'Este Curso Mentoria Short time te enseña con metodologias de Control Mental ALPHA en DOCE DIAS A SABER BUSCAR Y ENCONTRAR EL AMOR TE ENSEÑA LO PRINCIPAL A SABER CONSERVARLO POR LOS AÑOS DE TODA TU VIDA',
 			price: '180.00',
-			image: '/pexels-pixabay-415078.jpg',
-			info: 'Idiomas: English Y Español.',
+			image: '/pexels-rdne-7490819.jpg',
+			info: 'El AMOR es la fuerza MAS PODEROSA QUE EXISTE EN ESTE MUNDO TODOS LOS SERES HUMANOS. LO BUSCAN MUCHOS DESESPERACDAMENTE VEN PASAR SUS VIDAS Y NO LO ENCUENTRAN',
 		},
 	];
 
