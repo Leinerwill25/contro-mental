@@ -1,26 +1,24 @@
 // components/Footer.tsx
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import { Mail, Phone, MapPin, Instagram, Facebook, Twitter } from 'lucide-react';
+import { Mail, MapPin } from 'lucide-react';
 
 export default function Footer() {
-	const [email, setEmail] = useState('');
-	const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+	// const [email, setEmail] = useState('');
+	// const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
-	const handleSubscribe = async (e: React.FormEvent) => {
-		e.preventDefault();
-		if (!email) return setStatus('error');
-		setStatus('loading');
-		// Simulación de petición — reemplaza por fetch a tu API real
-		setTimeout(() => {
-			setStatus('success');
-			setEmail('');
-			setTimeout(() => setStatus('idle'), 2000);
-		}, 900);
-	};
+	// const handleSubscribe = async (e: React.FormEvent) => {
+	// 	e.preventDefault();
+	// 	if (!email) return setStatus('error');
+	// 	setStatus('loading');
+	// 	// Simulación de petición — reemplaza por fetch a tu API real
+	// 	setTimeout(() => {
+	// 		setStatus('success');
+	// 		setEmail('');
+	// 		setTimeout(() => setStatus('idle'), 2000);
+	// 	}, 900);
+	// };
 
 	return (
 		<footer className="bg-gradient-to-r from-[#0B2342] to-[#133A66] text-slate-100">
@@ -50,17 +48,17 @@ export default function Footer() {
 							</h4>
 							<ul className="mt-4 space-y-2 text-sm text-slate-300">
 								<li>
-									<Link href="#consultoria" className="hover:text-white focus:outline-none focus:ring-4 focus:ring-[#0B2342]/25 rounded">
+									<Link href="#" className="hover:text-white focus:outline-none focus:ring-4 focus:ring-[#0B2342]/25 rounded">
 										Consultoría estratégica
 									</Link>
 								</li>
 								<li>
-									<Link href="#mentorias" className="hover:text-white focus:outline-none focus:ring-4 focus:ring-[#0B2342]/25 rounded">
+									<Link href="#" className="hover:text-white focus:outline-none focus:ring-4 focus:ring-[#0B2342]/25 rounded">
 										Mentorías ejecutivas
 									</Link>
 								</li>
 								<li>
-									<Link href="#marketing" className="hover:text-white focus:outline-none focus:ring-4 focus:ring-[#0B2342]/25 rounded">
+									<Link href="#" className="hover:text-white focus:outline-none focus:ring-4 focus:ring-[#0B2342]/25 rounded">
 										Marketing de alto impacto
 									</Link>
 								</li>
@@ -98,10 +96,6 @@ export default function Footer() {
 						</h4>
 
 						<div className="mt-4 text-sm text-slate-300 space-y-2">
-							<div className="flex items-center gap-2">
-								<Phone className="w-4 h-4 text-amber-300" />
-								<span>+34 600 000 000</span>
-							</div>
 							<div className="flex items-center gap-2">
 								<Mail className="w-4 h-4 text-amber-300" />
 								<a href="mailto:Corporacion2025intl@gmail.com" className="hover:text-white focus:outline-none focus:ring-4 focus:ring-[#0B2342]/25 rounded">
