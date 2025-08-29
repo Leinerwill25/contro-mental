@@ -13,8 +13,8 @@ export default function Home() {
 		{
 			id: 1,
 			title: 'Obra Literaria - Second Pearl Harbor',
-			subtitle: 'Temas: El Verdadero Origen Del COVID 19 - El Murcielago Que Se Enamoro De Un Mono? - La Organización Terrorista - El Disfrazado Ataque A Los Estados Unidos De America Y Aliados - El Rodo De Las Elecciones Al Presidente Donald Trum El 2020 - Como Operas Los Servicios De Inteligencia En El Mundo.',
-			price: '16.00',
+			subtitle: 'Temas: El Verdadero Origen Del COVID 19 - El Murcielago Que Se Enamoro De Un Mono? - La Organización Terrorista - El Disfrazado Ataque A Los Estados Unidos De America Y Aliados - El Robo De Las Elecciones Al Presidente Donald Trum El 2020 - Como Operas Los Servicios De Inteligencia En El Mundo.',
+			price: '12.00',
 			image: '/caratula.png',
 			info: 'Extras: La Posible Guerra De Estados Unidos Contra China Reforzada Por Rusia - America Empezo a Despertar.',
 			details: 'Todo ello narrado con una claridad y crudeza sorprendente por el escritor e investigador social JAIME BERTOLI CASTAGNETO',

@@ -16,18 +16,18 @@ type Book = {
 	price: string;
 	image: string;
 	tag?: string;
-	info?: string; // breve: mostrado en la card
-	details?: string; // modal: contenido distinto y más extenso
-	features?: string[]; // bullets para modal
+	info?: string;
+	details?: string;
+	features?: string[];
 	isbn?: string;
 	pages?: number;
 	language?: string;
 	format?: string;
-	releaseDate?: string; // 'YYYY-MM-DD'
+	releaseDate?: string;
 	stock?: number;
 	sku?: string;
 	purchaseUrl?: string;
-	rating?: number; // 0..5
+	rating?: number;
 	reviews?: Review[];
 	sampleUrl?: string;
 	category?: string;
@@ -36,7 +36,7 @@ type Book = {
 
 type Props = {
 	books: Book[];
-	autoplay?: number; // ms, 0 = off
+	autoplay?: number;
 };
 
 const overlayVariants: Variants = {
@@ -49,23 +49,22 @@ const dialogVariants: Variants = {
 	visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.22 } },
 };
 
+const FEATURED_ID = 1;
+
 export default function BookCarousel({ books, autoplay = 0 }: Props) {
 	const [current, setCurrent] = useState(0);
 
-	// modal state
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [modalBook, setModalBook] = useState<Book | null>(null);
 	const lastActiveRef = useRef<HTMLElement | null>(null);
 	const closeBtnRef = useRef<HTMLButtonElement | null>(null);
 
-	// autoplay
 	useEffect(() => {
 		if (!autoplay || books.length <= 1) return;
 		const t = setInterval(() => setCurrent((s) => (s === books.length - 1 ? 0 : s + 1)), autoplay);
 		return () => clearInterval(t);
 	}, [autoplay, books.length]);
 
-	// keyboard nav for slides + ESC close handled here
 	const prevSlide = useCallback(() => setCurrent((p) => (p === 0 ? books.length - 1 : p - 1)), [books.length]);
 	const nextSlide = useCallback(() => setCurrent((p) => (p === books.length - 1 ? 0 : p + 1)), [books.length]);
 
@@ -86,22 +85,31 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 		lastActiveRef.current = trigger ?? (document.activeElement as HTMLElement | null);
 		setModalBook(b);
 		setIsModalOpen(true);
-		// focus will be given by AnimateModal on mount (we still attempt a small timeout)
 		setTimeout(() => closeBtnRef.current?.focus(), 50);
 	}
 
 	function closeModal() {
 		setIsModalOpen(false);
 		setModalBook(null);
-		// restore focus to last active element (slight timeout to allow modal unmount)
 		setTimeout(() => lastActiveRef.current?.focus(), 50);
 	}
 
 	function getModalContent(b: Book) {
 		if (b.details && b.details.trim().length > 0) return b.details;
-		// ensure difference from book.info
 		const infoDiff = b.info && b.info.trim().length > 0 ? `Nota: (diferente al resumen) ${b.info}` : '';
 		return `Detalles extendidos sobre "${b.title}". Contenido adicional: características clave, beneficios y uso recomendado. Precio: €${b.price}. ${infoDiff}`;
+	}
+
+	// helper: parse "Temas: A - B - C" into array (works only when present)
+	function parseThemes(sub?: string) {
+		if (!sub) return [];
+		const cleaned = sub.replace(/^Temas:\s*/i, '').trim();
+		// split by " - " or " -"
+		const parts = cleaned
+			.split(/\s*-\s*/)
+			.map((s) => s.trim())
+			.filter(Boolean);
+		return parts;
 	}
 
 	return (
@@ -110,12 +118,12 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 			<div className="relative bg-gradient-to-b from-white via-white/95 to-slate-50 border-2 border-slate-100 rounded-3xl p-6 md:p-8 shadow-lg overflow-visible">
 				<div className="flex flex-col md:flex-row items-center gap-8 md:gap-10">
 					{/* Imagen sobresaliente */}
-					<div className="relative flex-shrink-0 w-56 md:w-72 lg:w-80 -mt-8 md:-mt-12 transform transition-all duration-500 hover:scale-105" aria-hidden={false}>
-						<div className="relative rounded-3xl overflow-hidden ring-1 ring-slate-100 shadow-2xl">
+					<div className={`relative flex-shrink-0 -mt-8 md:-mt-12 transform transition-all duration-500 hover:scale-105 ${book.id === FEATURED_ID ? 'w-64 md:w-80 lg:w-96' : 'w-56 md:w-72 lg:w-80'}`} aria-hidden={false}>
+						<div className={`relative rounded-3xl overflow-hidden ring-1 ${book.id === FEATURED_ID ? 'ring-indigo-200 shadow-[0_20px_50px_rgba(56,53,112,0.12)]' : 'ring-slate-100 shadow-2xl'}`}>
 							<Image src={book.image} alt={book.title} width={720} height={960} className="object-cover w-full h-[260px] md:h-[420px] lg:h-[480px] block" priority />
 						</div>
 
-						{book.tag ? <span className="absolute -left-3 top-4 md:top-6 bg-gradient-to-r from-sky-600 to-indigo-600 text-white text-xs md:text-sm font-semibold px-3 py-1.5 rounded-full shadow-sm">{book.tag}</span> : null}
+						{book.tag ? <span className={`absolute -left-3 top-4 md:top-6 text-xs md:text-sm font-semibold px-3 py-1.5 rounded-full shadow-sm ${book.id === FEATURED_ID ? 'bg-gradient-to-r from-red-500 to-blue-600 text-white' : 'bg-gradient-to-r from-sky-600 to-indigo-600 text-white'}`}>{book.tag}</span> : null}
 
 						<div className="mt-3 flex items-center gap-2">
 							<div className="w-10 h-2 rounded-full bg-gradient-to-r from-sky-400 to-indigo-400" />
@@ -125,15 +133,43 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 
 					{/* Bloque de información redondeado */}
 					<div className="flex-1 w-full">
-						<div className="bg-white/70 backdrop-blur-sm border border-slate-100 rounded-2xl p-6 md:p-8 shadow-md">
-							<h3 className="text-lg md:text-2xl lg:text-3xl font-semibold text-slate-900 leading-tight">{book.title}</h3>
+						<div className={`bg-white/70 backdrop-blur-sm border border-slate-100 rounded-2xl p-6 md:p-8 shadow-md ${book.id === FEATURED_ID ? 'ring-1 ring-indigo-50' : ''}`}>
+							{/* Title */}
+							<h3 className={`leading-tight ${book.id === FEATURED_ID ? 'text-3xl md:text-5xl lg:text-6xl font-extrabold text-slate-900' : 'text-lg md:text-2xl lg:text-3xl font-semibold text-slate-900'}`}>{book.title}</h3>
 
-							{book.subtitle && <p className="mt-3 text-sm md:text-base text-slate-600 max-w-2xl">{book.subtitle}</p>}
+							{/* Featured: render themes as list with stars */}
+							{book.id === FEATURED_ID && book.subtitle ? (
+								<div className="mt-4">
+									{/* bright main subtitle color */}
+									<p className="text-base md:text-lg font-medium text-[#0066FF]">
+										{/* If subtitle starts with "Temas:" we will show label; else show as plain */}
+										{/^Temas:/i.test(book.subtitle) ? 'Temas destacados:' : ''}
+									</p>
+
+									{/* parsed themes */}
+									<div className="mt-3 flex flex-wrap gap-2 items-start">
+										{parseThemes(book.subtitle).map((t, i) => (
+											<span key={i} className="flex items-center gap-2 bg-white/40 border border-slate-100 rounded-xl px-3 py-2 text-sm md:text-base font-medium shadow-sm" role="listitem">
+												{/* star: alternate red / blue; larger and vivid */}
+												<span aria-hidden title={i % 2 === 0 ? 'estrella roja' : 'estrella azul'} className={`inline-flex items-center justify-center w-6 h-6 rounded-full text-white text-[12px] md:text-sm font-bold ${i % 2 === 0 ? 'bg-red-500' : 'bg-[#0066FF]'}`}>
+													{/* using star char for crispness */}★
+												</span>
+
+												{/* theme text in bright blue (not gray) */}
+												<span className="text-[#0066FF]">{t}</span>
+											</span>
+										))}
+									</div>
+								</div>
+							) : (
+								// Non-featured: regular subtitle but larger/clearer than before (no gray)
+								book.subtitle && <p className="mt-3 text-sm md:text-base text-slate-700 max-w-2xl">{book.subtitle}</p>
+							)}
 
 							{/* Información breve (card) */}
 							{book.info && (
 								<div className="mt-6 bg-slate-50 border border-slate-100 rounded-2xl p-5 md:p-6 shadow-inner">
-									<p className="text-sm md:text-base text-slate-700 leading-relaxed">{book.info}</p>
+									<p className={`${book.id === FEATURED_ID ? 'text-slate-800 text-base md:text-lg' : 'text-sm md:text-base text-slate-700'} leading-relaxed`}>{book.info}</p>
 								</div>
 							)}
 
@@ -141,7 +177,7 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 							<div className="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-start gap-4">
 								<div className="flex items-baseline gap-3">
 									<span className="text-sm text-slate-500">Precio</span>
-									<span className="text-2xl md:text-3xl font-extrabold text-slate-900">€{book.price}</span>
+									<span className={`text-2xl md:text-3xl font-extrabold ${book.id === FEATURED_ID ? 'text-[#0b2b8a]' : 'text-slate-900'}`}>€{book.price}</span>
 								</div>
 
 								<div className="flex items-center gap-3 ml-0 sm:ml-6">
@@ -149,7 +185,6 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 										Comprar ahora
 									</a>
 
-									{/* Opens modal with DIFFERENT content */}
 									<button
 										onClick={(e) => {
 											e.stopPropagation();
@@ -192,16 +227,14 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 				</button>
 			</div>
 
-			{/* Modal (rendered in portal to ensure it sits above everything) */}
+			{/* Modal */}
 			<AnimateModal isOpen={isModalOpen} onClose={closeModal} initialFocusRef={closeBtnRef}>
 				{modalBook && (
 					<div className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-						{/* Left: image (con altura restringida para no estirar verticalmente) */}
 						<div className="relative rounded-2xl overflow-hidden bg-white/70 ring-1 ring-slate-100 shadow-md h-48 md:h-64 lg:h-80 xl:h-[340px]">
 							<Image src={modalBook.image} alt={modalBook.title} fill className="object-cover w-full h-full" />
 						</div>
 
-						{/* Right: different details */}
 						<div className="p-4 md:p-6 bg-white rounded-2xl border border-slate-100 shadow-sm h-[calc(80vh-48px)] md:h-auto overflow-auto">
 							<h2 className="text-2xl font-bold text-slate-900">{modalBook.title}</h2>
 							{modalBook.author && (
@@ -214,7 +247,6 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 							<div className="mt-4 text-sm text-slate-700">
 								<p>{getModalContent(modalBook)}</p>
 
-								{/* Render features if available */}
 								{modalBook.features && modalBook.features.length > 0 && (
 									<ul className="mt-4 list-disc list-inside text-sm text-slate-700 space-y-2">
 										{modalBook.features.map((f, i) => (
@@ -223,7 +255,6 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 									</ul>
 								)}
 
-								{/* Example structured extra info */}
 								<ul className="mt-4 list-disc list-inside text-sm text-slate-700 space-y-2">
 									<li>
 										<strong>Formato:</strong> {modalBook.format ?? ''}
@@ -234,7 +265,6 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 								</ul>
 							</div>
 
-							{/* reviews (if present) */}
 							{modalBook.reviews && modalBook.reviews.length > 0 && (
 								<div className="mt-4">
 									<h4 className="font-medium text-sm text-slate-800">Reseñas</h4>
@@ -274,7 +304,6 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 function AnimateModal({ children, isOpen, onClose, initialFocusRef }: { children: React.ReactNode; isOpen: boolean; onClose: () => void; initialFocusRef?: React.RefObject<HTMLButtonElement | null> }) {
 	const elRef = useRef<HTMLDivElement | null>(null);
 
-	// create portal container
 	useEffect(() => {
 		if (typeof window === 'undefined') return;
 		elRef.current = document.createElement('div');
@@ -288,7 +317,6 @@ function AnimateModal({ children, isOpen, onClose, initialFocusRef }: { children
 		};
 	}, []);
 
-	// lock scroll while open
 	useEffect(() => {
 		if (!isOpen) return;
 		const prev = document.body.style.overflow;
@@ -298,15 +326,12 @@ function AnimateModal({ children, isOpen, onClose, initialFocusRef }: { children
 		};
 	}, [isOpen]);
 
-	// nothing to render until portal node exists and open
 	if (!isOpen || typeof window === 'undefined' || !elRef.current) return null;
 
 	const modal = (
 		<motion.div initial="hidden" animate="visible" exit="hidden" variants={overlayVariants} className="fixed inset-0 z-[99999] flex items-center justify-center p-4">
-			{/* overlay */}
 			<motion.div variants={overlayVariants} initial="hidden" animate="visible" onClick={(e) => e.currentTarget === e.target && onClose()} className="absolute inset-0 bg-black/55" />
 
-			{/* dialog: wider and constrained vertically */}
 			<motion.div variants={dialogVariants} initial="hidden" animate="visible" role="dialog" aria-modal="true" className="relative z-[100000] max-w-7xl w-full max-h-[80vh]">
 				<div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-slate-100 p-4 md:p-6 h-full">
 					<div className="flex items-start justify-end">

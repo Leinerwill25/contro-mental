@@ -50,18 +50,25 @@ export default function QuienesSomos({ team = defaultTeam }: { team?: TeamMember
 					<p className="mt-3 text-sm md:text-base text-slate-700 max-w-3xl mx-auto leading-relaxed">
 						<span className="text-blue-900 text-lg md:text-xl font-semibold">
 							Justo es nombrar a&nbsp;
-							<span title="Veronica Salazar" className="inline-block px-2 py-0.5 rounded-md bg-indigo-50 border border-indigo-100 text-indigo-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105 ">
-								Veronica Salazar
+							<span title="Veronica Salazar" className="inline-block px-2 py-0.5 rounded-md bg-indigo-50 border border-indigo-100 text-indigo-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105">
+								VERONICA SALAZAR
 							</span>
-							&nbsp;— integra y eficiente, venezolana gerenciando maravillosamente. &nbsp;
-							<span title="Dereck Leinerwill Ruiz" className="inline-block px-2 py-0.5 rounded-md bg-indigo-50 border border-indigo-100 text-indigo-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105 ">
-								Dereck Leinerwill Ruiz
+							&nbsp;
+							<span className="inline-block px-2 py-0.5 rounded-md bg-yellow-50 border border-yellow-100 text-yellow-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105">Integra y eficiente · Venezolana gerenciando maravillosamente</span>
+							&nbsp;*
+							<span title="Dereck Leinerwill Ruiz" className="inline-block px-2 py-0.5 rounded-md bg-indigo-50 border border-indigo-100 text-indigo-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105">
+								DERECK LEINERWILL RUIZ
 							</span>
-							&nbsp;— desarrollador web y genio en el mundo del internet. &nbsp;
-							<span title="Luishaidy Gil" className="inline-block px-2 py-0.5 rounded-md bg-indigo-50 border border-indigo-100 text-indigo-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105 ">
-								Luishaidy Gil
+							&nbsp;
+							<span className="inline-block px-2 py-0.5 rounded-md bg-yellow-50 border border-yellow-100 text-yellow-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105">Desarrollador Web · Genio en el mundo del Internet</span>
+							&nbsp;*
+							<span title="Luishaidy Gil" className="inline-block px-2 py-0.5 rounded-md bg-indigo-50 border border-indigo-100 text-indigo-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105">
+								LUISHAIDY GIL
 							</span>
-							&nbsp;— excelencia y juventud como directora. Ahora ellos no están más; Dios mediante esperamos tener la suerte de volver pronto a tenerlos en nuestra familia empresarial.
+							&nbsp;
+							<span className="inline-block px-2 py-0.5 rounded-md bg-yellow-50 border border-yellow-100 text-yellow-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105">Excelencia y juventud como Directora</span>
+							.&nbsp;Ahora ellos no están&nbsp;
+							<span className="uppercase text-red-700 font-bold">MÁS</span>;&nbsp;DIOS mediante esperamos tener la suerte de volver pronto a tenerlos en nuestra familia empresarial.
 						</span>
 					</p>
 
