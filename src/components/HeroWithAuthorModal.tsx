@@ -167,13 +167,13 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 					<div className="w-full md:w-1/2 relative">
 						<div className="relative mx-auto md:mx-0 w-[92%] md:w-full lg:w-[95%] transform transition-shadow duration-300">
 							{/* Top-left card */}
-							<div aria-hidden className="absolute -top-6 -left-6 z-50 w-40 md:w-43 h-32 bg-amber-50/90 rounded-2xl p-4 text-slate-900 shadow-lg">
+							<div aria-hidden className="absolute -top-6 -left-6 z-50 w-40 md:w-43 h-32 bg-amber-300/95 rounded-2xl p-4 text-slate-900 shadow-lg">
 								<div className="text-sm font-semibold">Elimina:</div>
 								<div className="text-xs font-semibold text-slate-800">Tus principales bloqueos mentales mediante técnicas prácticas.</div>
 							</div>
 
 							{/* Right card */}
-							<div aria-hidden className="absolute -right-6 top-16 z-50 w-40 md:w-48 h-20 bg-amber-50/90 rounded-2xl p-3 text-slate-900 flex items-center justify-center shadow-lg">
+							<div aria-hidden className="absolute -right-6 top-16 z-50 w-40 md:w-48 h-20 bg-amber-300/95 rounded-2xl p-3 text-slate-900 flex items-center justify-center shadow-lg">
 								<div>
 									<div className="text-sm font-semibold">Aprende:</div>
 									<div className="text-xs font-semibold text-slate-800">A conectar con el núcleo mental de forma efectiva.</div>
@@ -189,7 +189,7 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 
 							{/* Bottom floating card */}
 							<div className="absolute left-1/2 transform -translate-x-1/2 md:translate-x-0 md:left-auto md:right-6 bottom-[-48px] md:bottom-[-72px] z-50 w-[86%] md:w-[58%]">
-								<div className="bg-amber-50/95 rounded-2xl p-6 text-slate-900 shadow-lg">
+								<div className="bg-amber-300/95 rounded-2xl p-6 text-slate-900 shadow-lg">
 									<p className="text-sm font-semibold">Aumento mínimo 300%:</p>
 									<p className="mt-1 text-xs font-semibold text-slate-800">Tu energía mental, eliminación completa del stress y la angustia, vas a poder a través de tu infinita energía mental. cambiar tu entorno físico, materializando tus deseos.</p>
 								</div>

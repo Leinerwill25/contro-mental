@@ -8,18 +8,19 @@ type TeamMember = {
 	name: string;
 	role: string;
 	image: string;
-	description: string;
+	description: string; // tratada como \"cualidad\" aquí
 };
 
 const defaultTeam: TeamMember[] = [
-	{ name: 'Jaime Bertoli Castagneto', role: 'Presidencia', image: '/pexels-cottonbro-4865536.jpg', description: 'Liderazgo visionario, con amplia experiencia en dirección estratégica.' },
-	{ name: 'Dr. Jesus', role: 'Gerencia', image: '/Jesus.png', description: 'Comprometido con la excelencia y el crecimiento sostenible.' },
+	{ name: 'Jaime Bertoli Castagneto', role: 'Presidencia', image: '/pexels-cottonbro-4865536.jpg', description: 'Liderazgo visionario y dirección estratégica.' },
+	{ name: 'Dr. Jesus', role: 'Gerencia', image: '/Jesus.png', description: 'Compromiso con la excelencia y crecimiento sostenible.' },
 	{ name: 'Dr. Tullio', role: 'Gerencia', image: '/Tullio.jpg', description: 'Experto en gestión operativa y planeación empresarial.' },
-	{ name: 'Erica', role: 'Directora de Control', image: '/Erica.png', description: 'Supervisa procesos y asegura el cumplimiento organizacional.' },
-	{ name: 'Lourdes', role: 'Directora de Internet', image: '/Lourdes.jpg', description: 'Encargada de innovación tecnológica y transformación digital.' },
-	{ name: 'Luishaidy Gil', role: 'Directora', image: '/1077063.png', description: 'Diseña estrategias de comunicación efectivas y modernas.' },
-	{ name: 'Dereck Ruiz', role: 'Director Desarrollo Web', image: '/pexels-djordje-petrovic-590080-2102416.jpg', description: 'Desarrollador web enfocado en la sostenibilidad y el control.' },
-	{ name: 'Veronica Salazar', role: 'Gerencia', image: '/1077063.png', description: 'Impulsa el desarrollo del talento humano con visión global.' },
+	{ name: 'Erica', role: 'Directora de Control', image: '/Erica.png', description: 'Supervisión rigurosa de procesos y cumplimiento.' },
+	{ name: 'Lourdes', role: 'Directora de Internet', image: '/Lourdes.jpg', description: 'Lidera innovación tecnológica y transformación digital.' },
+	// Luishaidy y Veronica usan la imagen placeholder '/1077063.png' según tu entrada
+	{ name: 'Luishaidy Gil', role: 'Directora', image: '/1077063.png', description: 'Estrategias de comunicación modernas y efectivas.' },
+	{ name: 'Dereck Ruiz', role: 'Director Desarrollo Web', image: '/pexels-djordje-petrovic-590080-2102416.jpg', description: 'Desarrollo web con enfoque en sostenibilidad y control.' },
+	{ name: 'Veronica Salazar', role: 'Gerencia', image: '/1077063.png', description: 'Impulsa el talento humano con visión global.' },
 ];
 
 const containerVariants: Variants = {
@@ -41,25 +42,29 @@ export default function QuienesSomos({ team = defaultTeam }: { team?: TeamMember
 					<h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#05295B]">
 						<span className="inline-block bg-clip-text text-transparent bg-gradient-to-r from-[#073B7A] via-[#1F6FB8] to-[#F6C23E]">CORPORACIÓN EJECUTIVA INTERNACIONAL</span>
 					</h2>
+
 					{/* Texto principal */}
 					<p className="mt-4 text-md md:text-lg text-slate-600 max-w-3xl mx-auto">Nuestro Equipo Ejecutivo: Experiencia y Juventud Brindando Éxitos En Más De 12 Países</p>
 
-					{/* Texto con nombres resaltados */}
+					{/* Texto con nombres resaltados — desde "Justo" hasta "empresarial" en azul y mayor tamaño */}
 					<p className="mt-3 text-sm md:text-base text-slate-700 max-w-3xl mx-auto leading-relaxed">
-						Justo es nombrar a&nbsp;
-						<span title="Veronica Salazar" className="inline-block px-2 py-0.5 rounded-md bg-indigo-50 border border-indigo-100 text-indigo-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105">
-							Veronica Salazar
+						<span className="text-blue-900 text-lg md:text-xl font-semibold">
+							Justo es nombrar a&nbsp;
+							<span title="Veronica Salazar" className="inline-block px-2 py-0.5 rounded-md bg-indigo-50 border border-indigo-100 text-indigo-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105 ">
+								Veronica Salazar
+							</span>
+							&nbsp;— integra y eficiente, venezolana gerenciando maravillosamente. &nbsp;
+							<span title="Dereck Leinerwill Ruiz" className="inline-block px-2 py-0.5 rounded-md bg-indigo-50 border border-indigo-100 text-indigo-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105 ">
+								Dereck Leinerwill Ruiz
+							</span>
+							&nbsp;— desarrollador web y genio en el mundo del internet. &nbsp;
+							<span title="Luishaidy Gil" className="inline-block px-2 py-0.5 rounded-md bg-indigo-50 border border-indigo-100 text-indigo-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105 ">
+								Luishaidy Gil
+							</span>
+							&nbsp;— excelencia y juventud como directora. Ahora ellos no están más; Dios mediante esperamos tener la suerte de volver pronto a tenerlos en nuestra familia empresarial.
 						</span>
-						&nbsp;— integra y eficiente, venezolana gerenciando maravillosamente. &nbsp;
-						<span title="Dereck Leinerwill Ruiz" className="inline-block px-2 py-0.5 rounded-md bg-indigo-50 border border-indigo-100 text-indigo-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105">
-							Dereck Leinerwill Ruiz
-						</span>
-						&nbsp;— desarrollador web y genio en el mundo del internet. &nbsp;
-						<span title="Luishaidy Gil" className="inline-block px-2 py-0.5 rounded-md bg-indigo-50 border border-indigo-100 text-indigo-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105">
-							Luishaidy Gil
-						</span>
-						&nbsp;— excelencia y juventud como directora. Ahora ellos no están más; Dios mediante esperamos tener la suerte de volver pronto a tenerlos en nuestra familia empresarial.
 					</p>
+
 					<div className="mt-6 flex items-center justify-center gap-3">
 						<span className="inline-block w-32 h-1 rounded-full bg-gradient-to-r from-[#073B7A] via-[#1F6FB8] to-[#F6C23E] shadow-sm" />
 					</div>
@@ -81,7 +86,7 @@ export default function QuienesSomos({ team = defaultTeam }: { team?: TeamMember
 				{/* Grid */}
 				<motion.div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8" variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.18 }}>
 					{team.map((member, idx) => (
-						<motion.article key={member.name} variants={cardVariants} className="relative rounded-3xl bg-white/80 backdrop-blur-[2px] border border-slate-100 shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-3" aria-label={`${member.name} — ${member.role}`}>
+						<motion.article key={member.name} variants={cardVariants} className="relative rounded-3xl bg-white/90 backdrop-blur-[2px] border border-slate-100 shadow-lg overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-3" aria-label={`${member.name} — ${member.role}`}>
 							{/* Accent shape */}
 							<div className="absolute -left-8 -top-8 w-28 h-28 rotate-45 rounded-xl bg-gradient-to-br from-[#073B7A] to-[#1F6FB8] opacity-10 pointer-events-none" />
 
@@ -91,19 +96,32 @@ export default function QuienesSomos({ team = defaultTeam }: { team?: TeamMember
 								<div className="relative flex items-center justify-center w-36 h-36 -mt-8">
 									<div className="absolute inset-0 rounded-full scale-105 blur-[10px] opacity-30 bg-gradient-to-tr from-[#F6C23E] to-[#F3D07A]" />
 									<div className="relative w-32 h-32 rounded-full overflow-hidden ring-2 ring-white shadow-md">
-										<Image src={member.image} alt={member.name} fill className="object-cover" />
+										{/* Si la imagen es la placeholder '/1077063.png' (Luishaidy / Veronica), mostrar fondo celeste con texto "EN AUSENCIA" */}
+										{member.image === '/1077063.png' ? (
+											<div className="w-full h-full bg-sky-100 flex items-center justify-center">
+												<span className="text-[#05295B] font-semibold text-lg tracking-wider">EN AUSENCIA</span>
+											</div>
+										) : (
+											<Image src={member.image} alt={member.name} fill className="object-cover" />
+										)}
 									</div>
 									<span className="absolute -bottom-2 px-3 py-1 rounded-full text-xs font-semibold bg-white/80 backdrop-blur-sm border border-slate-100">Miembro</span>
 								</div>
 
 								<div className="mt-2">
+									{/* Nombre (azul, sin negro) */}
 									<h3 className="text-lg md:text-xl font-semibold text-[#05295B]">{member.name}</h3>
+
+									{/* Rol (badge azul) */}
 									<div className="mt-1 inline-flex items-center gap-2">
 										<span className="inline-block px-2.5 py-0.5 text-xs font-medium uppercase tracking-wider rounded-md bg-gradient-to-r from-[#073B7A] to-[#1F6FB8] text-white shadow-sm">{member.role}</span>
 									</div>
 								</div>
 
-								<p className="mt-3 text-sm text-slate-600 leading-relaxed min-h-[3.4rem]">{member.description}</p>
+								{/* Cualidad resaltada en franja (color distinto: degradado emerald/teal) */}
+								<div className="mt-3 w-full">
+									<div className="rounded-md px-4 py-2 bg-gradient-to-r from-yellow-600 to-yellow-400 text-white font-medium text-sm shadow-sm">{member.description}</div>
+								</div>
 
 								{/* subtle footer */}
 								<div className="mt-4 w-full flex items-center justify-center">
