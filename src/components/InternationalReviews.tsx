@@ -66,7 +66,7 @@ export default function InternationalReviews() {
 				</div>
 
 				{/* Intro subtitle */}
-				<p className="text-sm md:text-base text-slate-600 max-w-3xl">Selección de 4 reseñas internacionales destacadas sobre la obra. Testimonios reales presentados de forma elegante y llamativa para captar la atención de lectores e interesados.</p>
+				<p className="text-sm md:text-base text-slate-600 max-w-3xl">Selección de 4 reseñas internacionales destacadas sobre la obra. Testimonios reales presentados por lectores e interesados.</p>
 
 				{/* Collapsible area */}
 				<div className={`overflow-hidden transition-[max-height,opacity] duration-400 ${open ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'}`} aria-hidden={!open}>
