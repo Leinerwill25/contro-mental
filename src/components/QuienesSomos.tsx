@@ -12,7 +12,7 @@ type TeamMember = {
 };
 
 const defaultTeam: TeamMember[] = [
-	{ name: 'Jaime Bertoli Castagneto', role: 'Presidencia', image: '/pexels-cottonbro-4865536.jpg', description: 'Liderazgo visionario y dirección estratégica.' },
+	{ name: 'Jaime Bertoli Castagneto', role: 'Presidencia', image: '/Sr. Jaime.png', description: 'Liderazgo visionario y dirección estratégica.' },
 	{ name: 'Dr. Jesus', role: 'Gerencia', image: '/Jesus.png', description: 'Compromiso con la excelencia y crecimiento sostenible.' },
 	{ name: 'Dr. Tullio', role: 'Gerencia', image: '/Tullio.jpg', description: 'Experto en gestión operativa y planeación empresarial.' },
 	{ name: 'Erica', role: 'Directora de Control', image: '/Erica.png', description: 'Supervisión rigurosa de procesos y cumplimiento.' },

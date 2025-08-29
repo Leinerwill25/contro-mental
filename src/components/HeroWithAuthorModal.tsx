@@ -18,7 +18,7 @@ const SAMPLE_AUTHOR: Author = {
 	name: 'Jaime Bértoli Castagneto',
 	title: 'Escritor e Investigador Social',
 	bio: 'Despues de años viajando por este mundo de Díos en más de 16 países brindando mis conocimientos en marketing, control mental ALPHA y mátematicas no lineales a las empresas y a veces personalmente a los dueños de las mismas empresas, de tener 5 libros escritos, tres con ediciones internacionales, despues de ser asesor de dos campañas presidenciales las dos con éxitos presidenciales de los candidatos, de estudios en dos universidades y de un curso especial internacional en una marina de guerra, y de 28 añis investigando la mente humana estoy seguro que si te sientes persona frustrada, apresada, en una vida de stress y angustia, puedo ayudarte a cambiar y a mejorar tu vida. A que aprendas a manejar y dirigir el tesoro más valioso que tienes, ese tesoro es tu mente y su energía infinita, la mente humana crea físicamente tus deseos.',
-	photo: '/pexels-cottonbro-4865536.jpg',
+	photo: '/Sr. Jaime.png',
 	email: 'alejandro@ejemplo.com',
 	linkedin: 'https://linkedin.com/in/alejandro-ramirez',
 };

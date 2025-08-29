@@ -7,6 +7,7 @@ import SupportAnimalsBanner from '@/components/SupportAnimalsBanner';
 import TarjetaTuristica from '@/components/TarjetaTuristica';
 import AnimalHelpBanner from '@/components/AnimalHelpBanner';
 import TarotShowcase from '@/components/TarotShowcase';
+import InternationalReviews from '@/components/InternationalReviews';
 
 export default function Home() {
 	const books = [
@@ -68,6 +69,8 @@ export default function Home() {
 					<BookCarousel books={books} />
 				</div>
 			</section>
+			<InternationalReviews />
+			{/* TAROT SHOWCASE */}
 			<section id="quienes-somos" className="py-16 bg-gray-50">
 				<div className="max-w-6xl mx-auto px-6">
 					<TarjetaTuristica />
