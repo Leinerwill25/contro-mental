@@ -50,16 +50,6 @@ export default function Home() {
 		<>
 			{/* HERO (con modal "Sobre el autor") */}
 			<HeroWithAuthorModal />
-
-			{/* QUIÉNES SOMOS */}
-			<section id="quienes-somos" className="py-16 bg-gray-50">
-				<div className="max-w-6xl mx-auto px-6">
-					<QuienesSomos />
-				</div>
-			</section>
-			<SupportAnimalsBanner />
-			<AnimalHelpBanner />
-
 			{/* LIBROS - carrusel */}
 			<section id="libros" className="py-16">
 				<div className="max-w-6xl mx-auto px-6">
@@ -69,6 +59,15 @@ export default function Home() {
 					<BookCarousel books={books} />
 				</div>
 			</section>
+			{/* QUIÉNES SOMOS */}
+			<section id="quienes-somos" className="py-16 bg-gray-50">
+				<div className="max-w-6xl mx-auto px-6">
+					<QuienesSomos />
+				</div>
+			</section>
+			<SupportAnimalsBanner />
+			<AnimalHelpBanner />
+
 			<InternationalReviews />
 			{/* TAROT SHOWCASE */}
 			<section id="quienes-somos" className="py-16 bg-gray-50">
