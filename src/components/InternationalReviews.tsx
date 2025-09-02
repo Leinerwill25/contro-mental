@@ -58,7 +58,7 @@ export default function InternationalReviews() {
 					<h2 className="text-xl md:text-3xl font-extrabold tracking-tight text-slate-900">Opiniones internacionales</h2>
 
 					<button onClick={() => setOpen((s) => !s)} aria-expanded={open} className="inline-flex items-center gap-3 px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-md transition">
-						OPINIONES INTERNACIONALES
+						VER OPINIONES INTERNACIONALES
 						<svg className={`w-4 h-4 transform transition ${open ? 'rotate-180' : 'rotate-0'}`} viewBox="0 0 20 20" fill="currentColor" aria-hidden>
 							<path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 011.08 1.04l-4.25 4.25a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clipRule="evenodd" />
 						</svg>
@@ -119,7 +119,7 @@ export default function InternationalReviews() {
 
 					{/* bottom call-to-action */}
 					<div className="mt-6 flex items-center justify-between gap-4">
-						<a href="mailto:Corporacion2025intl@gmail.com" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-indigo-600 text-indigo-600 font-semibold hover:bg-indigo-50 transition">
+						<a href="mailto:Corporacion2025int@gmail.com" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-indigo-600 text-indigo-600 font-semibold hover:bg-indigo-50 transition">
 							Contactar equipo
 						</a>
 					</div>

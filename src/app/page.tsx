@@ -13,7 +13,7 @@ export default function Home() {
 	const books = [
 		{
 			id: 1,
-			title: 'Obra Literaria - Second Pearl Harbor',
+			title: 'Second Pearl Harbor',
 			subtitle: 'Temas: El Verdadero Origen Del COVID 19 - El Murcielago Que Se Enamoro De Un Mono? - La Organización Terrorista - El Disfrazado Ataque A Los Estados Unidos De America Y Aliados - El Robo De Las Elecciones Al Presidente Donald Trum El 2020 - Como Operas Los Servicios De Inteligencia En El Mundo.',
 			price: '12.00',
 			image: '/caratula.png',
@@ -37,8 +37,8 @@ export default function Home() {
 			id: 3,
 			title: 'Como Tener Éxito En El Amor, Aprende Seducción Subliminal',
 			subtitle: 'Este Curso Mentoria Short time te enseña con metodologias de Control Mental ALPHA en DOCE DIAS A SABER BUSCAR Y ENCONTRAR EL AMOR TE ENSEÑA LO PRINCIPAL A SABER CONSERVARLO POR LOS AÑOS DE TODA TU VIDA',
-			price: '180.00',
-			image: '/pexels-rdne-7490819.jpg',
+			price: '125.00',
+			image: '/image (22).png',
 			info: 'El AMOR es la fuerza MAS PODEROSA QUE EXISTE EN ESTE MUNDO TODOS LOS SERES HUMANOS. LO BUSCAN MUCHOS DESESPERACDAMENTE VEN PASAR SUS VIDAS Y NO LO ENCUENTRAN',
 			details: 'Detalles extendidos sobre "Como Tener Éxito En El Amor, Aprende Seducción Subliminal". Contenido adicional: características clave, beneficios y uso recomendado. Precio: €180.00. Para más información específica del producto por favor contáctanos.',
 			tag: 'Seducción',
@@ -51,23 +51,20 @@ export default function Home() {
 			{/* HERO (con modal "Sobre el autor") */}
 			<HeroWithAuthorModal />
 			{/* LIBROS - carrusel */}
-			<section id="libros" className="py-16">
-				<div className="max-w-6xl mx-auto px-6">
-					<h2 className="text-2xl font-semibold text-primary-700 mb-8">Nuestros Productos Y Servicios</h2>
 
-					{/* Si quieres autoplay: <BookCarousel books={books} autoplay={5000} /> */}
-					<BookCarousel books={books} />
-				</div>
-			</section>
 			{/* QUIÉNES SOMOS */}
 			<section id="quienes-somos" className="py-16 bg-gray-50">
 				<div className="max-w-6xl mx-auto px-6">
 					<QuienesSomos />
 				</div>
 			</section>
+			<section id="libros" className="py-16">
+				<div className="max-w-6xl mx-auto px-6">
+					{/* Si quieres autoplay: <BookCarousel books={books} autoplay={5000} /> */}
+					<BookCarousel books={books} />
+				</div>
+			</section>
 			<SupportAnimalsBanner />
-			<AnimalHelpBanner />
-
 			<InternationalReviews />
 			{/* TAROT SHOWCASE */}
 			<section id="quienes-somos" className="py-16 bg-gray-50">
@@ -76,6 +73,7 @@ export default function Home() {
 				</div>
 			</section>
 			<TarotShowcase />
+			<AnimalHelpBanner />
 		</>
 	);
 }

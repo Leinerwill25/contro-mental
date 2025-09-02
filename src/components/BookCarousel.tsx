@@ -1,10 +1,8 @@
 // components/BookCarousel.tsx
 'use client';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
+import React, { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
-import { ChevronLeft, ChevronRight, X } from 'lucide-react';
-import { motion, Variants } from 'framer-motion';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 type Review = { user: string; text: string; rating: number; date?: string };
 
@@ -39,25 +37,15 @@ type Props = {
 	autoplay?: number;
 };
 
-const overlayVariants: Variants = {
-	hidden: { opacity: 0 },
-	visible: { opacity: 1, transition: { duration: 0.18 } },
-};
-
-const dialogVariants: Variants = {
-	hidden: { opacity: 0, y: 16, scale: 0.995 },
-	visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.22 } },
-};
-
 const FEATURED_ID = 1;
+
+// Ajusta aquí si quieres otros hex corporativos
+const PINK_HEX = '#ff6fa3';
+const BLUE_HEX = '#0066ff';
+const DARK_BLUE_HEX = '#0b2b8a';
 
 export default function BookCarousel({ books, autoplay = 0 }: Props) {
 	const [current, setCurrent] = useState(0);
-
-	const [isModalOpen, setIsModalOpen] = useState(false);
-	const [modalBook, setModalBook] = useState<Book | null>(null);
-	const lastActiveRef = useRef<HTMLElement | null>(null);
-	const closeBtnRef = useRef<HTMLButtonElement | null>(null);
 
 	useEffect(() => {
 		if (!autoplay || books.length <= 1) return;
@@ -68,49 +56,39 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 	const prevSlide = useCallback(() => setCurrent((p) => (p === 0 ? books.length - 1 : p - 1)), [books.length]);
 	const nextSlide = useCallback(() => setCurrent((p) => (p === books.length - 1 ? 0 : p + 1)), [books.length]);
 
+	// Manejador de teclas: solo flechas izquierda/derecha para navegación
 	useEffect(() => {
 		const onKey = (e: KeyboardEvent) => {
 			if (e.key === 'ArrowLeft') prevSlide();
 			if (e.key === 'ArrowRight') nextSlide();
-			if (e.key === 'Escape' && isModalOpen) closeModal();
 		};
 		window.addEventListener('keydown', onKey);
 		return () => window.removeEventListener('keydown', onKey);
-	}, [prevSlide, nextSlide, isModalOpen]);
+	}, [prevSlide, nextSlide]);
 
 	if (!books || books.length === 0) return null;
 	const book = books[current];
 
-	function openModalForBook(b: Book, trigger?: HTMLElement | null) {
-		lastActiveRef.current = trigger ?? (document.activeElement as HTMLElement | null);
-		setModalBook(b);
-		setIsModalOpen(true);
-		setTimeout(() => closeBtnRef.current?.focus(), 50);
-	}
-
-	function closeModal() {
-		setIsModalOpen(false);
-		setModalBook(null);
-		setTimeout(() => lastActiveRef.current?.focus(), 50);
-	}
-
-	function getModalContent(b: Book) {
-		if (b.details && b.details.trim().length > 0) return b.details;
-		const infoDiff = b.info && b.info.trim().length > 0 ? `Nota: (diferente al resumen) ${b.info}` : '';
-		return `Detalles extendidos sobre "${b.title}". Contenido adicional: características clave, beneficios y uso recomendado. Precio: €${b.price}. ${infoDiff}`;
-	}
+	// matcher robusto: "como tener exito en el amor" con o sin acento en 'éxito'
+	const loveTitleMatcher = (t?: string) => {
+		if (!t) return false;
+		const normalized = t.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+		return /como\s+tener\s+exito\s+en\s+el\s+amor/i.test(normalized);
+	};
 
 	// helper: parse "Temas: A - B - C" into array (works only when present)
 	function parseThemes(sub?: string) {
 		if (!sub) return [];
 		const cleaned = sub.replace(/^Temas:\s*/i, '').trim();
-		// split by " - " or " -"
 		const parts = cleaned
 			.split(/\s*-\s*/)
 			.map((s) => s.trim())
 			.filter(Boolean);
 		return parts;
 	}
+
+	// style helper: si es el libro id=2 aplicamos color azul corporativo a todo el bloque de texto
+	const containerTextStyle: React.CSSProperties | undefined = book.id === 2 ? { color: BLUE_HEX } : undefined;
 
 	return (
 		<section id="libro" className="w-full max-w-7xl mx-auto p-6 md:p-10">
@@ -125,51 +103,64 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 
 						{book.tag ? <span className={`absolute -left-3 top-4 md:top-6 text-xs md:text-sm font-semibold px-3 py-1.5 rounded-full shadow-sm ${book.id === FEATURED_ID ? 'bg-gradient-to-r from-red-500 to-blue-600 text-white' : 'bg-gradient-to-r from-sky-600 to-indigo-600 text-white'}`}>{book.tag}</span> : null}
 
+						{/* Barra decorativa (sin texto "Imagen del producto") */}
 						<div className="mt-3 flex items-center gap-2">
-							<div className="w-10 h-2 rounded-full bg-gradient-to-r from-sky-400 to-indigo-400" />
-							<p className="text-xs text-slate-500">Imagen del producto</p>
+							<div className="w-10 h-2 rounded-full bg-gradient-to-r from-sky-400 to-indigo-400" aria-hidden="true" />
 						</div>
 					</div>
 
 					{/* Bloque de información redondeado */}
 					<div className="flex-1 w-full">
-						<div className={`bg-white/70 backdrop-blur-sm border border-slate-100 rounded-2xl p-6 md:p-8 shadow-md ${book.id === FEATURED_ID ? 'ring-1 ring-indigo-50' : ''}`}>
+						<div className={`bg-white/70 backdrop-blur-sm border border-slate-100 rounded-2xl p-6 md:p-8 shadow-md ${book.id === FEATURED_ID ? 'ring-1 ring-indigo-50' : ''}`} style={containerTextStyle}>
 							{/* Title */}
-							<h3 className={`leading-tight ${book.id === FEATURED_ID ? 'text-3xl md:text-5xl lg:text-6xl font-extrabold text-slate-900' : 'text-lg md:text-2xl lg:text-3xl font-semibold text-slate-900'}`}>{book.title}</h3>
+							{loveTitleMatcher(book.title) ? (
+								// gradiente rosa→azul corporativo aplicado al texto (se mantiene para el título objetivo de amor)
+								<h3 className="leading-tight text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight">
+									<span style={{ backgroundImage: `linear-gradient(90deg, ${PINK_HEX}, ${BLUE_HEX})` }} className="bg-clip-text text-transparent">
+										{book.title}
+									</span>
+								</h3>
+							) : (
+								// Si es el libro id=1 usar azul oscuro; si id=2 usar azul corporativo; si no, mantener estilo por defecto.
+								<h3 className={`leading-tight ${book.id === FEATURED_ID ? 'text-3xl md:text-5xl lg:text-6xl font-extrabold' : 'text-lg md:text-2xl lg:text-3xl font-semibold'}`} style={book.id === 1 ? { color: DARK_BLUE_HEX } : book.id === 2 ? { color: BLUE_HEX } : undefined}>
+									{book.title}
+								</h3>
+							)}
 
 							{/* Featured: render themes as list with stars */}
 							{book.id === FEATURED_ID && book.subtitle ? (
 								<div className="mt-4">
-									{/* bright main subtitle color */}
-									<p className="text-base md:text-lg font-medium text-[#0066FF]">
-										{/* If subtitle starts with "Temas:" we will show label; else show as plain */}
+									<p className="text-base md:text-lg font-medium" style={{ color: DARK_BLUE_HEX }}>
 										{/^Temas:/i.test(book.subtitle) ? 'Temas destacados:' : ''}
 									</p>
 
-									{/* parsed themes */}
 									<div className="mt-3 flex flex-wrap gap-2 items-start">
 										{parseThemes(book.subtitle).map((t, i) => (
 											<span key={i} className="flex items-center gap-2 bg-white/40 border border-slate-100 rounded-xl px-3 py-2 text-sm md:text-base font-medium shadow-sm" role="listitem">
-												{/* star: alternate red / blue; larger and vivid */}
 												<span aria-hidden title={i % 2 === 0 ? 'estrella roja' : 'estrella azul'} className={`inline-flex items-center justify-center w-6 h-6 rounded-full text-white text-[12px] md:text-sm font-bold ${i % 2 === 0 ? 'bg-red-500' : 'bg-[#0066FF]'}`}>
-													{/* using star char for crispness */}★
+													★
 												</span>
 
-												{/* theme text in bright blue (not gray) */}
-												<span className="text-[#0066FF]">{t}</span>
+												{/* Tema en azul oscuro para el libro featured (id=1) */}
+												<span style={{ color: DARK_BLUE_HEX }}>{t}</span>
 											</span>
 										))}
 									</div>
 								</div>
 							) : (
-								// Non-featured: regular subtitle but larger/clearer than before (no gray)
-								book.subtitle && <p className="mt-3 text-sm md:text-base text-slate-700 max-w-2xl">{book.subtitle}</p>
+								book.subtitle && (
+									<p className="mt-3 text-sm md:text-base" style={book.id === 2 ? { color: BLUE_HEX } : book.id === 3 ? { color: BLUE_HEX } : undefined}>
+										{book.subtitle}
+									</p>
+								)
 							)}
 
 							{/* Información breve (card) */}
 							{book.info && (
 								<div className="mt-6 bg-slate-50 border border-slate-100 rounded-2xl p-5 md:p-6 shadow-inner">
-									<p className={`${book.id === FEATURED_ID ? 'text-slate-800 text-base md:text-lg' : 'text-sm md:text-base text-slate-700'} leading-relaxed`}>{book.info}</p>
+									<p className={`${book.id === FEATURED_ID ? 'text-slate-800 text-base md:text-lg' : 'text-sm md:text-base'} leading-relaxed`} style={book.id === 2 || book.id === 3 ? { color: BLUE_HEX } : undefined}>
+										{book.info}
+									</p>
 								</div>
 							)}
 
@@ -177,36 +168,23 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 							<div className="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-start gap-4">
 								<div className="flex items-baseline gap-3">
 									<span className="text-sm text-slate-500">Precio</span>
-									<span className={`text-2xl md:text-3xl font-extrabold ${book.id === FEATURED_ID ? 'text-[#0b2b8a]' : 'text-slate-900'}`}>€{book.price}</span>
+									{/* override de precio si coincide el título objetivo */}
+									<span className={`text-2xl md:text-3xl font-extrabold ${book.id === FEATURED_ID ? '' : 'text-slate-900'}`} style={book.id === 2 ? { color: BLUE_HEX } : book.id === 1 ? { color: DARK_BLUE_HEX } : undefined}>
+										{loveTitleMatcher(book.title) ? '125$' : `€${book.price}`}
+									</span>
 								</div>
 
 								<div className="flex items-center gap-3 ml-0 sm:ml-6">
-									<a href={`#comprar-${book.id}`} className="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-sky-500 text-white font-semibold shadow-lg hover:scale-[1.03] transform transition" aria-label={`Comprar ${book.title}`}>
-										Comprar ahora
+									<a href={`#comprar-${book.id}`} className="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-sky-500 text-white font-semibold shadow-lg hover:scale-[1.03] transform transition" aria-label={loveTitleMatcher(book.title) ? `Adquirir ${book.title}` : `Adquirir ${book.title}`}>
+										{loveTitleMatcher(book.title) ? 'Adquirir' : 'Adquirir'}
 									</a>
 
-									<button
-										onClick={(e) => {
-											e.stopPropagation();
-											openModalForBook(book, e.currentTarget as HTMLElement);
-										}}
-										className="px-4 py-2 rounded-lg border border-slate-200 text-sm text-slate-700 hover:bg-slate-50 transition"
-										aria-label={`Más información sobre ${book.title}`}>
-										Más info
-									</button>
+									{/* Botón "Más info" eliminado por petición */}
 								</div>
 							</div>
 
 							{/* Thumbnails / indicators */}
 							<div className="mt-6 flex items-center gap-3">
-								<div className="flex gap-2 overflow-x-auto pb-1">
-									{books.map((b, i) => (
-										<button key={b.id} onClick={() => setCurrent(i)} aria-label={`Ver ${b.title}`} className={`flex-none rounded-lg overflow-hidden ring-1 ring-transparent ${i === current ? 'ring-2 ring-indigo-300 scale-105' : 'opacity-70 hover:opacity-100'} transform transition`} style={{ width: 64, height: 64 }}>
-											<Image src={b.image} alt={b.title} width={64} height={64} className="object-cover w-full h-full" />
-										</button>
-									))}
-								</div>
-
 								<div className="ml-auto hidden sm:flex items-center gap-2">
 									{books.map((_, idx) => (
 										<button key={idx} onClick={() => setCurrent(idx)} className={`w-2.5 h-2.5 rounded-full transition-all ${idx === current ? 'bg-indigo-600 scale-125' : 'bg-slate-300'}`} aria-label={`Slide ${idx + 1}`} />
@@ -226,125 +204,6 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 					<ChevronRight className="w-5 h-5 text-indigo-600" />
 				</button>
 			</div>
-
-			{/* Modal */}
-			<AnimateModal isOpen={isModalOpen} onClose={closeModal} initialFocusRef={closeBtnRef}>
-				{modalBook && (
-					<div className="max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-						<div className="relative rounded-2xl overflow-hidden bg-white/70 ring-1 ring-slate-100 shadow-md h-48 md:h-64 lg:h-80 xl:h-[340px]">
-							<Image src={modalBook.image} alt={modalBook.title} fill className="object-cover w-full h-full" />
-						</div>
-
-						<div className="p-4 md:p-6 bg-white rounded-2xl border border-slate-100 shadow-sm h-[calc(80vh-48px)] md:h-auto overflow-auto">
-							<h2 className="text-2xl font-bold text-slate-900">{modalBook.title}</h2>
-							{modalBook.author && (
-								<p className="mt-1 text-sm text-slate-600">
-									Autor: <strong>{modalBook.author}</strong>
-								</p>
-							)}
-							{modalBook.subtitle && <p className="mt-2 text-sm text-slate-600">{modalBook.subtitle}</p>}
-
-							<div className="mt-4 text-sm text-slate-700">
-								<p>{getModalContent(modalBook)}</p>
-
-								{modalBook.features && modalBook.features.length > 0 && (
-									<ul className="mt-4 list-disc list-inside text-sm text-slate-700 space-y-2">
-										{modalBook.features.map((f, i) => (
-											<li key={i}>{f}</li>
-										))}
-									</ul>
-								)}
-
-								<ul className="mt-4 list-disc list-inside text-sm text-slate-700 space-y-2">
-									<li>
-										<strong>Formato:</strong> {modalBook.format ?? ''}
-									</li>
-									<li>
-										<strong>Etiqueta:</strong> {modalBook.tag ?? ''}
-									</li>
-								</ul>
-							</div>
-
-							{modalBook.reviews && modalBook.reviews.length > 0 && (
-								<div className="mt-4">
-									<h4 className="font-medium text-sm text-slate-800">Reseñas</h4>
-									<div className="mt-2 space-y-2 text-sm text-slate-700">
-										{modalBook.reviews.slice(0, 3).map((r, i) => (
-											<div key={i} className="border rounded-md p-2 bg-slate-50">
-												<div className="flex items-center justify-between">
-													<strong>{r.user}</strong>
-													<span className="text-xs text-slate-500">{r.rating}/5</span>
-												</div>
-												<p className="mt-1 text-xs text-slate-700">{r.text}</p>
-											</div>
-										))}
-									</div>
-								</div>
-							)}
-
-							<div className="mt-6 flex items-center gap-3">
-								<div className="flex items-baseline gap-3">
-									<span className="text-sm text-slate-500">Precio</span>
-									<span className="text-xl font-extrabold text-slate-900">€{modalBook.price}</span>
-								</div>
-
-								<a href={modalBook.purchaseUrl ?? `#comprar-${modalBook.id}`} className="ml-4 inline-flex items-center gap-2 px-4 py-2 rounded-md bg-indigo-600 text-white font-semibold hover:brightness-95 transition">
-									Comprar ahora
-								</a>
-							</div>
-						</div>
-					</div>
-				)}
-			</AnimateModal>
 		</section>
 	);
-}
-
-/* AnimateModal: portal-based modal with very high z-index and scroll lock */
-function AnimateModal({ children, isOpen, onClose, initialFocusRef }: { children: React.ReactNode; isOpen: boolean; onClose: () => void; initialFocusRef?: React.RefObject<HTMLButtonElement | null> }) {
-	const elRef = useRef<HTMLDivElement | null>(null);
-
-	useEffect(() => {
-		if (typeof window === 'undefined') return;
-		elRef.current = document.createElement('div');
-		elRef.current.setAttribute('data-modal-portal', 'true');
-		document.body.appendChild(elRef.current);
-		return () => {
-			if (elRef.current) {
-				document.body.removeChild(elRef.current);
-				elRef.current = null;
-			}
-		};
-	}, []);
-
-	useEffect(() => {
-		if (!isOpen) return;
-		const prev = document.body.style.overflow;
-		document.body.style.overflow = 'hidden';
-		return () => {
-			document.body.style.overflow = prev;
-		};
-	}, [isOpen]);
-
-	if (!isOpen || typeof window === 'undefined' || !elRef.current) return null;
-
-	const modal = (
-		<motion.div initial="hidden" animate="visible" exit="hidden" variants={overlayVariants} className="fixed inset-0 z-[99999] flex items-center justify-center p-4">
-			<motion.div variants={overlayVariants} initial="hidden" animate="visible" onClick={(e) => e.currentTarget === e.target && onClose()} className="absolute inset-0 bg-black/55" />
-
-			<motion.div variants={dialogVariants} initial="hidden" animate="visible" role="dialog" aria-modal="true" className="relative z-[100000] max-w-7xl w-full max-h-[80vh]">
-				<div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-slate-100 p-4 md:p-6 h-full">
-					<div className="flex items-start justify-end">
-						<button ref={initialFocusRef ?? null} onClick={onClose} aria-label="Cerrar" className="inline-flex items-center justify-center w-10 h-10 rounded-md text-slate-600 hover:text-slate-900 bg-white border border-slate-100 shadow-sm">
-							<X className="w-5 h-5" />
-						</button>
-					</div>
-
-					<div className="mt-2 h-[calc(80vh-64px)] overflow-auto">{children}</div>
-				</div>
-			</motion.div>
-		</motion.div>
-	);
-
-	return createPortal(modal, elRef.current);
 }

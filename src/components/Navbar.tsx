@@ -24,7 +24,7 @@ export default function NavbarImproved() {
 	}, [pathname]);
 
 	return (
-		<header className="sticky top-0 z-150 w-full bg-gradient-to-r from-[#0B2342]/80 to-[#133A66]/75 backdrop-blur-md border-b border-slate-800/10">
+		<header className="sticky top-0 z-150 w-full bg-gradient-to-r from-[#0B2342]/100 to-[#133A66]/100 backdrop-blur-md border-b border-slate-800/10">
 			{/* Skip link for keyboard users */}
 			<a href="#main" className="sr-only focus:not-sr-only focus:relative focus:z-50 focus:top-4 focus:left-4 focus:px-3 focus:py-2 focus:bg-white/90 focus:text-[#0B2342] rounded-md font-medium">
 				Ir al contenido

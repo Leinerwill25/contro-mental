@@ -67,7 +67,7 @@ export default function QuienesSomos({ team = defaultTeam }: { team?: TeamMember
 							&nbsp;
 							<span className="inline-block px-2 py-0.5 rounded-md bg-yellow-50 border border-yellow-100 text-yellow-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105">Excelencia y juventud como Directora</span>
 							.&nbsp;Ahora ellos no están&nbsp;
-							<span className="uppercase text-red-700 font-bold">MÁS</span>
+							<span className="uppercase text-blue-700 font-bold">MÁS</span>
 							&nbsp;DIOS mediante esperamos tener la suerte de volver pronto a tenerlos en nuestra familia empresarial.
 						</span>
 					</p>
@@ -124,7 +124,7 @@ export default function QuienesSomos({ team = defaultTeam }: { team?: TeamMember
 
 								{/* Cualidad resaltada en franja (color distinto: degradado amarillos) */}
 								<div className="mt-3 w-full">
-									<div className="rounded-md px-4 py-2 bg-gradient-to-r from-yellow-600 to-yellow-400 text-white font-medium text-sm shadow-sm text-center">{member.description}</div>
+									<div className="rounded-md px-4 py-2 bg-gradient-to-r from-yellow-600 to-yellow-400 text-blue-900 font-medium text-sm shadow-sm text-center">{member.description}</div>
 								</div>
 
 								{/* subtle footer */}

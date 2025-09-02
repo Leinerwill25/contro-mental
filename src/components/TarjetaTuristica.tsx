@@ -8,7 +8,7 @@ interface TarjetaTuristicaProps {
 	email?: string;
 }
 
-export default function TarjetaTuristica({ ticketImage = 'pexels-pixabay-210742.jpg', email = 'Corporacion2025intl@gmail.com' }: TarjetaTuristicaProps) {
+export default function TarjetaTuristica({ ticketImage = '/C.png', email = 'Corporacion2025int@gmail.com' }: TarjetaTuristicaProps) {
 	const [mounted, setMounted] = useState(false);
 
 	useEffect(() => {
@@ -105,7 +105,7 @@ export default function TarjetaTuristica({ ticketImage = 'pexels-pixabay-210742.
 						<div className="flex items-center gap-3 py-3 border-b border-slate-700">
 							<div className="w-10 h-10 rounded-md bg-white/5 flex items-center justify-center border border-slate-700">🏷️</div>
 							<div>
-								<p className="text-xs text-slate-300">Restaurantes</p>
+								<p className="text-sm text-slate-300">Restaurantes</p>
 								<p className="text-sm font-semibold text-amber-300">1 brindis de cortesía</p>
 							</div>
 						</div>

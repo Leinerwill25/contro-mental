@@ -116,7 +116,11 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 
 	return (
 		<>
-			<section className="relative bg-gradient-to-r from-[#0B2342] to-[#133A66] text-white py-20">
+			<section className="relative text-white py-20">
+				{/* Imagen de fondo */}
+				<div className="absolute inset-0 -z-20 bg-[url('/f.jpg')] bg-cover bg-center" />
+				{/* Overlay oscuro para mejorar legibilidad (ajusta /60 a /40, /70 según necesites) */}
+				<div aria-hidden="true" className="absolute inset-0 -z-10 bg-black/60" />{' '}
 				<div className="max-w-6xl mx-auto px-6 flex flex-col-reverse md:flex-row items-start md:items-center gap-10">
 					{/* LEFT: Texto */}
 					<div className="flex-1 pt-10">
@@ -183,7 +187,7 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 							{/* Imagen principal */}
 							<div className="relative rounded-xl overflow-hidden shadow-2xl border border-slate-800/20 bg-white z-40">
 								<div className="w-full h-64 md:h-80 lg:h-96 relative">
-									<Image src="/pexels-kampus-8428080.jpg" alt="Libros y formación" fill style={{ objectFit: 'cover' }} className="block" priority />
+									<Image src="/image (22).png" alt="Libros y formación" fill style={{ objectFit: 'cover' }} className="block" priority />
 								</div>
 							</div>
 
@@ -239,16 +243,6 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 											)}
 										</div>
 									</div>
-
-									{/* small contact block for md+ under photo (keeps corporate feel) */}
-									<div className="hidden md:block mt-4">
-										{SAMPLE_AUTHOR.email && (
-											<a className="inline-flex items-center gap-2 text-sm text-amber-200 hover:underline" href={`mailto:${SAMPLE_AUTHOR.email}`}>
-												<Mail className="w-4 h-4 text-amber-200" />
-												{SAMPLE_AUTHOR.email}
-											</a>
-										)}
-									</div>
 								</figure>
 
 								{/* Content column */}
@@ -293,8 +287,8 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 
 										{/* actions */}
 										<div className="mt-2 flex flex-wrap gap-3">
-											<a href="#contacto" className="inline-flex items-center px-4 py-2 rounded-md bg-amber-400 text-[#07203a] font-medium shadow-sm hover:opacity-95 transition">
-												Empieza A Cambiar Tu Vida — Contactar
+											<a href="mailto:Corporacion2025int@gmail.com" className="inline-flex items-center px-4 py-2 rounded-md bg-amber-400 text-[#07203a] font-medium shadow-sm hover:opacity-95 transition">
+												Contactar
 											</a>
 
 											<button onClick={closeModal} className="inline-flex items-center px-4 py-2 rounded-md border border-amber-300 text-sm text-amber-100 hover:bg-white/5 transition">

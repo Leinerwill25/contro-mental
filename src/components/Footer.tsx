@@ -32,21 +32,21 @@ export default function Footer() {
 								<span className="font-semibold bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-200 text-lg">CEI</span>
 							</div>
 							<div>
-								<h3 className="text-xl font-extrabold tracking-tight text-white"> CORPORACIÓN EJECUTIVA INTERNACIONAL</h3>
-								<p className="mt-1 text-sm text-slate-300">Consultoría · Mentorías · Estrategias corporativas</p>
+								<h3 className="text-xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-200"> CORPORACIÓN EJECUTIVA INTERNACIONAL</h3>
+								<p className="mt-1 text-base text-slate-300">Consultoría · Mentorías · Estrategias corporativas</p>
 							</div>
 						</div>
 
-						<p className="mt-4 text-sm text-slate-300 leading-relaxed max-w-sm">Edición seleccionada — Atención profesional. Acompañamos a líderes y equipos a desarrollar estrategias con impacto real y crecimiento sostenible.</p>
+						<p className="mt-4 text-base text-slate-300 leading-relaxed max-w-sm">Edición seleccionada — Atención profesional. Acompañamos a líderes y equipos a desarrollar estrategias con impacto real y crecimiento sostenible.</p>
 					</div>
 
 					{/* Navigation columns */}
 					<nav className="md:col-span-5 grid grid-cols-2 gap-6">
 						<div>
-							<h4 className="text-sm font-semibold uppercase tracking-wider">
+							<h4 className="text-base font-semibold uppercase tracking-wider">
 								<span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-200">Servicios</span>
 							</h4>
-							<ul className="mt-4 space-y-2 text-sm text-slate-300">
+							<ul className="mt-4 space-y-2 text-base text-slate-300">
 								<li>
 									<Link href="#" className="hover:text-white focus:outline-none focus:ring-4 focus:ring-[#0B2342]/25 rounded">
 										Consultoría estratégica
@@ -66,10 +66,10 @@ export default function Footer() {
 						</div>
 
 						<div>
-							<h4 className="text-sm font-semibold uppercase tracking-wider">
+							<h4 className="text-base font-semibold uppercase tracking-wider">
 								<span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-200">Enlaces</span>
 							</h4>
-							<ul className="mt-4 space-y-2 text-sm text-slate-300">
+							<ul className="mt-4 space-y-2 text-base text-slate-300">
 								<li>
 									<Link href="#libro" className="hover:text-white focus:outline-none focus:ring-4 focus:ring-[#0B2342]/25 rounded">
 										Libros
@@ -81,7 +81,7 @@ export default function Footer() {
 									</Link>
 								</li>
 								<li>
-									<Link href="mailto:Corporacion2025intl@gmail.com" className="hover:text-white focus:outline-none focus:ring-4 focus:ring-[#0B2342]/25 rounded">
+									<Link href="mailto:Corporacion2025int@gmail.com" className="hover:text-white focus:outline-none focus:ring-4 focus:ring-[#0B2342]/25 rounded">
 										Contacto
 									</Link>
 								</li>
@@ -91,19 +91,19 @@ export default function Footer() {
 
 					{/* Contact + Newsletter */}
 					<div className="md:col-span-3">
-						<h4 className="text-sm font-semibold uppercase tracking-wider">
+						<h4 className="text-base font-semibold uppercase tracking-wider">
 							<span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-200">Contacto</span>
 						</h4>
 
-						<div className="mt-4 text-sm text-slate-300 space-y-2">
+						<div className="mt-4 text-base text-slate-300 space-y-2">
 							<div className="flex items-center gap-2">
-								<Mail className="w-4 h-4 text-amber-300" />
-								<a href="mailto:Corporacion2025intl@gmail.com" className="hover:text-white focus:outline-none focus:ring-4 focus:ring-[#0B2342]/25 rounded">
-									Corporacion2025intl@gmail.com
+								<Mail className="w-5 h-5 text-amber-300" />
+								<a href="mailto:Corporacion2025int@gmail.com" className="hover:text-white focus:outline-none focus:ring-4 focus:ring-[#0B2342]/25 rounded">
+									Corporacion2025int@gmail.com
 								</a>
 							</div>
 							<div className="flex items-center gap-2">
-								<MapPin className="w-4 h-4 text-amber-300" />
+								<MapPin className="w-5 h-5 text-amber-300" />
 								<span>Oficina central · España</span>
 							</div>
 						</div>
@@ -113,7 +113,7 @@ export default function Footer() {
 
 			{/* Bottom bar */}
 			<div className="border-t border-slate-800/60">
-				<div className="max-w-7xl mx-auto px-6 md:px-12 py-4 flex flex-col md:flex-row items-center justify-between gap-3 text-sm text-slate-400">
+				<div className="max-w-7xl mx-auto px-6 md:px-12 py-4 flex flex-col md:flex-row items-center justify-between gap-3 text-base text-slate-400">
 					<div>© {new Date().getFullYear()} Corporación Ejecutiva Internacional. Todos los derechos reservados.</div>
 
 					<div className="flex items-center gap-4">
