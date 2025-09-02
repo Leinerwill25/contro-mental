@@ -141,10 +141,6 @@ export default function TarjetaTuristica({ ticketImage = '/C.png', email = 'Corp
 							<a href={mailtoMoreInfo} className="px-4 py-2 rounded-md bg-amber-400 text-slate-900 font-semibold text-sm shadow hover:brightness-95 transition inline-flex items-center justify-center" aria-label="Enviar correo para más información">
 								Más info
 							</a>
-
-							<a href={mailtoAffiliate} className="px-3 py-2 rounded-md border border-slate-700 text-slate-200 text-sm hover:bg-slate-800 transition inline-flex items-center justify-center" aria-label="Enviar correo para afiliarse">
-								Afiliate
-							</a>
 						</div>
 					</div>
 

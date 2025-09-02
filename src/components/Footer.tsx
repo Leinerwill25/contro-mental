@@ -104,7 +104,7 @@ export default function Footer() {
 							</div>
 							<div className="flex items-center gap-2">
 								<MapPin className="w-5 h-5 text-amber-300" />
-								<span>Oficina central · España</span>
+								<span>Oficina central · España, Barcelona - Cataluña</span>
 							</div>
 						</div>
 					</div>
