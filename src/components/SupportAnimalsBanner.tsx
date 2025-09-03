@@ -84,7 +84,7 @@ export default function SupportAnimalsBanner({ message = 'Todos nuestros product
 				<div className="flex items-center gap-3 bg-white/95 backdrop-blur rounded-full px-3 py-2 shadow-lg border border-slate-200">
 					<button onClick={() => setMinimized(false)} aria-label="Abrir panel de ayuda" className="inline-flex items-center gap-2 text-sm font-medium text-slate-800 hover:text-[#0B2342] focus:outline-none focus:ring-4 focus:ring-[#0B2342]/15 rounded">
 						<Heart className="w-4 h-4 text-amber-400" />
-						<span className="hidden sm:inline bg-clip-text text-transparent bg-gradient-to-r from-blue-900 via-blue-700 to-blue-500 font-semibold">Apoya a PATITAS</span>
+						<span className="hidden sm:inline bg-clip-text text-transparent bg-gradient-to-r from-blue-900 via-blue-700 to-blue-500 font-semibold">Apoya a PATITAS - Clic Aquí</span>
 						<span className="inline sm:hidden bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-200 font-semibold">PATITAS</span>
 					</button>
 

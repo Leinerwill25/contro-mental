@@ -15,7 +15,7 @@ type Review = {
 const REVIEWS: Review[] = [
 	{
 		id: 1,
-		author: 'ENZO — Gerente de Marketing',
+		author: 'Enzo — Gerente de Marketing',
 		location: 'Santiago, Chile',
 		date: '',
 		text: 'No soy entendido en política, mas doy mi felicitación sincera y emocionada a este escritor por la valentía demostrada en decir la verdad. Jaime, no te conozco pero eres un completo analista y un gran escritor. Felicidades desde Santiago de Chile.',
@@ -23,7 +23,7 @@ const REVIEWS: Review[] = [
 	},
 	{
 		id: 2,
-		author: 'KATHERINE Quiroga Mejía — Ejecutiva y Empresaria',
+		author: 'Katherine Quiroga Mejía — Ejecutiva y Empresaria',
 		location: 'Lima, Perú',
 		date: '8 feb',
 		text: 'Me ha gustado mucho el libro: a sido genial poder leerlo. Dice la verdad de manera cruda y sin “pelos en la lengua”. Creo que hemos estado dormidos demasiado y hoy América y nuestras instituciones empezarán a despertar. Felicitaciones, escritor Jaime Bértoli C.',
@@ -31,7 +31,7 @@ const REVIEWS: Review[] = [
 	},
 	{
 		id: 3,
-		author: 'DAYANA — Investigadora Universitaria',
+		author: 'Dayana — Investigadora Universitaria',
 		location: 'Venezuela',
 		date: '28 nov 2024',
 		text: 'Leer este libro es entrar en una realidad paralela que cuestiona estructuras tradicionales. Es una obra que invita a la reflexión y a despertar la conciencia. Gracias, Jaime Bértoli, por este regalo para despertar.',
@@ -39,7 +39,7 @@ const REVIEWS: Review[] = [
 	},
 	{
 		id: 4,
-		author: 'DOMENICO — Dedicatario (Italia, Milán)',
+		author: 'Domenico — Dedicatario (Italia, Milán)',
 		location: 'Italia - Milán',
 		date: 'Mayo 2025',
 		text: 'Difícil encontrar palabras para definir las verdades y claridades de este libro. Second Pearl Harbor muestra la crudeza de la realidad reciente con pruebas imposibles de refutar. Felicitaciones al valiente autor.',
@@ -55,7 +55,7 @@ export default function InternationalReviews() {
 			<div className="flex flex-col gap-6">
 				{/* CTA Link */}
 				<div className="flex items-center justify-between gap-4">
-					<h2 className="text-xl md:text-3xl font-extrabold tracking-tight text-slate-900">Opiniones internacionales</h2>
+					<h2 className="text-xl md:text-3xl font-extrabold tracking-tight text-slate-700">Opiniones - Second Pearl Harbor</h2>
 
 					<button onClick={() => setOpen((s) => !s)} aria-expanded={open} className="inline-flex items-center gap-3 px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-md transition">
 						VER OPINIONES INTERNACIONALES
@@ -107,10 +107,6 @@ export default function InternationalReviews() {
 											<span className="w-8 h-8 rounded-full bg-white border border-slate-100 flex items-center justify-center shadow-sm text-lg">★</span>
 											<span className="text-xs text-slate-500">Reseña #{r.id}</span>
 										</div>
-
-										<a href="#" onClick={(e) => e.preventDefault()} className="text-xs text-indigo-600 font-medium hover:underline">
-											Leer original
-										</a>
 									</div>
 								</div>
 							</article>

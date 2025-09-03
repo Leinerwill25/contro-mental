@@ -126,17 +126,15 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 					<div className="flex-1 pt-10">
 						<h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
 							Programa Internacional Bértoli
-							<span className="block text-accent-200 mt-2 text-3xl font-medium">&quot;Control Mental ALPHA&quot;</span>
+							<span className="block text-accent-200 mt-2 text-3xl font-medium">Cumple Tus Deseos</span>
 							<span
 								className=" font-semibold text-2xl tracking-tight
                bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-200
                bg-clip-text text-transparent
                drop-shadow-[0_6px_18px_rgba(245,158,11,0.20)]">
-								Cumple Tus Deseos
+								&quot;Control Mental ALPHA&quot;
 							</span>
 						</h1>
-
-						<p className="mt-6 text-lg text-slate-100 max-w-xl leading-relaxed">Somos Una Empresa Que Ofrece A Su Público Conocimientos Que Brindan A Su Clientela La Oportunidad De Tener Mayor Éxito En Sus Vidas Mediante Nuestras Mentorias Internacionales, Las Cuales Son Acompañadas De Métodos Y Sistemas Personalizados, Coaching Individuales, Todo Short-Time con Resultados Tangibles y Concretos.</p>
 
 						<ul
 							className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 text-base bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-200

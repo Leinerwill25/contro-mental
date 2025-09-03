@@ -1,6 +1,5 @@
-// components/BookCarousel.tsx
 'use client';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -39,10 +38,11 @@ type Props = {
 
 const FEATURED_ID = 1;
 
-// Ajusta aquí si quieres otros hex corporativos
+// Colores corporativos
 const PINK_HEX = '#ff6fa3';
 const BLUE_HEX = '#0066ff';
 const DARK_BLUE_HEX = '#0b2b8a';
+const RED_HEX = '#ff3b30';
 
 export default function BookCarousel({ books, autoplay = 0 }: Props) {
 	const [current, setCurrent] = useState(0);
@@ -56,7 +56,6 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 	const prevSlide = useCallback(() => setCurrent((p) => (p === 0 ? books.length - 1 : p - 1)), [books.length]);
 	const nextSlide = useCallback(() => setCurrent((p) => (p === books.length - 1 ? 0 : p + 1)), [books.length]);
 
-	// Manejador de teclas: solo flechas izquierda/derecha para navegación
 	useEffect(() => {
 		const onKey = (e: KeyboardEvent) => {
 			if (e.key === 'ArrowLeft') prevSlide();
@@ -69,14 +68,12 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 	if (!books || books.length === 0) return null;
 	const book = books[current];
 
-	// matcher robusto: "como tener exito en el amor" con o sin acento en 'éxito'
 	const loveTitleMatcher = (t?: string) => {
 		if (!t) return false;
 		const normalized = t.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 		return /como\s+tener\s+exito\s+en\s+el\s+amor/i.test(normalized);
 	};
 
-	// helper: parse "Temas: A - B - C" into array (works only when present)
 	function parseThemes(sub?: string) {
 		if (!sub) return [];
 		const cleaned = sub.replace(/^Temas:\s*/i, '').trim();
@@ -87,8 +84,14 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 		return parts;
 	}
 
-	// style helper: si es el libro id=2 aplicamos color azul corporativo a todo el bloque de texto
 	const containerTextStyle: React.CSSProperties | undefined = book.id === 2 ? { color: BLUE_HEX } : undefined;
+
+	// Detectores específicos
+	const isSecondPearl = !!book.title && book.title.trim().toLowerCase() === 'second pearl harbor';
+	const extrasText = 'Extras: La Posible Guerra De Estados Unidos Contra China Reforzada Por Rusia - America Empezo a Despertar.';
+
+	// Helper para aplicar estilo azul oscuro si el texto contiene el extrasText
+	const extrasStyle: React.CSSProperties = { color: DARK_BLUE_HEX };
 
 	return (
 		<section id="libro" className="w-full max-w-7xl mx-auto p-6 md:p-10">
@@ -103,7 +106,7 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 
 						{book.tag ? <span className={`absolute -left-3 top-4 md:top-6 text-xs md:text-sm font-semibold px-3 py-1.5 rounded-full shadow-sm ${book.id === FEATURED_ID ? 'bg-gradient-to-r from-red-500 to-blue-600 text-white' : 'bg-gradient-to-r from-sky-600 to-indigo-600 text-white'}`}>{book.tag}</span> : null}
 
-						{/* Barra decorativa (sin texto "Imagen del producto") */}
+						{/* Barra decorativa */}
 						<div className="mt-3 flex items-center gap-2">
 							<div className="w-10 h-2 rounded-full bg-gradient-to-r from-sky-400 to-indigo-400" aria-hidden="true" />
 						</div>
@@ -114,14 +117,19 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 						<div className={`bg-white/70 backdrop-blur-sm border border-slate-100 rounded-2xl p-6 md:p-8 shadow-md ${book.id === FEATURED_ID ? 'ring-1 ring-indigo-50' : ''}`} style={containerTextStyle}>
 							{/* Title */}
 							{loveTitleMatcher(book.title) ? (
-								// gradiente rosa→azul corporativo aplicado al texto (se mantiene para el título objetivo de amor)
 								<h3 className="leading-tight text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight">
 									<span style={{ backgroundImage: `linear-gradient(90deg, ${PINK_HEX}, ${BLUE_HEX})` }} className="bg-clip-text text-transparent">
 										{book.title}
 									</span>
 								</h3>
+							) : isSecondPearl ? (
+								// Gradiente azul -> rojo para "Second Pearl Harbor"
+								<h3 className="leading-tight text-2xl md:text-3xl lg:text-5xl font-extrabold tracking-tight">
+									<span style={{ backgroundImage: `linear-gradient(90deg, ${BLUE_HEX}, ${RED_HEX})` }} className="bg-clip-text text-transparent">
+										{book.title}
+									</span>
+								</h3>
 							) : (
-								// Si es el libro id=1 usar azul oscuro; si id=2 usar azul corporativo; si no, mantener estilo por defecto.
 								<h3 className={`leading-tight ${book.id === FEATURED_ID ? 'text-3xl md:text-5xl lg:text-6xl font-extrabold' : 'text-lg md:text-2xl lg:text-3xl font-semibold'}`} style={book.id === 1 ? { color: DARK_BLUE_HEX } : book.id === 2 ? { color: BLUE_HEX } : undefined}>
 									{book.title}
 								</h3>
@@ -149,7 +157,7 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 								</div>
 							) : (
 								book.subtitle && (
-									<p className="mt-3 text-sm md:text-base" style={book.id === 2 ? { color: BLUE_HEX } : book.id === 3 ? { color: BLUE_HEX } : undefined}>
+									<p className="mt-3 text-sm md:text-base" style={book.subtitle.includes(extrasText) ? extrasStyle : book.id === 2 ? { color: BLUE_HEX } : book.id === 3 ? { color: BLUE_HEX } : undefined}>
 										{book.subtitle}
 									</p>
 								)
@@ -158,7 +166,7 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 							{/* Información breve (card) */}
 							{book.info && (
 								<div className="mt-6 bg-slate-50 border border-slate-100 rounded-2xl p-5 md:p-6 shadow-inner">
-									<p className={`${book.id === FEATURED_ID ? 'text-slate-800 text-base md:text-lg' : 'text-sm md:text-base'} leading-relaxed`} style={book.id === 2 || book.id === 3 ? { color: BLUE_HEX } : undefined}>
+									<p className={`${book.id === FEATURED_ID ? 'text-slate-800 text-base md:text-lg' : 'text-sm md:text-base'} leading-relaxed`} style={book.info.includes(extrasText) || book.id === 2 || book.id === 3 ? { color: DARK_BLUE_HEX } : undefined}>
 										{book.info}
 									</p>
 								</div>
@@ -168,8 +176,8 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 							<div className="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-start gap-4">
 								<div className="flex items-baseline gap-3">
 									<span className="text-sm text-slate-500">Precio</span>
-									{/* override de precio si coincide el título objetivo */}
-									<span className={`text-2xl md:text-3xl font-extrabold ${book.id === FEATURED_ID ? '' : 'text-slate-900'}`} style={book.id === 2 ? { color: BLUE_HEX } : book.id === 1 ? { color: DARK_BLUE_HEX } : undefined}>
+									{/* Precio más pequeño y letra más delgada */}
+									<span className={`text-lg md:text-xl font-medium ${book.id === FEATURED_ID ? '' : 'text-slate-900'}`} style={book.id === 2 ? { color: BLUE_HEX } : book.id === 1 ? { color: DARK_BLUE_HEX } : { color: BLUE_HEX }}>
 										{loveTitleMatcher(book.title) ? '125$' : `€${book.price}`}
 									</span>
 								</div>
@@ -178,8 +186,6 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 									<a href={`#comprar-${book.id}`} className="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-sky-500 text-white font-semibold shadow-lg hover:scale-[1.03] transform transition" aria-label={loveTitleMatcher(book.title) ? `Adquirir ${book.title}` : `Adquirir ${book.title}`}>
 										{loveTitleMatcher(book.title) ? 'Adquirir' : 'Adquirir'}
 									</a>
-
-									{/* Botón "Más info" eliminado por petición */}
 								</div>
 							</div>
 

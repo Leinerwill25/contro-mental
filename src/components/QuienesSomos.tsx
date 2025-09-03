@@ -19,9 +19,9 @@ const defaultTeam: TeamMember[] = [
 	{ name: 'Erica', role: 'Directora de Control', image: '/Erica.png', description: 'Supervisión rigurosa de procesos y cumplimiento.' },
 	{ name: 'Lourdes', role: 'Directora de Internet', image: '/Lourdes.jpg', description: 'Lidera innovación tecnológica y transformación digital.' },
 	// Luishaidy y Veronica usan la imagen placeholder '/1077063.png'
-	{ name: 'Luishaidy Gil', role: 'Directora', image: '/1077063.png', description: 'Estrategias de comunicación modernas y efectivas.' },
+	{ name: 'En Ausencia', role: 'Directora', image: '/1077063.png', description: 'Estrategias de comunicación modernas y efectivas.' },
 	{ name: 'Dereck Ruiz', role: 'Director Desarrollo Web', image: '/pexels-djordje-petrovic-590080-2102416.jpg', description: 'Desarrollo web con enfoque en sostenibilidad y control.' },
-	{ name: 'Veronica Salazar', role: 'Gerencia', image: '/1077063.png', description: 'Impulsa el talento humano con visión global.' },
+	{ name: 'En Ausencia', role: 'Gerencia', image: '/1077063.png', description: 'Impulsa el talento humano con visión global.' },
 ];
 
 const containerVariants: Variants = {
@@ -136,7 +136,6 @@ export default function QuienesSomos({ team = defaultTeam }: { team?: TeamMember
 							</div>
 
 							{/* Bottom color stripe */}
-							<div className="h-1 bg-gradient-to-r from-[#073B7A] via-[#1F6FB8] to-[#F6C23E]" aria-hidden />
 						</motion.article>
 					))}
 				</motion.div>

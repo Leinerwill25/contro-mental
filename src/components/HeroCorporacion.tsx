@@ -1,0 +1,93 @@
+'use client';
+
+import React, { useEffect, useState } from 'react';
+import FlagCircularCarousel from './FlagCircularCarousel';
+
+interface Flag {
+	src: string;
+	name: string;
+}
+interface HeroProfesionalProps {
+	email?: string;
+	flags?: Flag[];
+}
+
+export default function HeroProfesional({
+	email = 'Corporacion2025int@gmail.com',
+	flags = [
+		{ src: '/descarga.png', name: 'España' },
+		{ src: '/descarga (1).png', name: 'Venezuela' },
+		{ src: '/descarga (2).png', name: 'Estados Unidos' },
+		{ src: '/descarga (4).png', name: 'Perú' },
+		{ src: '/descarga (3).png', name: 'Colombia' },
+	],
+}: HeroProfesionalProps) {
+	const [mounted, setMounted] = useState(false);
+
+	useEffect(() => {
+		const raf = requestAnimationFrame(() => setMounted(true));
+		return () => cancelAnimationFrame(raf);
+	}, []);
+
+	const enterBase = 'transition-all duration-600 ease-out';
+	const titleCls = `${enterBase} ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-6'}`;
+	const subtitleCls = `${enterBase} delay-150 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`;
+	const ctasCls = `${enterBase} delay-250 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`;
+	const flagsCls = `${enterBase} delay-200 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`;
+
+	const mailtoContacto = `mailto:${email}?subject=${encodeURIComponent('Información - Corporación Ejecutiva Internacional')}`;
+	const mailtoContactar = `mailto:${email}?subject=${encodeURIComponent('Contacto - Corporación Ejecutiva Internacional')}`;
+
+	return (
+		<header id="hero" className="w-full bg-gradient-to-b from-slate-900 to-slate-800 text-slate-100" aria-label="Hero Corporativo - Corporación Ejecutiva Internacional">
+			<div className="relative overflow-hidden">
+				<div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-20 md:py-28 flex flex-col-reverse md:flex-row items-center gap-10">
+					{/* Texto principal */}
+					<div className="w-full md:w-2/3">
+						<div className={titleCls}>
+							<h1 className="text-3xl md:text-5xl lg:text-6xl font-serif font-semibold leading-tight text-amber-300 drop-shadow-sm">Corporación Ejecutiva Internacional</h1>
+						</div>
+
+						<div className={subtitleCls}>
+							<p className="mt-4 text-sm md:text-base text-slate-300 max-w-prose">
+								<strong className="text-amber-300">Gente Emprendedora — Empresarial</strong> · <span className="italic">Somos una empresa de conocimientos</span>.
+							</p>
+
+							<p className="mt-4 text-sm md:text-lg text-rose-50 leading-relaxed max-w-2xl">
+								<span className="font-normal">Somos Una Empresa Que Ofrece A Su Público Conocimientos Que Brindan A Su Clientela La Oportunidad De Tener Mayor Éxito En Sus Vidas Mediante Nuestras Mentorias Internacionales, Las Cuales Son Acompañadas De Métodos Y Sistemas Personalizados, Coaching Individuales, Todo Short-Time con Resultados Tangibles y Concretos.</span>
+							</p>
+						</div>
+
+						{/* CTAs */}
+						<div className={`${ctasCls} mt-6 flex flex-wrap gap-3`}>
+							<a href={mailtoContacto} className="inline-flex items-center gap-3 px-5 py-3 rounded-md bg-amber-400 text-slate-900 font-semibold text-sm shadow hover:brightness-95 focus:outline-none focus:ring-2 focus:ring-amber-400" aria-label="Solicitar información">
+								Solicitar información
+							</a>
+
+							<a href={mailtoContactar} className="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-transparent border border-amber-500 text-amber-300 font-medium text-sm hover:bg-amber-500/10 focus:outline-none focus:ring-2 focus:ring-amber-300" aria-label="Contactar">
+								Contactar
+							</a>
+						</div>
+
+						{/* Texto pequeño / presencia */}
+						<div className="mt-6 flex items-center gap-4 flex-wrap">
+							<p className="text-xs text-slate-400">Presencia en países:</p>
+							<div className="flex items-center gap-2">
+								{flags.map((f, i) => (
+									<div key={i} className="hidden md:block">
+										<img src={f.src} alt={f.name} className="w-7 h-4 object-cover rounded-sm border border-slate-700 shadow-sm" />
+									</div>
+								))}
+							</div>
+						</div>
+					</div>
+
+					{/* Rejilla de banderas (sustituye la imagen derecha) */}
+					<div className="w-full md:w-1/3 flex justify-center md:justify-end">
+						<FlagCircularCarousel flags={flags} size={260} itemSize={88} autoRotateMs={5000} />
+					</div>
+				</div>
+			</div>
+		</header>
+	);
+}

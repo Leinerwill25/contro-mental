@@ -1,4 +1,3 @@
-// components/TarotShowcase.tsx
 'use client';
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
@@ -8,17 +7,16 @@ type TarotShowcaseProps = {
 	title?: string;
 	subtitle?: string;
 	lead?: string;
-	videoSrc?: string; // path to mp4 or external link (Drive link supported)
+	videoSrc?: string;
 	posterSrc?: string;
 	imageSrc?: string;
 	priceLabel?: string;
 	contactEmail?: string;
 };
 
-export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitle = 'Visualización escrita de 9 Meses — Si deseas Ver y tener mejores decisiones, esta es tu oportunidad', lead = 'Conoce Tu Futuro', videoSrc = 'https://drive.google.com/file/d/1J0aSdJ3GCEdRJWXnA8bdaNE9ARJOodd7/view?usp=drive_link', posterSrc = '/image (22).png', imageSrc = '/foto para  el  TAROT.png', priceLabel = 'Precio súper económico por promoción', contactEmail = 'alphadeseos@gmail.com' }: TarotShowcaseProps) {
+export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitle = 'Visualización escrita de 9 Meses — Si deseas Ver y tener mejores decisiones, esta es tu oportunidad', lead = 'Conoce Tu Futuro', videoSrc = 'https://drive.google.com/file/d/1J0aSdJ3GCEdRJWXnA8bdaNE9ARJOodd7/view?usp=drive_link', posterSrc = '/cap.png', imageSrc = '/foto para  el  TAROT.png', priceLabel = 'Precio súper económico por promoción', contactEmail = 'alphadeseos@gmail.com' }: TarotShowcaseProps) {
 	const videoRef = useRef<HTMLVideoElement | null>(null);
 
-	// Extraer ID de Google Drive si existe
 	const driveInfo = useMemo(() => {
 		if (!videoSrc) return null;
 		const match = videoSrc.match(/\/d\/([a-zA-Z0-9_-]+)/);
@@ -113,8 +111,6 @@ export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitl
 				}
 				return;
 			} catch (err) {
-				// fallback: modal iframe
-				// eslint-disable-next-line no-console
 				console.warn('Control de reproducción directo falló, abriendo modal como fallback:', err);
 				setShowDriveModal(true);
 				setShowOverlay(false);
@@ -145,6 +141,9 @@ export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitl
 		return undefined;
 	}, [isMp4, driveInfo, useDriveDirect, videoSrc]);
 
+	// Clase reutilizable para destacar el email
+	const emailHighlight = 'inline-block px-3 py-1 rounded-md bg-amber-400 text-slate-900 font-semibold shadow-sm hover:brightness-95 transition text-base';
+
 	return (
 		<section className="w-full max-w-6xl mx-auto px-6 py-12">
 			<div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-100">
@@ -152,17 +151,19 @@ export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitl
 				<div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 p-6 md:p-8 bg-gradient-to-r from-sky-50 to-white">
 					<div>
 						<h1 className="text-xl md:text-2xl lg:text-3xl font-extrabold text-sky-900 tracking-tight">{title}</h1>
-						<p className="mt-1 text-base md:text-lg text-slate-600 max-w-xl">{subtitle}</p>
+						{/* subtitle kept slightly larger */}
+						<p className="mt-1 text-lg md:text-xl text-slate-600 max-w-xl">{subtitle}</p>
 					</div>
 
 					<div className="ml-auto text-right">
 						<div className="inline-flex items-center gap-3">
-							<span className="px-3 py-2 rounded-md bg-sky-50 text-sky-800 text-base font-semibold border border-sky-100 shadow-sm">{priceLabel}</span>
+							<span className="px-3 py-2 rounded-md bg-sky-50 text-sky-800 text-lg font-semibold border border-sky-100 shadow-sm">{priceLabel}</span>
 						</div>
 
-						<p className="mt-2 text-base text-slate-700">
+						{/* Email resaltado en header */}
+						<p className="mt-2 text-lg text-slate-700">
 							<span className="font-medium">Informes sin compromiso:</span>{' '}
-							<a className="text-sky-700 hover:underline" href={`mailto:${contactEmail}`}>
+							<a className={emailHighlight} href={`mailto:${contactEmail}`}>
 								{contactEmail}
 							</a>
 						</p>
@@ -198,7 +199,7 @@ export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitl
 						{/* small file box / download */}
 						<div className="flex items-center gap-4">
 							<div className="flex-1">
-								<div className="rounded-md border border-slate-200 bg-slate-50 px-4 py-2 text-base text-slate-700 shadow-sm">
+								<div className="rounded-md border border-slate-200 bg-slate-50 px-4 py-2 text-lg text-slate-700 shadow-sm">
 									<div className="flex items-center gap-3">
 										<svg className="w-5 h-5 text-sky-600" viewBox="0 0 24 24" fill="none" aria-hidden>
 											<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
@@ -210,7 +211,7 @@ export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitl
 							</div>
 
 							<div className="flex-shrink-0 text-right">
-								<a href={downloadHref} {...(driveInfo ? { target: '_blank', rel: 'noopener noreferrer' } : { download: true })} className="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-sky-600 text-white text-base font-semibold shadow hover:bg-sky-700 transition">
+								<a href={downloadHref} {...(driveInfo ? { target: '_blank', rel: 'noopener noreferrer' } : { download: true })} className="inline-flex items-center gap-2 px-3 py-2 rounded-md bg-sky-600 text-white text-lg font-semibold shadow hover:bg-sky-700 transition">
 									Descargar
 								</a>
 							</div>
@@ -225,39 +226,43 @@ export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitl
 							</div>
 
 							<div className="p-4 md:p-6">
-								<p className="text-base text-slate-700">{lead}</p>
+								{/* lead aumentado */}
+								<p className="text-lg text-slate-700">{lead}</p>
 
 								<div className="mt-4">
-									<h4 className="text-base font-semibold text-sky-900">Presentación</h4>
-									<p className="mt-2 text-base text-slate-600">Lectura Garantizada</p>
+									<h4 className="text-lg font-semibold text-sky-900">Presentación</h4>
+									<p className="mt-2 text-lg text-slate-600">Lectura Garantizada</p>
 								</div>
 
 								<div className="mt-4 flex items-center justify-between gap-4">
 									<div className="flex items-center gap-3">
-										<span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-sky-50 text-sky-700 font-semibold">α</span>
+										<span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-sky-50 text-sky-700 font-semibold text-lg">α</span>
 										<div>
-											<div className="text-base font-semibold text-slate-900">Tarot Alpha</div>
-											<div className="text-sm text-slate-500">Visualización escrita • 9 meses</div>
+											<div className="text-lg font-semibold text-slate-900">Tarot Alpha</div>
+											{/* aquí era text-sm -> ahora text-base */}
+											<div className="text-base text-slate-500">Visualización escrita • 9 meses</div>
 										</div>
 									</div>
 
 									<div className="text-right">
-										<div className="text-base font-semibold text-sky-800">{priceLabel}</div>
-										<a className="mt-1 block text-sm text-sky-600 hover:underline" href={`mailto:${contactEmail}`}>
+										<div className="text-lg font-semibold text-sky-800">{priceLabel}</div>
+										{/* email resaltado en panel derecho */}
+										<a className={emailHighlight + ' mt-1 inline-block'} href={`mailto:${contactEmail}`}>
 											{contactEmail}
 										</a>
 									</div>
 								</div>
 
 								<div className="mt-6 flex flex-col sm:flex-row gap-3">
-									<a href={`mailto:${contactEmail}?subject=Interés%20Consulta%20Tarot%20Alpha`} className="inline-flex items-center justify-center px-4 py-3 rounded-lg bg-gradient-to-r from-sky-700 to-indigo-600 text-white font-semibold shadow hover:scale-[1.02] transition">
+									<a href={`mailto:${contactEmail}?subject=Interés%20Consulta%20Tarot%20Alpha`} className="inline-flex items-center justify-center px-4 py-3 rounded-lg bg-gradient-to-r from-sky-700 to-indigo-600 text-white font-semibold text-lg shadow hover:scale-[1.02] transition">
 										Solicitar información
 									</a>
 								</div>
 							</div>
 						</div>
 
-						<div className="text-center text-sm text-slate-500">© {new Date().getFullYear()} Tarot Alpha — Presentación profesional y segura.</div>
+						{/* footer note aumentado */}
+						<div className="text-center text-base text-slate-500">© {new Date().getFullYear()} Tarot Alpha — Presentación profesional y segura.</div>
 					</aside>
 				</div>
 			</div>
