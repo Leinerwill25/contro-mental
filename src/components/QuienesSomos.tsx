@@ -18,10 +18,9 @@ const defaultTeam: TeamMember[] = [
 	{ name: 'Dr. Tullio', role: 'Gerencia', image: '/Tullio.jpg', description: 'Experto en gestión operativa y planeación empresarial.' },
 	{ name: 'Erica', role: 'Directora de Control', image: '/Erica.png', description: 'Supervisión rigurosa de procesos y cumplimiento.' },
 	{ name: 'Lourdes', role: 'Directora de Internet', image: '/Lourdes.jpg', description: 'Lidera innovación tecnológica y transformación digital.' },
-	// Luishaidy y Veronica usan la imagen placeholder '/1077063.png'
-	{ name: 'En Ausencia', role: 'Directora', image: '/1077063.png', description: 'Estrategias de comunicación modernas y efectivas.' },
 	{ name: 'Dereck Ruiz', role: 'Director Desarrollo Web', image: '/pexels-djordje-petrovic-590080-2102416.jpg', description: 'Desarrollo web con enfoque en sostenibilidad y control.' },
-	{ name: 'En Ausencia', role: 'Gerencia', image: '/1077063.png', description: 'Impulsa el talento humano con visión global.' },
+	{ name: 'Directora', role: 'Directora', image: '/1077063.png', description: 'Estrategias de comunicación modernas y efectivas.' },
+	{ name: 'Gerencia', role: 'Gerencia', image: '/1077063.png', description: 'Impulsa el talento humano con visión global.' },
 ];
 
 const containerVariants: Variants = {
@@ -45,32 +44,6 @@ export default function QuienesSomos({ team = defaultTeam }: { team?: TeamMember
 					</h2>
 
 					<p className="mt-4 text-md md:text-lg text-slate-600 max-w-3xl mx-auto">Nuestro Equipo Ejecutivo: Experiencia y Juventud Brindando Éxitos En Más De 12 Países</p>
-
-					<p className="mt-3 text-sm md:text-base text-slate-700 max-w-3xl mx-auto leading-relaxed">
-						<span className="text-blue-900 text-lg md:text-xl font-semibold">
-							Justo es nombrar a&nbsp;
-							<span title="Veronica Salazar" className="inline-block px-2 py-0.5 rounded-md bg-indigo-50 border border-indigo-100 text-indigo-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105">
-								VERONICA SALAZAR
-							</span>
-							&nbsp;
-							<span className="inline-block px-2 py-0.5 rounded-md bg-yellow-50 border border-yellow-100 text-yellow-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105">Integra y eficiente · Venezolana gerenciando maravillosamente</span>
-							&nbsp;*
-							<span title="Dereck Leinerwill Ruiz" className="inline-block px-2 py-0.5 rounded-md bg-indigo-50 border border-indigo-100 text-indigo-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105">
-								DERECK LEINERWILL RUIZ
-							</span>
-							&nbsp;
-							<span className="inline-block px-2 py-0.5 rounded-md bg-yellow-50 border border-yellow-100 text-yellow-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105">Desarrollador Web · Genio en el mundo del Internet</span>
-							&nbsp;*
-							<span title="Luishaidy Gil" className="inline-block px-2 py-0.5 rounded-md bg-indigo-50 border border-indigo-100 text-indigo-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105">
-								LUISHAIDY GIL
-							</span>
-							&nbsp;
-							<span className="inline-block px-2 py-0.5 rounded-md bg-yellow-50 border border-yellow-100 text-yellow-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105">Excelencia y juventud como Directora</span>
-							.&nbsp;Ahora ellos no están&nbsp;
-							<span className="uppercase text-blue-700 font-bold">MÁS</span>
-							&nbsp;DIOS mediante esperamos tener la suerte de volver pronto a tenerlos en nuestra familia empresarial.
-						</span>
-					</p>
 
 					<div className="mt-6 flex items-center justify-center gap-3">
 						<span className="inline-block w-32 h-1 rounded-full bg-gradient-to-r from-[#073B7A] via-[#1F6FB8] to-[#F6C23E] shadow-sm" />
@@ -142,11 +115,30 @@ export default function QuienesSomos({ team = defaultTeam }: { team?: TeamMember
 
 				{/* CTA */}
 				<div className="mt-10 text-center">
-					<p className="text-sm text-slate-600">
-						¿Interesado en conocer más sobre nuestra gobernanza corporativa?{' '}
-						<a href="#contacto" className="font-semibold text-[#073B7A] underline-offset-2 hover:underline">
-							Contáctanos
-						</a>
+					<p className="mt-3 text-sm md:text-base text-slate-700 max-w-3xl mx-auto leading-relaxed">
+						<span className="text-blue-900 text-lg md:text-xl font-semibold">
+							Justo es nombrar a&nbsp;
+							<span title="Veronica Salazar" className="inline-block px-2 py-0.5 rounded-md bg-indigo-50 border border-indigo-100 text-indigo-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105">
+								VERONICA SALAZAR
+							</span>
+							&nbsp;
+							<span className="inline-block px-2 py-0.5 rounded-md bg-yellow-50 border border-yellow-100 text-yellow-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105">Integra y eficiente · Venezolana gerenciando maravillosamente</span>
+							&nbsp;*
+							<span title="Dereck Leinerwill Ruiz" className="inline-block px-2 py-0.5 rounded-md bg-indigo-50 border border-indigo-100 text-indigo-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105">
+								DERECK LEINERWILL RUIZ
+							</span>
+							&nbsp;
+							<span className="inline-block px-2 py-0.5 rounded-md bg-yellow-50 border border-yellow-100 text-yellow-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105">Desarrollador Web · Genio en el mundo del Internet</span>
+							&nbsp;*
+							<span title="Luishaidy Gil" className="inline-block px-2 py-0.5 rounded-md bg-indigo-50 border border-indigo-100 text-indigo-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105">
+								LUISHAIDY GIL
+							</span>
+							&nbsp;
+							<span className="inline-block px-2 py-0.5 rounded-md bg-yellow-50 border border-yellow-100 text-yellow-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105">Excelencia y juventud como Directora</span>
+							.&nbsp;Ahora ellos no están&nbsp;
+							<span className="uppercase text-blue-700 font-bold">MÁS</span>
+							&nbsp;DIOS mediante esperamos tener la suerte de volver pronto a tenerlos en nuestra familia empresarial.
+						</span>
 					</p>
 				</div>
 			</div>

@@ -24,7 +24,7 @@ export default function NavbarImproved() {
 	}, [pathname]);
 
 	return (
-		<header className="sticky top-0 z-150 w-full bg-gradient-to-r from-[#0B2342]/100 to-[#133A66]/100 backdrop-blur-md border-b border-slate-800/10">
+		<header className="sticky top-0 z-150 w-full bg-gradient-to-r from-[#ffffff]/100 to-[#ffff]/100 backdrop-blur-md border-b border-slate-800/10">
 			{/* Skip link for keyboard users */}
 			<a href="#main" className="sr-only focus:not-sr-only focus:relative focus:z-50 focus:top-4 focus:left-4 focus:px-3 focus:py-2 focus:bg-white/90 focus:text-[#0B2342] rounded-md font-medium">
 				Ir al contenido
@@ -46,13 +46,13 @@ export default function NavbarImproved() {
 				{/* Desktop nav */}
 				<nav className="hidden md:flex items-center gap-8" aria-label="Navegación principal">
 					{NAV_ITEMS.map((item) => (
-						<a key={item.href} href={item.href} className={clsx('text-sm font-medium transition-colors whitespace-nowrap', pathname?.includes(item.href.replace('#', '')) ? 'text-white/95' : 'text-white/80 hover:text-white/100')}>
+						<a key={item.href} href={item.href} className={clsx('text-sm font-medium transition-colors whitespace-nowrap ', pathname?.includes(item.href.replace('#', '')) ? 'text-blue-700/95' : 'text-blue-700/80 hover:text-blue-500/100')}>
 							{item.label}
 						</a>
 					))}
 
-					<Link href="#libro" className="inline-flex items-center px-5 py-2 rounded-lg bg-yellow-300 text-[#0B2342] text-sm font-semibold shadow-sm hover:shadow-md transform-gpu hover:-translate-y-0.5 transition" aria-label="Comprar ahora">
-						Adquirir Productos
+					<Link href="#libro" className="inline-flex items-center px-5 py-2 rounded-lg bg-yellow-300 text-[#295997] text-sm font-semibold shadow-sm hover:shadow-md transform-gpu hover:-translate-y-0.5 transition" aria-label="Comprar ahora">
+						Contactar
 					</Link>
 				</nav>
 

@@ -3,7 +3,7 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { X, Mail, Linkedin } from 'lucide-react';
+import { X, Mail } from 'lucide-react';
 
 type Author = {
 	name: string;
@@ -19,12 +19,13 @@ const SAMPLE_AUTHOR: Author = {
 	title: 'Escritor e Investigador Social',
 	bio: 'Despues de años viajando por este mundo de Díos en más de 16 países brindando mis conocimientos en marketing, control mental ALPHA y mátematicas no lineales a las empresas y a veces personalmente a los dueños de las mismas empresas, de tener 5 libros escritos, tres con ediciones internacionales, despues de ser asesor de dos campañas presidenciales las dos con éxitos presidenciales de los candidatos, de estudios en dos universidades y de un curso especial internacional en una marina de guerra, y de 28 añis investigando la mente humana estoy seguro que si te sientes persona frustrada, apresada, en una vida de stress y angustia, puedo ayudarte a cambiar y a mejorar tu vida. A que aprendas a manejar y dirigir el tesoro más valioso que tienes, ese tesoro es tu mente y su energía infinita, la mente humana crea físicamente tus deseos.',
 	photo: '/Sr. Jaime.png',
-	email: 'alejandro@ejemplo.com',
+	email: 'corporacion2025int@gmail.com',
 	linkedin: 'https://linkedin.com/in/alejandro-ramirez',
 };
 
 export default function HeroWithAuthorModal(): React.ReactElement {
 	const [isOpen, setIsOpen] = useState(false);
+	const [copyStatus, setCopyStatus] = useState<'idle' | 'copied' | 'error'>('idle');
 	const triggerRef = useRef<HTMLButtonElement | null>(null);
 	const modalRef = useRef<HTMLDivElement | null>(null);
 	const previouslyFocused = useRef<HTMLElement | null>(null);
@@ -224,8 +225,8 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 						{/* content */}
 						<div className="h-full md:h-auto overflow-y-auto">
 							<main className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4 md:p-8" id="author-modal-main">
-								{/* Photo column */}
-								<figure className="md:col-span-1">
+								{/* Photo column con email llamativo debajo */}
+								<figure className="md:col-span-1 flex flex-col items-center">
 									<div className="w-full rounded-xl overflow-hidden border border-amber-500/10 bg-gradient-to-b from-slate-800 to-slate-900 p-2">
 										<div className="relative w-full h-44 md:h-56 rounded-xl overflow-hidden">
 											{SAMPLE_AUTHOR.photo ? (
@@ -241,6 +242,13 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 											)}
 										</div>
 									</div>
+
+									{SAMPLE_AUTHOR?.email && (
+										<a href={`mailto:${SAMPLE_AUTHOR.email}`} aria-label={`Enviar correo a ${SAMPLE_AUTHOR.email}`} className="mt-2 mx-auto w-full sm:w-auto inline-flex items-center gap-1 px-2 py-1 rounded-md bg-gradient-to-r from-amber-500 to-amber-300 text-slate-900 font-medium shadow text-xs">
+											<Mail className="w-3 h-3" />
+											<span className="truncate max-w-[9rem] md:max-w-none text-xs">{SAMPLE_AUTHOR.email}</span>
+										</a>
+									)}
 								</figure>
 
 								{/* Content column */}
@@ -267,18 +275,11 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 										<p className="text-amber-200/95 prose max-w-none">EMPIEZA A CAMBIAR TU VIDA LAS CASUALIDADES NO EXISTEN Y HOY DIA EL DESTINO TE BRINDA UNA OPORTUNIDAD</p>
 
 										{/* contact links (mobile visible here too) */}
-										<div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:hidden">
+										<div className="grid grid-cols-1 sm:grid-cols-2 gap-1 md:hidden">
 											{SAMPLE_AUTHOR.email && (
-												<a className="inline-flex items-center gap-2 text-sm text-amber-200 hover:underline" href={`mailto:${SAMPLE_AUTHOR.email}`}>
-													<Mail className="w-4 h-4 text-amber-200" />
-													{SAMPLE_AUTHOR.email}
-												</a>
-											)}
-
-											{SAMPLE_AUTHOR.linkedin && (
-												<a className="inline-flex items-center gap-2 text-sm text-amber-200 hover:underline" href={SAMPLE_AUTHOR.linkedin} target="_blank" rel="noreferrer noopener">
-													<Linkedin className="w-4 h-4 text-amber-200" />
-													Perfil LinkedIn
+												<a href={`mailto:${SAMPLE_AUTHOR.email}`} className="inline-flex items-center gap-2 text-xs text-amber-200 hover:underline truncate" aria-label={`Enviar correo a ${SAMPLE_AUTHOR.email}`}>
+													<Mail className="w-3 h-3 text-amber-200" />
+													<span className="max-w-[10rem] truncate">{SAMPLE_AUTHOR.email}</span>
 												</a>
 											)}
 										</div>
