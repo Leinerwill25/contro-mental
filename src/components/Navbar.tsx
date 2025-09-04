@@ -51,7 +51,7 @@ export default function NavbarImproved() {
 						</a>
 					))}
 
-					<Link href="#libro" className="inline-flex items-center px-5 py-2 rounded-lg bg-yellow-300 text-[#295997] text-sm font-semibold shadow-sm hover:shadow-md transform-gpu hover:-translate-y-0.5 transition" aria-label="Comprar ahora">
+					<Link href="mailto:Corporacion2025int@gmail.com" className="inline-flex items-center px-5 py-2 rounded-lg bg-yellow-300 text-[#295997] text-sm font-semibold shadow-sm hover:shadow-md transform-gpu hover:-translate-y-0.5 transition" aria-label="Comprar ahora">
 						Contactar
 					</Link>
 				</nav>
