@@ -173,22 +173,25 @@ export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitl
 				{/* Content grid */}
 				<div className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-6 md:p-8">
 					{/* Left: Video */}
-					<div className="lg:col-span-7 flex flex-col gap-4">
+					{/* <-- Cambiado: lg:col-span-7 -> lg:col-span-6 para ocupar menos ancho --> */}
+					<div className="lg:col-span-6 flex flex-col gap-4">
 						<div className="relative rounded-2xl overflow-hidden shadow-lg border border-slate-100 bg-black">
 							{playerSrc ? (
-								<video ref={videoRef} src={playerSrc} poster={posterSrc} controls preload="metadata" className="w-full h-[320px] md:h-[420px] lg:h-[520px] object-cover bg-black" aria-label="Video presentación Tarot Alpha">
+								/* <-- Cambiado: alturas reducidas --> */
+								<video ref={videoRef} src={playerSrc} poster={posterSrc} controls preload="metadata" className="w-full h-[220px] md:h-[300px] lg:h-[360px] object-cover bg-black" aria-label="Video presentación Tarot Alpha">
 									Your browser does not support the <code>video</code> element.
 								</video>
 							) : (
-								<div className="w-full h-[320px] md:h-[420px] lg:h-[520px] relative bg-black">
+								<div className="w-full h-[220px] md:h-[300px] lg:h-[360px] relative bg-black">
 									<Image src={posterSrc} alt={title} fill className="object-cover" />
 								</div>
 							)}
 
 							{showOverlay && (
 								<div className="absolute inset-0 flex items-center justify-center pointer-events-auto">
-									<button type="button" aria-label="Reproducir / Pausar video" onClick={togglePlay} className="flex items-center justify-center bg-white/10 backdrop-blur-sm hover:bg-white/20 transition rounded-full w-20 h-20 focus:outline-none focus:ring-2 focus:ring-sky-400">
-										<svg className="w-8 h-8 text-white/95" viewBox="0 0 24 24" fill="none" aria-hidden>
+									{/* <-- Cambiado: botón play más pequeño w-16 h-16, svg w-6 h-6 --> */}
+									<button type="button" aria-label="Reproducir / Pausar video" onClick={togglePlay} className="flex items-center justify-center bg-white/10 backdrop-blur-sm hover:bg-white/20 transition rounded-full w-16 h-16 focus:outline-none focus:ring-2 focus:ring-sky-400">
+										<svg className="w-6 h-6 text-white/95" viewBox="0 0 24 24" fill="none" aria-hidden>
 											<path d="M8 5v14l11-7L8 5z" fill="currentColor" />
 										</svg>
 									</button>
@@ -219,7 +222,7 @@ export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitl
 					</div>
 
 					{/* Right column */}
-					<aside className="lg:col-span-5 flex flex-col gap-4">
+					<aside className="lg:col-span-6 flex flex-col gap-4">
 						<div className="rounded-2xl overflow-hidden border border-slate-100 shadow-sm bg-white">
 							<div className="relative w-full h-48 md:h-64">
 								<Image src={imageSrc} alt="Imagen de presentación Tarot" fill className="object-cover" />
@@ -271,7 +274,8 @@ export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitl
 			{showDriveModal && driveInfo && (
 				<div className="fixed inset-0 z-50 flex items-center justify-center p-4">
 					<div className="absolute inset-0 bg-black/60" onClick={closeModal} />
-					<div className="relative w-full max-w-4xl h-[60vh] bg-black rounded-lg overflow-hidden shadow-2xl">
+					{/* <-- Cambiado: modal más pequeño max-w-3xl y h-[50vh] --> */}
+					<div className="relative w-full max-w-3xl h-[50vh] bg-black rounded-lg overflow-hidden shadow-2xl">
 						<button onClick={closeModal} aria-label="Cerrar" className="absolute right-3 top-3 z-10 bg-white/10 hover:bg-white/20 p-2 rounded-full text-white">
 							✕
 						</button>
