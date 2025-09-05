@@ -23,7 +23,7 @@ const REVIEWS: Review[] = [
 	},
 	{
 		id: 2,
-		author: 'Katherine Quiroga Mejía — Ejecutiva y Empresaria',
+		author: 'Katherine — Ejecutiva y Empresaria',
 		location: 'Lima, Perú',
 		date: '8 feb',
 		text: 'Me ha gustado mucho el libro: a sido genial poder leerlo. Dice la verdad de manera cruda y sin “pelos en la lengua”. Creo que hemos estado dormidos demasiado y hoy América y nuestras instituciones empezarán a despertar. Felicitaciones, escritor Jaime Bértoli C.',

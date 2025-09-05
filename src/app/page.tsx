@@ -13,17 +13,6 @@ import HeroCorporacion from '@/components/HeroCorporacion';
 export default function Home() {
 	const books = [
 		{
-			id: 1,
-			title: 'Second Pearl Harbor',
-			subtitle: 'Temas: El Verdadero Origen Del COVID 19 - El Murcielago Que Se Enamoro De Un Mono? - La Organización Terrorista - El Disfrazado Ataque A Los Estados Unidos De America Y Aliados - El Robo De Las Elecciones Al Presidente Donald Trump El 2020 - Como Operas Los Servicios De Inteligencia En El Mundo.',
-			price: '12.00',
-			image: '/caratula.png',
-			info: 'Extras: La Posible Guerra De Estados Unidos Contra China Reforzada Por Rusia - America Empezo a Despertar.',
-			details: 'Todo ello narrado con una claridad y crudeza sorprendente por el escritor e investigador social JAIME BERTOLI CASTAGNETO',
-			tag: 'Literatura',
-			format: 'Digital',
-		},
-		{
 			id: 2,
 			title: 'Mentoría Y Sistema Internacional Método Bértoli',
 			subtitle: 'Control Mental Alpha - Tu Mente Cumple Tus Deseos - Duración: 34 Dias, Resultados Inmediatos Garantizados. Control Mental Externo Individual y/o Masivo. Aprende a Materializar tus Deseos.',
@@ -33,6 +22,17 @@ export default function Home() {
 			details: 'Detalles extendidos sobre "Mentoría Y Sistema Internacional Método Bértoli". Contenido adicional: características clave, beneficios y uso recomendado. Precio: €250.00. Para más información específica del producto por favor contáctanos.',
 			tag: 'Mentoría',
 			format: 'Digital / Física',
+		},
+		{
+			id: 1,
+			title: 'Second Pearl Harbor',
+			subtitle: 'Temas: El Verdadero Origen Del COVID 19 - El Murcielago Que Se Enamoro De Un Mono? - La Organización Terrorista - El Disfrazado Ataque A Los Estados Unidos De America Y Aliados - El Robo De Las Elecciones Al Presidente Donald Trump El 2020 - Como Operas Los Servicios De Inteligencia En El Mundo.',
+			price: '12.00',
+			image: '/caratula.png',
+			info: 'Extras: La Posible Guerra De Estados Unidos Contra China Reforzada Por Rusia - America Empezo a Despertar.',
+			details: 'Todo ello narrado con una claridad y crudeza sorprendente por el escritor e investigador social JAIME BERTOLI CASTAGNETO',
+			tag: 'Literatura',
+			format: 'Digital',
 		},
 		{
 			id: 3,

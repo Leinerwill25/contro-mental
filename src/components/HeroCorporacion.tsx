@@ -45,7 +45,8 @@ export default function HeroProfesional({
 					{/* Texto principal */}
 					<div className="w-full md:w-2/3">
 						<div className={titleCls}>
-							<h1 className="text-3xl md:text-5xl lg:text-6xl font-serif font-semibold leading-tight text-amber-300 drop-shadow-sm">Corporación Ejecutiva Internacional</h1>
+							{/* Título con efecto de luces aplicado directamente al texto */}
+							<h1 className="light-text text-3xl md:text-5xl lg:text-6xl font-serif font-semibold leading-tight drop-shadow-sm">Corporación Ejecutiva Internacional</h1>
 						</div>
 
 						<div className={subtitleCls}>
@@ -65,7 +66,7 @@ export default function HeroProfesional({
 							</a>
 
 							<a href={mailtoContactar} className="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-transparent border border-amber-500 text-amber-300 font-medium text-sm hover:bg-amber-500/10 focus:outline-none focus:ring-2 focus:ring-amber-300" aria-label="Contactar">
-								Contactar
+								Contactar - Corporacion2025int@gmail.com
 							</a>
 						</div>
 
@@ -88,6 +89,82 @@ export default function HeroProfesional({
 					</div>
 				</div>
 			</div>
+
+			{/* Estilos locales que aplican el efecto de luces directamente al texto. */}
+			<style jsx>{`
+				.light-text {
+					/* Gradiente principal que se mueve */
+					background: linear-gradient(90deg, rgba(255, 235, 205, 1) 0%, rgba(255, 196, 0, 1) 25%, rgba(255, 140, 0, 1) 50%, rgba(255, 196, 0, 1) 75%, rgba(255, 235, 205, 1) 100%);
+					background-size: 200% 100%;
+					-webkit-background-clip: text;
+					background-clip: text;
+					color: transparent; /* importante para mostrar el gradiente */
+					text-shadow: 0 8px 24px rgba(255, 160, 60, 0.06), 0 2px 8px rgba(255, 120, 40, 0.08);
+					position: relative;
+					/* animación suave que desplaza el gradiente */
+					animation: gradientShift 5s linear infinite;
+				}
+
+				/* Pseudo-elemento que crea el 'paso de luz' sobre las letras (shimmer) */
+				.light-text::after {
+					content: '';
+					position: absolute;
+					top: 0;
+					left: -40%;
+					width: 40%;
+					height: 100%;
+					background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.75) 50%, rgba(255, 255, 255, 0) 100%);
+					transform: skewX(-18deg);
+					filter: blur(6px);
+					opacity: 0.95;
+					mix-blend-mode: screen;
+					pointer-events: none;
+					animation: shimmer 2.2s ease-in-out infinite;
+				}
+
+				@keyframes gradientShift {
+					0% {
+						background-position: 0% 50%;
+					}
+					100% {
+						background-position: 200% 50%;
+					}
+				}
+
+				@keyframes shimmer {
+					0% {
+						left: -40%;
+						opacity: 0;
+					}
+					10% {
+						opacity: 0.9;
+					}
+					50% {
+						left: 120%;
+						opacity: 0.9;
+					}
+					100% {
+						left: 120%;
+						opacity: 0;
+					}
+				}
+
+				/* Suaviza/Desactiva animaciones si el usuario prefiere menos movimiento */
+				@media (prefers-reduced-motion: reduce) {
+					.light-text,
+					.light-text::after {
+						animation: none !important;
+						background-position: 50% 50% !important;
+					}
+				}
+
+				/* Ajustes responsivos */
+				@media (max-width: 640px) {
+					.light-text {
+						font-size: 1.6rem; /* ajusta si lo necesitas */
+					}
+				}
+			`}</style>
 		</header>
 	);
 }

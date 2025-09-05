@@ -117,7 +117,7 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 
 	return (
 		<>
-			<section className="relative text-white py-20">
+			<section id="herotwo" className="relative text-white py-20">
 				{/* Imagen de fondo */}
 				<div className="absolute inset-0 -z-20 bg-[url('/f.jpg')] bg-cover bg-center" />
 				{/* Overlay oscuro para mejorar legibilidad (ajusta /60 a /40, /70 según necesites) */}
@@ -156,7 +156,7 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 						</ul>
 
 						<div className="mt-6 flex flex-wrap gap-3 items-center">
-							<a href="#libros" className="inline-flex items-center px-6 py-3 rounded-md bg-yellow-400 text-[#07203a] font-semibold shadow hover:translate-y-[-2px] transition-transform">
+							<a href="#herotwo" className="inline-flex items-center px-6 py-3 rounded-md bg-yellow-400 text-[#07203a] font-semibold shadow hover:translate-y-[-2px] transition-transform">
 								Cumple Tus Deseos Obsequía El Libro ALPHA Al Éxito
 							</a>
 
@@ -287,7 +287,7 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 										{/* actions */}
 										<div className="mt-2 flex flex-wrap gap-3">
 											<a href="mailto:Corporacion2025int@gmail.com" className="inline-flex items-center px-4 py-2 rounded-md bg-amber-400 text-[#07203a] font-medium shadow-sm hover:opacity-95 transition">
-												Contactar
+												Contactar - Corporacion2025int@gmail.com
 											</a>
 
 											<button onClick={closeModal} className="inline-flex items-center px-4 py-2 rounded-md border border-amber-300 text-sm text-amber-100 hover:bg-white/5 transition">

@@ -14,7 +14,7 @@ type TeamMember = {
 
 const defaultTeam: TeamMember[] = [
 	{ name: 'Jaime Bertoli Castagneto', role: 'Presidencia', image: '/Sr. Jaime.png', description: 'Liderazgo visionario y dirección estratégica.' },
-	{ name: 'Dr. Jesus', role: 'Gerencia', image: '/Jesus.png', description: 'Compromiso con la excelencia y crecimiento sostenible.' },
+	{ name: 'Dr. Jesus', role: 'Gerencia', image: '/jesus.jpg', description: 'Compromiso con la excelencia y crecimiento sostenible.' },
 	{ name: 'Dr. Tullio', role: 'Gerencia', image: '/Tullio.jpg', description: 'Experto en gestión operativa y planeación empresarial.' },
 	{ name: 'Erica', role: 'Directora de Control', image: '/Erica.png', description: 'Supervisión rigurosa de procesos y cumplimiento.' },
 	{ name: 'Lourdes', role: 'Directora de Internet', image: '/Lourdes.jpg', description: 'Lidera innovación tecnológica y transformación digital.' },
@@ -76,7 +76,7 @@ export default function QuienesSomos({ team = defaultTeam }: { team?: TeamMember
 										{/* Si la imagen es la placeholder '/1077063.png' mostrar fondo celeste con texto "EN AUSENCIA" */}
 										{member.image === '/1077063.png' ? (
 											<div className="w-full h-full bg-sky-100 flex items-center justify-center">
-												<span className="text-[#05295B] font-semibold text-lg tracking-wider">EN AUSENCIA</span>
+												<span className="text-[#05295B] font-semibold text-lg tracking-wider"></span>
 											</div>
 										) : (
 											<Image src={member.image} alt={member.name} fill className="object-cover" />
