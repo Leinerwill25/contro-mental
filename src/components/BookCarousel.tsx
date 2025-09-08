@@ -177,8 +177,8 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 								<div className="flex items-baseline gap-3">
 									<span className="text-sm text-slate-500">Precio</span>
 									{/* Precio más pequeño y letra más delgada */}
-									<span className={`text-lg md:text-xl font-medium ${book.id === FEATURED_ID ? '' : 'text-slate-900'}`} style={book.id === 2 ? { color: BLUE_HEX } : book.id === 1 ? { color: DARK_BLUE_HEX } : { color: BLUE_HEX }}>
-										{loveTitleMatcher(book.title) ? '125$' : `€${book.price}`}
+									<span className={`text-lg md:text-xl font-light ${book.id === FEATURED_ID ? '' : 'text-slate-900'}`} style={book.id === 2 ? { color: BLUE_HEX } : book.id === 1 ? { color: DARK_BLUE_HEX } : { color: BLUE_HEX }}>
+										{loveTitleMatcher(book.title) ? '€125' : `€${book.price}`}
 									</span>
 								</div>
 

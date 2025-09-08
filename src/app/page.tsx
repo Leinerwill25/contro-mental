@@ -14,10 +14,10 @@ export default function Home() {
 	const books = [
 		{
 			id: 2,
-			title: 'Mentoría Y Sistema Internacional Método Bértoli',
+			title: 'CUMPLE TUS DESEOS - Mentoría Y Sistema Internacional Método Bértoli',
 			subtitle: 'Control Mental Alpha - Tu Mente Cumple Tus Deseos - Duración: 34 Dias, Resultados Inmediatos Garantizados. Control Mental Externo Individual y/o Masivo. Aprende a Materializar tus Deseos.',
 			price: '250.00',
-			image: '/pexels-timur-weber-8560658.jpg',
+			image: '/2.jpg',
 			info: 'Investigación profunda y contundente.',
 			details: 'Detalles extendidos sobre "Mentoría Y Sistema Internacional Método Bértoli". Contenido adicional: características clave, beneficios y uso recomendado. Precio: €250.00. Para más información específica del producto por favor contáctanos.',
 			tag: 'Mentoría',
@@ -36,14 +36,19 @@ export default function Home() {
 		},
 		{
 			id: 3,
-			title: 'Como Tener Éxito En El Amor, Aprende Seducción Subliminal',
-			subtitle: 'Este Curso Mentoria Short time te enseña con metodologias de Control Mental ALPHA en DOCE DIAS A SABER BUSCAR Y ENCONTRAR EL AMOR TE ENSEÑA LO PRINCIPAL A SABER CONSERVARLO POR LOS AÑOS DE TODA TU VIDA',
+			title: 'Como Tener Éxito en el Amor, Como Aprender Seducción Subliminal',
+			subtitle: 'Este Programa Curso Short Time es para TI. On Line, grabado y personalizado. 19 días. Garantizado. Informes sin compromiso: alphadeseos@gmail.com',
 			price: '125.00',
 			image: '/image (22).png',
-			info: 'El AMOR es la fuerza MAS PODEROSA QUE EXISTE EN ESTE MUNDO TODOS LOS SERES HUMANOS. LO BUSCAN MUCHOS DESESPERACDAMENTE VEN PASAR SUS VIDAS Y NO LO ENCUENTRAN',
-			details: 'Detalles extendidos sobre "Como Tener Éxito En El Amor, Aprende Seducción Subliminal". Contenido adicional: características clave, beneficios y uso recomendado. Precio: €180.00. Para más información específica del producto por favor contáctanos.',
+			info: `• Si eres persona CANSADA de la SOLEDAD.
+• Si deseas volver a creer en EL AMOR.
+• Si tienes fracasos continuos en romances.
+• Si deseas ser una persona experta en CONQUISTAR.
+• Si quieres un verdadero AMOR de por VIDA.`,
+			details: 'Este Programa Curso Short Time es para TI. On Line, grabado y personalizado. 19 días. Garantizado. Informes sin compromiso: alphadeseos@gmail.com',
 			tag: 'Seducción',
 			format: 'Digital / Física',
+			features: ['Si eres persona CANSADA de la SOLEDAD', 'Si deseas volver a creer en EL AMOR', 'Si tienes fracasos continuos en romances', 'Si deseas ser una persona experta en CONQUISTAR', 'Si quieres un verdadero AMOR de por VIDA'],
 		},
 	];
 
