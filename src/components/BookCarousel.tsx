@@ -1,6 +1,8 @@
+// app/components/BookCarousel.tsx
 'use client';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 type Review = { user: string; text: string; rating: number; date?: string };
@@ -34,6 +36,8 @@ type Book = {
 type Props = {
 	books: Book[];
 	autoplay?: number;
+	/** ruta a la imagen de fondo en /public (opcional) */
+	backgroundImage?: string;
 };
 
 const FEATURED_ID = 1;
@@ -44,7 +48,7 @@ const BLUE_HEX = '#0066ff';
 const DARK_BLUE_HEX = '#0b2b8a';
 const RED_HEX = '#ff3b30';
 
-export default function BookCarousel({ books, autoplay = 0 }: Props) {
+export default function BookCarousel({ books, autoplay = 0, backgroundImage = '/f.jpg' }: Props) {
 	const [current, setCurrent] = useState(0);
 
 	useEffect(() => {
@@ -93,10 +97,34 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 	// Helper para aplicar estilo azul oscuro si el texto contiene el extrasText
 	const extrasStyle: React.CSSProperties = { color: DARK_BLUE_HEX };
 
+	// Background style (inline so it uses the provided path)
+	const sectionBgStyle: React.CSSProperties = {
+		backgroundImage: `url('${backgroundImage}')`,
+		backgroundSize: 'cover',
+		backgroundPosition: 'center',
+	};
+
+	// Helpers
+	function formatCurrencyVal(priceStr: string) {
+		// try to sanitize price string (it was a string in your model)
+		const num =
+			Number(
+				String(priceStr)
+					.replace(/[^\d.,]/g, '')
+					.replace(',', '.')
+			) || 0;
+		return `€${num}`;
+	}
+
 	return (
-		<section id="libro" className="w-full max-w-7xl mx-auto p-6 md:p-10">
-			{/* Outer frame */}
-			<div className="relative bg-gradient-to-b from-white via-white/95 to-slate-50 border-2 border-slate-100 rounded-3xl p-6 md:p-8 shadow-lg overflow-visible">
+		<section id="libro" className="w-full max-w-7xl mx-auto p-6 md:p-10 relative rounded-3xl overflow-visible" style={sectionBgStyle} aria-label="Carrusel de libros">
+			{/* overlay for readable text */}
+			<div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-black/10 via-white/30 to-black/10 pointer-events-none" />
+
+			{/* Outer frame (content) */}
+			<div className="relative bg-white/30 backdrop-blur-lg border border-white/20 rounded-3xl p-6 md:p-8 shadow-2xl overflow-visible" style={{ backgroundColor: 'rgba(255,255,255,0.35)' }}>
+				{/* Glassmorphism overlay (subtle sheen) */}
+				<div className="absolute inset-0 rounded-3xl pointer-events-none bg-gradient-to-t from-white/30 via-white/10 to-transparent mix-blend-overlay" />
 				<div className="flex flex-col md:flex-row items-center gap-8 md:gap-10">
 					{/* Imagen sobresaliente */}
 					<div className={`relative flex-shrink-0 -mt-8 md:-mt-12 transform transition-all duration-500 hover:scale-105 ${book.id === FEATURED_ID ? 'w-64 md:w-80 lg:w-96' : 'w-56 md:w-72 lg:w-80'}`} aria-hidden={false}>
@@ -106,7 +134,7 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 
 						{book.tag ? <span className={`absolute -left-3 top-4 md:top-6 text-xs md:text-sm font-semibold px-3 py-1.5 rounded-full shadow-sm ${book.id === FEATURED_ID ? 'bg-gradient-to-r from-red-500 to-blue-600 text-white' : 'bg-gradient-to-r from-sky-600 to-indigo-600 text-white'}`}>{book.tag}</span> : null}
 
-						{/* Barra decorativa */}
+						{/* Decorative bar */}
 						<div className="mt-3 flex items-center gap-2">
 							<div className="w-10 h-2 rounded-full bg-gradient-to-r from-sky-400 to-indigo-400" aria-hidden="true" />
 						</div>
@@ -114,7 +142,7 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 
 					{/* Bloque de información redondeado */}
 					<div className="flex-1 w-full">
-						<div className={`bg-white/70 backdrop-blur-sm border border-slate-100 rounded-2xl p-6 md:p-8 shadow-md ${book.id === FEATURED_ID ? 'ring-1 ring-indigo-50' : ''}`} style={containerTextStyle}>
+						<div className={`bg-white/80 backdrop-blur-sm border border-slate-100 rounded-2xl p-6 md:p-8 shadow-md ${book.id === FEATURED_ID ? 'ring-1 ring-indigo-50' : ''}`} style={containerTextStyle}>
 							{/* Title */}
 							{loveTitleMatcher(book.title) ? (
 								<h3 className="leading-tight text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight">
@@ -123,7 +151,6 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 									</span>
 								</h3>
 							) : isSecondPearl ? (
-								// Gradiente azul -> rojo para "Second Pearl Harbor"
 								<h3 className="leading-tight text-2xl md:text-3xl lg:text-5xl font-extrabold tracking-tight">
 									<span style={{ backgroundImage: `linear-gradient(90deg, ${BLUE_HEX}, ${RED_HEX})` }} className="bg-clip-text text-transparent">
 										{book.title}
@@ -135,7 +162,7 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 								</h3>
 							)}
 
-							{/* Featured: render themes as list with stars */}
+							{/* Featured: themes */}
 							{book.id === FEATURED_ID && book.subtitle ? (
 								<div className="mt-4">
 									<p className="text-base md:text-lg font-medium" style={{ color: DARK_BLUE_HEX }}>
@@ -148,8 +175,6 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 												<span aria-hidden title={i % 2 === 0 ? 'estrella roja' : 'estrella azul'} className={`inline-flex items-center justify-center w-6 h-6 rounded-full text-white text-[12px] md:text-sm font-bold ${i % 2 === 0 ? 'bg-red-500' : 'bg-[#0066FF]'}`}>
 													★
 												</span>
-
-												{/* Tema en azul oscuro para el libro featured (id=1) */}
 												<span style={{ color: DARK_BLUE_HEX }}>{t}</span>
 											</span>
 										))}
@@ -163,7 +188,7 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 								)
 							)}
 
-							{/* Información breve (card) */}
+							{/* Info card */}
 							{book.info && (
 								<div className="mt-6 bg-slate-50 border border-slate-100 rounded-2xl p-5 md:p-6 shadow-inner">
 									<p className={`${book.id === FEATURED_ID ? 'text-slate-800 text-base md:text-lg' : 'text-sm md:text-base'} leading-relaxed`} style={book.info.includes(extrasText) || book.id === 2 || book.id === 3 ? { color: DARK_BLUE_HEX } : undefined}>
@@ -172,24 +197,31 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 								</div>
 							)}
 
-							{/* Precio y CTAs */}
+							{/* Price & CTA */}
 							<div className="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-start gap-4">
 								<div className="flex items-baseline gap-3">
 									<span className="text-sm text-slate-500">Precio</span>
-									{/* Precio más pequeño y letra más delgada */}
 									<span className={`text-lg md:text-xl font-light ${book.id === FEATURED_ID ? '' : 'text-slate-900'}`} style={book.id === 2 ? { color: BLUE_HEX } : book.id === 1 ? { color: DARK_BLUE_HEX } : { color: BLUE_HEX }}>
-										{loveTitleMatcher(book.title) ? '€125' : `€${book.price}`}
+										{loveTitleMatcher(book.title) ? '€125' : formatCurrencyVal(book.price)}
 									</span>
 								</div>
 
 								<div className="flex items-center gap-3 ml-0 sm:ml-6">
-									<a href={`#comprar-${book.id}`} className="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-sky-500 text-white font-semibold shadow-lg hover:scale-[1.03] transform transition" aria-label={loveTitleMatcher(book.title) ? `Adquirir ${book.title}` : `Adquirir ${book.title}`}>
-										{loveTitleMatcher(book.title) ? 'Adquirir' : 'Adquirir'}
-									</a>
+									{/* Link to pagos page - includes product id as query param for convenience */}
+									<Link href={`/pagos?product=${encodeURIComponent(String(book.id))}`} className="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-sky-500 text-white font-semibold shadow-lg hover:scale-[1.03] transform transition focus:outline-none focus:ring-4 focus:ring-indigo-200" aria-label={`Adquirir ${book.title} - Ir a pagos`}>
+										Adquirir
+									</Link>
+
+									{/* Optional: quick sample / more info */}
+									{book.sampleUrl && (
+										<a href={book.sampleUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-2 rounded-lg border text-sm text-slate-700 hover:bg-slate-50 transition">
+											Ver muestra
+										</a>
+									)}
 								</div>
 							</div>
 
-							{/* Thumbnails / indicators */}
+							{/* Indicators */}
 							<div className="mt-6 flex items-center gap-3">
 								<div className="ml-auto hidden sm:flex items-center gap-2">
 									{books.map((_, idx) => (
@@ -201,7 +233,7 @@ export default function BookCarousel({ books, autoplay = 0 }: Props) {
 					</div>
 				</div>
 
-				{/* Flechas superpuestas */}
+				{/* Overlaid navigation arrows */}
 				<button onClick={prevSlide} aria-label="Anterior" className="absolute top-1/2 left-4 -translate-y-1/2 bg-white/90 backdrop-blur-sm rounded-full shadow-lg p-2.5 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-100 transition">
 					<ChevronLeft className="w-5 h-5 text-indigo-600" />
 				</button>
