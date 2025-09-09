@@ -1,7 +1,7 @@
 // app/pagos/page-styled-updated.tsx
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, ReactElement } from 'react';
 
 type Product = {
 	id: string;
@@ -23,7 +23,7 @@ const PAYMENT_METHODS = [
 	{ id: 'zelle', label: 'Zelle' }, // nuevo método agregado
 ];
 
-export default function PagosPage(): JSX.Element {
+export default function PagosPage(): ReactElement {
 	const [mounted, setMounted] = useState(false);
 	useEffect(() => {
 		const raf = requestAnimationFrame(() => setMounted(true));
@@ -194,6 +194,7 @@ export default function PagosPage(): JSX.Element {
 					<h3 className={`${headingCls} text-xl md:text-2xl font-semibold text-rose-50`}>Métodos de pago</h3>
 
 					<div className={`${paraCls} mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4`}>
+						{/* payment methods */}
 						{PAYMENT_METHODS.map((m) => (
 							<div key={m.id} className="p-4 border border-slate-700 rounded-md bg-slate-800">
 								<h4 className="font-medium text-slate-100">{m.label}</h4>
