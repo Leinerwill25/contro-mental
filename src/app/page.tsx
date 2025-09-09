@@ -9,6 +9,7 @@ import AnimalHelpBanner from '@/components/AnimalHelpBanner';
 import TarotShowcase from '@/components/TarotShowcase';
 import InternationalReviews from '@/components/InternationalReviews';
 import HeroCorporacion from '@/components/HeroCorporacion';
+import SeduccionPromo from '@/components/SeduccionPromo';
 
 export default function Home() {
 	const books = [
@@ -71,6 +72,8 @@ export default function Home() {
 			</section>
 			<SupportAnimalsBanner />
 			<InternationalReviews />
+			<SeduccionPromo />
+			{/* TAROT SHOWCASE */}
 			<TarotShowcase />
 
 			{/* TAROT SHOWCASE */}

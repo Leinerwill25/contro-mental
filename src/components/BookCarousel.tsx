@@ -1,4 +1,3 @@
-// app/components/BookCarousel.tsx
 'use client';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
@@ -38,6 +37,8 @@ type Props = {
 	autoplay?: number;
 	/** ruta a la imagen de fondo en /public (opcional) */
 	backgroundImage?: string;
+	/** escala del fondo: 1 = 100%, 1.3 = 130% (opcional) */
+	backgroundScale?: number;
 };
 
 const FEATURED_ID = 1;
@@ -48,7 +49,7 @@ const BLUE_HEX = '#0066ff';
 const DARK_BLUE_HEX = '#0b2b8a';
 const RED_HEX = '#ff3b30';
 
-export default function BookCarousel({ books, autoplay = 0, backgroundImage = '/f.jpg' }: Props) {
+export default function BookCarousel({ books, autoplay = 0, backgroundImage = '/f.jpg', backgroundScale = 1.6 }: Props) {
 	const [current, setCurrent] = useState(0);
 
 	useEffect(() => {
@@ -98,10 +99,23 @@ export default function BookCarousel({ books, autoplay = 0, backgroundImage = '/
 	const extrasStyle: React.CSSProperties = { color: DARK_BLUE_HEX };
 
 	// Background style (inline so it uses the provided path)
+	// Ahora usamos `backgroundScale` para controlar qué tan grande aparece la imagen de fondo.
 	const sectionBgStyle: React.CSSProperties = {
 		backgroundImage: `url('${backgroundImage}')`,
-		backgroundSize: 'cover',
-		backgroundPosition: 'center',
+		// Multiplica el 100% por backgroundScale. Ej: 1.6 => 160%.
+		backgroundSize: `${Math.round(backgroundScale * 100)}% auto`,
+		backgroundPosition: 'center top',
+		backgroundRepeat: 'no-repeat',
+		// Evita que la imagen se corte bruscamente en móviles
+		backgroundAttachment: 'scroll',
+	};
+
+	// Para ampliar visualmente el fondo sin alterar el layout del contenido,
+	// añadimos un objeto de estilos extra que se fusionará en el elemento root.
+	const sectionExtraStyle: React.CSSProperties = {
+		minHeight: '640px', // eleva la altura mínima para dar más 'espacio'
+		paddingTop: '32px',
+		paddingBottom: '32px',
 	};
 
 	// Helpers
@@ -117,7 +131,7 @@ export default function BookCarousel({ books, autoplay = 0, backgroundImage = '/
 	}
 
 	return (
-		<section id="libro" className="w-full max-w-7xl mx-auto p-6 md:p-10 relative rounded-3xl overflow-visible" style={sectionBgStyle} aria-label="Carrusel de libros">
+		<section id="libro" className="w-full max-w-7xl mx-auto p-8 md:p-16 relative rounded-3xl overflow-visible" style={{ ...sectionBgStyle, ...sectionExtraStyle }} aria-label="Carrusel de libros">
 			{/* overlay for readable text */}
 			<div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-black/10 via-white/30 to-black/10 pointer-events-none" />
 

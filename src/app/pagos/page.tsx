@@ -162,7 +162,7 @@ export default function PagosPage(): ReactElement {
 	const mailtoContact = `mailto:${contactEmail}?subject=${encodeURIComponent('Consulta sobre pago y comprobante')}`;
 
 	return (
-		<section className="w-full max-w-5xl mx-auto p-6 md:p-10 bg-slate-900 text-slate-100 rounded-2xl shadow-2xl border border-slate-800">
+		<section className="w-full max-w-5xl mx-auto p-6 md:p-10 bg-slate-900 m-5 text-slate-100 rounded-2xl shadow-2xl border border-slate-800">
 			<header className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-0">
 				<div className="flex items-center gap-4">
 					<div className="w-16 h-16 rounded-lg bg-gradient-to-br from-yellow-400 via-amber-400 to-red-500 flex items-center justify-center shadow-inner">
@@ -199,7 +199,7 @@ export default function PagosPage(): ReactElement {
 							<div key={m.id} className="p-4 border border-slate-700 rounded-md bg-slate-800">
 								<h4 className="font-medium text-slate-100">{m.label}</h4>
 								<p className="text-sm text-slate-300 mt-1">
-									{m.id === 'bank' && 'Cuenta: 5591 8401 1491 2333 — Titular: Jaime Instituto'}
+									{m.id === 'bank' && 'Cuenta: 5591 8401 0038 2863 — Titular: Jaime Bertoli Castagneto'}
 									{m.id === 'paypal' && 'Envía el pago a: presidenciajaime379@gmail.com'}
 									{m.id === 'binance' && 'Usa la dirección de correo asociada: jaimeinstituto12@gmail.com'}
 									{m.id === 'mobile' && 'Banesco - Tel: 0414 797 34 75 - C.I: 12422041'}
@@ -213,7 +213,7 @@ export default function PagosPage(): ReactElement {
 						<h4 className="text-sm text-slate-300 mb-3 font-semibold">Selecciona tus productos</h4>
 						<div className="flex flex-col sm:flex-row gap-3">
 							{PRODUCTS.map((p) => (
-								<button key={p.id} onClick={() => toggleProduct(p.id)} className={`flex-1 px-4 py-3 rounded-lg border transition-shadow text-left ${selected[p.id] ? 'bg-amber-400 text-slate-900 shadow-md border-amber-300' : 'bg-slate-900 text-slate-100 border-slate-700'}`} aria-pressed={!!selected[p.id]}>
+								<button key={p.id} onClick={() => toggleProduct(p.id)} className={`flex-1 px-4 py-3 rounded-lg border transition-shadow text-left ${selected[p.id] ? 'bg-amber-400 text-slate-900 shadow-md border-amber-300' : 'bg-blue-500 text-slate-100 border-slate-700'}`} aria-pressed={!!selected[p.id]}>
 									<div className="font-semibold">{p.title}</div>
 									<div className="text-sm">{formatCurrency(p.price)}</div>
 								</button>
