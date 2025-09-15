@@ -33,7 +33,6 @@ export default function HeroProfesional({
 	const titleCls = `${enterBase} ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-6'}`;
 	const subtitleCls = `${enterBase} delay-150 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`;
 	const ctasCls = `${enterBase} delay-250 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`;
-	const flagsCls = `${enterBase} delay-200 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`;
 
 	const mailtoContacto = `mailto:${email}?subject=${encodeURIComponent('Información - Corporación Ejecutiva Internacional')}`;
 	const mailtoContactar = `mailto:${email}?subject=${encodeURIComponent('Contacto - Corporación Ejecutiva Internacional')}`;

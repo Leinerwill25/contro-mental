@@ -1,3 +1,4 @@
+// src/components/HeroWithAuthorModal.tsx
 'use client';
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
@@ -11,7 +12,6 @@ type Author = {
 	photo?: string;
 	email?: string;
 	linkedin?: string;
-	whatsapp?: string;
 };
 
 const SAMPLE_AUTHOR: Author = {
@@ -21,30 +21,10 @@ const SAMPLE_AUTHOR: Author = {
 	photo: '/Sr. Jaime.png',
 	email: 'corporacion2025int@gmail.com',
 	linkedin: 'https://linkedin.com/in/alejandro-ramirez',
-	// whatsapp: '+58xxxxxxxxxxx',
 };
-
-// Helper: abre Gmail web en desktop; en mobile usa mailto como fallback.
-// subject y body serán codificados automáticamente.
-function openMailCompose(email: string, subject = '', body = '') {
-	if (typeof window === 'undefined') return;
-
-	const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
-	const encodedSubject = encodeURIComponent(subject);
-	const encodedBody = encodeURIComponent(body);
-
-	const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${encodedSubject}&body=${encodedBody}&tf=1`;
-
-	if (!isMobile) {
-		window.open(gmailUrl, '_blank', 'noopener,noreferrer');
-	} else {
-		window.location.href = `mailto:${email}?subject=${encodedSubject}&body=${encodedBody}`;
-	}
-}
 
 export default function HeroWithAuthorModal(): React.ReactElement {
 	const [isOpen, setIsOpen] = useState(false);
-	const [copyStatus, setCopyStatus] = useState<'idle' | 'copied' | 'error'>('idle');
 	const triggerRef = useRef<HTMLButtonElement | null>(null);
 	const modalRef = useRef<HTMLDivElement | null>(null);
 	const previouslyFocused = useRef<HTMLElement | null>(null);
@@ -57,12 +37,13 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 
 	const closeModal = useCallback(() => {
 		setIsOpen(false);
+		// restore focus to the trigger (or previously focused element)
 		setTimeout(() => {
 			(previouslyFocused.current ?? triggerRef.current)?.focus();
 		}, 0);
 	}, []);
 
-	// Scroll lock while modal open
+	// Scroll lock while modal open (robust handling)
 	useEffect(() => {
 		if (typeof window === 'undefined') return;
 
@@ -85,13 +66,14 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 			}
 		}
 		return () => {
+			// cleanup safe-guards
 			document.body.style.position = '';
 			document.body.style.top = '';
 			document.body.style.width = '';
 		};
 	}, [isOpen]);
 
-	// Focus trap + ESC
+	// Focus trap + ESC handling
 	useEffect(() => {
 		if (!isOpen) return;
 
@@ -102,7 +84,7 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 			} else if (e.key === 'Tab') {
 				const modal = modalRef.current;
 				if (!modal) return;
-				const focusables = Array.from(modal.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])')).filter((el) => el.offsetParent !== null);
+				const focusables = Array.from(modal.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])')).filter((el) => el.offsetParent !== null); // only visible
 				if (focusables.length === 0) return;
 				const first = focusables[0];
 				const last = focusables[focusables.length - 1];
@@ -120,6 +102,7 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 			}
 		};
 
+		// initial focus inside modal
 		setTimeout(() => {
 			const modal = modalRef.current;
 			if (!modal) return;
@@ -141,13 +124,28 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 						<h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
 							Programa Internacional Bértoli
 							<span className="block text-accent-200 mt-2 text-3xl font-medium">Cumple Tus Deseos</span>
-							<span className=" font-semibold text-2xl tracking-tight bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-200 bg-clip-text text-transparent drop-shadow-[0_6px_18px_rgba(245,158,11,0.20)]">&quot;Control Mental ALPHA&quot;</span>
+							<span
+								className=" font-semibold text-2xl tracking-tight
+               bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-200
+               bg-clip-text text-transparent
+               drop-shadow-[0_6px_18px_rgba(245,158,11,0.20)]">
+								&quot;Control Mental ALPHA&quot;
+							</span>
 						</h1>
 
-						<ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 text-base bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-200 bg-clip-text text-transparent drop-shadow-[0_6px_18px_rgba(245,158,11,0.20)]">
+						<ul
+							className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 text-base bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-200
+               bg-clip-text text-transparent
+               drop-shadow-[0_6px_18px_rgba(245,158,11,0.20)]">
 							{['Conocer Y Aplicar Las Ondas Electricas De Tu Mente', 'Conocer y Aplicar Técnica ALPHA De Relajación En Casos Especiales', 'Conocer y Aplicar Propiedad Mental De Visualización y Clarividencia ', 'Eliminar De Tu Vida El Stress Mas La Angustia y La Ansiedad', 'Aplicar Técnica ALPHA De Análisis Del Ser Humano', 'Ubicación ALPHA De Tu Vida En El Espacio Tiempo y Como Inmediatamente Mejorar', 'El Mas Importante: Mover Objetos Y Materializar Un Deseo'].map((item) => (
 								<li key={item} className="flex items-start gap-3">
-									<span className="flex-shrink-0 w-9 h-9 rounded-full bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-200 bg-clip-text text-transparent drop-shadow-[0_6px_18px_rgba(245,158,11,0.20)] flex items-center justify-center text-lg tracking-tight ">✓</span>
+									<span
+										className="flex-shrink-0 w-9 h-9 rounded-full bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-200
+               bg-clip-text text-transparent
+               drop-shadow-[0_6px_18px_rgba(245,158,11,0.20)] flex items-center justify-center text-lg tracking-tight
+               ">
+										✓
+									</span>
 									<span className="leading-tight">{item}</span>
 								</li>
 							))}
@@ -263,8 +261,7 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 												<a
 													href={`mailto:${SAMPLE_AUTHOR.email}`}
 													onClick={(e) => {
-														e.preventDefault();
-														openMailCompose(SAMPLE_AUTHOR.email!, 'Consulta rápida', 'Hola, quisiera más información...');
+														/* si quieres usar helper openMailCompose, agrégalo aquí */
 													}}
 													className="inline-flex items-center gap-2 text-xs text-amber-200 hover:underline truncate"
 													aria-label={`Enviar correo a ${SAMPLE_AUTHOR.email}`}>
@@ -275,13 +272,7 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 										</div>
 
 										<div className="mt-2 flex flex-wrap gap-3">
-											<a
-												href={`mailto:${SAMPLE_AUTHOR.email}`}
-												onClick={(e) => {
-													e.preventDefault();
-													openMailCompose(SAMPLE_AUTHOR.email!, 'Interés en pago', 'Hola, quisiera confirmar...');
-												}}
-												className="inline-flex items-center px-4 py-2 rounded-md bg-amber-400 text-[#07203a] font-medium shadow-sm hover:opacity-95 transition">
+											<a href={`mailto:${SAMPLE_AUTHOR.email}`} className="inline-flex items-center px-4 py-2 rounded-md bg-amber-400 text-[#07203a] font-medium shadow-sm hover:opacity-95 transition">
 												Contactar - {SAMPLE_AUTHOR.email}
 											</a>
 
@@ -295,13 +286,7 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 						</div>
 
 						<footer className="md:hidden sticky bottom-0 left-0 right-0 z-50 bg-gradient-to-r from-slate-900 to-slate-800 border-t border-slate-700 px-4 py-3 flex items-center gap-3">
-							<a
-								href={`mailto:${SAMPLE_AUTHOR.email}`}
-								onClick={(e) => {
-									e.preventDefault();
-									openMailCompose(SAMPLE_AUTHOR.email!, 'Consulta desde móvil', 'Hola, necesito ayuda...');
-								}}
-								className="flex-1 inline-flex items-center justify-center px-4 py-3 rounded-md bg-amber-400 text-[#07203a] font-medium">
+							<a href="#contacto" className="flex-1 inline-flex items-center justify-center px-4 py-3 rounded-md bg-amber-400 text-[#07203a] font-medium">
 								Contactar
 							</a>
 							<button onClick={closeModal} className="inline-flex items-center justify-center px-4 py-3 rounded-md border border-amber-300 text-sm text-amber-100">

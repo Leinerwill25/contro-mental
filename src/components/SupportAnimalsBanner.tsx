@@ -19,7 +19,7 @@ const DEFAULT_IMAGES: Img[] = [
 	{ src: '/pexels-pixabay-45201.jpg', alt: 'Gatita' },
 ];
 
-export default function SupportAnimalsBanner({ message = 'Todos nuestros productos ayudan a los animalitos abandonados — Pre Fundación PATITAS en la calle. ¡Ayúdanos ah ayudar!', images = DEFAULT_IMAGES, persistKey = 'supportAnimalsBanner:v1', onDonate }: Props) {
+export default function SupportAnimalsBanner({ message = 'Todos nuestros productos ayudan a los animalitos abandonados — Pre Fundación PATITAS en la calle. ¡Ayúdanos ah ayudar!', images = DEFAULT_IMAGES, persistKey = 'supportAnimalsBanner:v1' }: Props) {
 	// Sólo usamos `minimized`. Eliminamos la opción de "ocultar" para evitar desapariciones.
 	const [minimized, setMinimized] = useState<boolean>(() => {
 		try {
