@@ -43,11 +43,12 @@ type Props = {
 
 const FEATURED_ID = 1;
 
-// Colores corporativos
+// Colores corporativos / adicionales para degradado más llamativo
 const PINK_HEX = '#ff6fa3';
 const BLUE_HEX = '#0066ff';
 const DARK_BLUE_HEX = '#0b2b8a';
 const RED_HEX = '#ff3b30';
+const STRONG_GRADIENT = `linear-gradient(90deg, ${RED_HEX} 0%, ${PINK_HEX} 40%, ${BLUE_HEX} 100%)`;
 
 export default function BookCarousel({ books, autoplay = 0, backgroundImage = '/f.jpg', backgroundScale = 1.6 }: Props) {
 	const [current, setCurrent] = useState(0);
@@ -75,7 +76,10 @@ export default function BookCarousel({ books, autoplay = 0, backgroundImage = '/
 
 	const loveTitleMatcher = (t?: string) => {
 		if (!t) return false;
-		const normalized = t.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+		const normalized = t
+			.normalize('NFD')
+			.replace(/[^\w\s]/g, '')
+			.replace(/[\u0300-\u036f]/g, '');
 		return /como\s+tener\s+exito\s+en\s+el\s+amor/i.test(normalized);
 	};
 
@@ -90,37 +94,24 @@ export default function BookCarousel({ books, autoplay = 0, backgroundImage = '/
 	}
 
 	const containerTextStyle: React.CSSProperties | undefined = book.id === 2 ? { color: BLUE_HEX } : undefined;
-
-	// Detectores específicos
 	const isSecondPearl = !!book.title && book.title.trim().toLowerCase() === 'second pearl harbor';
-	const extrasText = 'Extras: La Posible Guerra De Estados Unidos Contra China Reforzada Por Rusia - America Empezo a Despertar.';
-
-	// Helper para aplicar estilo azul oscuro si el texto contiene el extrasText
-	const extrasStyle: React.CSSProperties = { color: DARK_BLUE_HEX };
 
 	// Background style (inline so it uses the provided path)
-	// Ahora usamos `backgroundScale` para controlar qué tan grande aparece la imagen de fondo.
 	const sectionBgStyle: React.CSSProperties = {
 		backgroundImage: `url('${backgroundImage}')`,
-		// Multiplica el 100% por backgroundScale. Ej: 1.6 => 160%.
 		backgroundSize: `${Math.round(backgroundScale * 100)}% auto`,
 		backgroundPosition: 'center top',
 		backgroundRepeat: 'no-repeat',
-		// Evita que la imagen se corte bruscamente en móviles
 		backgroundAttachment: 'scroll',
 	};
 
-	// Para ampliar visualmente el fondo sin alterar el layout del contenido,
-	// añadimos un objeto de estilos extra que se fusionará en el elemento root.
 	const sectionExtraStyle: React.CSSProperties = {
-		minHeight: '640px', // eleva la altura mínima para dar más 'espacio'
+		minHeight: '640px',
 		paddingTop: '32px',
 		paddingBottom: '32px',
 	};
 
-	// Helpers
 	function formatCurrencyVal(priceStr: string) {
-		// try to sanitize price string (it was a string in your model)
 		const num =
 			Number(
 				String(priceStr)
@@ -137,7 +128,6 @@ export default function BookCarousel({ books, autoplay = 0, backgroundImage = '/
 
 			{/* Outer frame (content) */}
 			<div className="relative bg-white/30 backdrop-blur-lg border border-white/20 rounded-3xl p-6 md:p-8 shadow-2xl overflow-visible" style={{ backgroundColor: 'rgba(255,255,255,0.35)' }}>
-				{/* Glassmorphism overlay (subtle sheen) */}
 				<div className="absolute inset-0 rounded-3xl pointer-events-none bg-gradient-to-t from-white/30 via-white/10 to-transparent mix-blend-overlay" />
 				<div className="flex flex-col md:flex-row items-center gap-8 md:gap-10">
 					{/* Imagen sobresaliente */}
@@ -148,7 +138,6 @@ export default function BookCarousel({ books, autoplay = 0, backgroundImage = '/
 
 						{book.tag ? <span className={`absolute -left-3 top-4 md:top-6 text-xs md:text-sm font-semibold px-3 py-1.5 rounded-full shadow-sm ${book.id === FEATURED_ID ? 'bg-gradient-to-r from-red-500 to-blue-600 text-white' : 'bg-gradient-to-r from-sky-600 to-indigo-600 text-white'}`}>{book.tag}</span> : null}
 
-						{/* Decorative bar */}
 						<div className="mt-3 flex items-center gap-2">
 							<div className="w-10 h-2 rounded-full bg-gradient-to-r from-sky-400 to-indigo-400" aria-hidden="true" />
 						</div>
@@ -157,8 +146,20 @@ export default function BookCarousel({ books, autoplay = 0, backgroundImage = '/
 					{/* Bloque de información redondeado */}
 					<div className="flex-1 w-full">
 						<div className={`bg-white/80 backdrop-blur-sm border border-slate-100 rounded-2xl p-6 md:p-8 shadow-md ${book.id === FEATURED_ID ? 'ring-1 ring-indigo-50' : ''}`} style={containerTextStyle}>
-							{/* Title */}
-							{loveTitleMatcher(book.title) ? (
+							{/* Title: prioridad especial para book.id === 2 */}
+							{book.id === 2 ? (
+								<>
+									<h3 className="leading-tight text-2xl md:text-4xl lg:text-5xl font-extrabold tracking-tight" style={{ backgroundImage: STRONG_GRADIENT, WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent', textShadow: '0 6px 30px rgba(2,6,23,0.18)' }}>
+										{book.title}
+									</h3>
+									{/* Subtitulo más grande y legible para id 2 */}
+									{book.subtitle && (
+										<p className="mt-3 text-base md:text-lg lg:text-xl font-semibold leading-snug" style={{ color: DARK_BLUE_HEX, letterSpacing: '0.2px' }}>
+											{book.subtitle}
+										</p>
+									)}
+								</>
+							) : loveTitleMatcher(book.title) ? (
 								<h3 className="leading-tight text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight">
 									<span style={{ backgroundImage: `linear-gradient(90deg, ${PINK_HEX}, ${BLUE_HEX})` }} className="bg-clip-text text-transparent">
 										{book.title}
@@ -171,7 +172,7 @@ export default function BookCarousel({ books, autoplay = 0, backgroundImage = '/
 									</span>
 								</h3>
 							) : (
-								<h3 className={`leading-tight ${book.id === FEATURED_ID ? 'text-3xl md:text-5xl lg:text-6xl font-extrabold' : 'text-lg md:text-2xl lg:text-3xl font-semibold'}`} style={book.id === 1 ? { color: DARK_BLUE_HEX } : book.id === 2 ? { color: BLUE_HEX } : undefined}>
+								<h3 className={`leading-tight ${book.id === FEATURED_ID ? 'text-3xl md:text-5xl lg:text-6xl font-extrabold' : 'text-lg md:text-2xl lg:text-3xl font-semibold'}`} style={book.id === 1 ? { color: DARK_BLUE_HEX } : undefined}>
 									{book.title}
 								</h3>
 							)}
@@ -195,17 +196,13 @@ export default function BookCarousel({ books, autoplay = 0, backgroundImage = '/
 									</div>
 								</div>
 							) : (
-								book.subtitle && (
-									<p className="mt-3 text-sm md:text-base" style={book.subtitle.includes(extrasText) ? extrasStyle : book.id === 2 ? { color: BLUE_HEX } : book.id === 3 ? { color: BLUE_HEX } : undefined}>
-										{book.subtitle}
-									</p>
-								)
+								book.subtitle && <p className="mt-3 text-sm md:text-base" style={book.subtitle.includes('Extras:') ? { color: DARK_BLUE_HEX } : undefined}></p>
 							)}
 
 							{/* Info card */}
 							{book.info && (
 								<div className="mt-6 bg-slate-50 border border-slate-100 rounded-2xl p-5 md:p-6 shadow-inner">
-									<p className={`${book.id === FEATURED_ID ? 'text-slate-800 text-base md:text-lg' : 'text-sm md:text-base'} leading-relaxed`} style={book.info.includes(extrasText) || book.id === 2 || book.id === 3 ? { color: DARK_BLUE_HEX } : undefined}>
+									<p className={`${book.id === FEATURED_ID ? 'text-blue-800 text-base md:text-lg' : 'text-sm md:text-base text-blue-800'} leading-relaxed`} style={book.info.includes('Extras:') || book.id === 2 ? { color: DARK_BLUE_HEX } : undefined}>
 										{book.info}
 									</p>
 								</div>
@@ -213,20 +210,11 @@ export default function BookCarousel({ books, autoplay = 0, backgroundImage = '/
 
 							{/* Price & CTA */}
 							<div className="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-start gap-4">
-								<div className="flex items-baseline gap-3">
-									<span className="text-sm text-slate-500">Precio</span>
-									<span className={`text-lg md:text-xl font-light ${book.id === FEATURED_ID ? '' : 'text-slate-900'}`} style={book.id === 2 ? { color: BLUE_HEX } : book.id === 1 ? { color: DARK_BLUE_HEX } : { color: BLUE_HEX }}>
-										{loveTitleMatcher(book.title) ? '€125' : formatCurrencyVal(book.price)}
-									</span>
-								</div>
-
 								<div className="flex items-center gap-3 ml-0 sm:ml-6">
-									{/* Link to pagos page - includes product id as query param for convenience */}
-									<Link href={`/pagos?product=${encodeURIComponent(String(book.id))}`} className="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-sky-500 text-white font-semibold shadow-lg hover:scale-[1.03] transform transition focus:outline-none focus:ring-4 focus:ring-indigo-200" aria-label={`Adquirir ${book.title} - Ir a pagos`}>
-										Adquirir
+									<Link href={`/pagos?product=${encodeURIComponent(String(book.id))}`} className="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-gradient-to-r from-green-500 to-green-900 text-white font-semibold shadow-lg hover:scale-[1.03] transform transition focus:outline-none focus:ring-4 focus:ring-indigo-200" aria-label={`Adquirir ${book.title} - Ir a pagos`}>
+										Adquirir Cualquier Producto
 									</Link>
 
-									{/* Optional: quick sample / more info */}
 									{book.sampleUrl && (
 										<a href={book.sampleUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-2 rounded-lg border text-sm text-slate-700 hover:bg-slate-50 transition">
 											Ver muestra

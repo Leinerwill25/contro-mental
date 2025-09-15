@@ -22,7 +22,7 @@ export default function Footer() {
 
 	return (
 		<footer className="bg-gradient-to-r from-[#0B2342] to-[#133A66] text-slate-100">
-			<div className="max-w-7xl mx-auto px-6 md:px-12 py-12">
+			<div className="max-w-7xl mx-auto px-6 md:px-10 py-10">
 				<div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
 					{/* Branding */}
 					<div className="md:col-span-4">

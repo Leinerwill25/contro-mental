@@ -82,7 +82,6 @@ export default function QuienesSomos({ team = defaultTeam }: { team?: TeamMember
 											<Image src={member.image} alt={member.name} fill className="object-cover" />
 										)}
 									</div>
-									<span className="absolute -bottom-2 px-3 py-1 rounded-full text-xs font-semibold bg-white/80 backdrop-blur-sm border border-slate-100">Miembro</span>
 								</div>
 
 								<div className="mt-2">

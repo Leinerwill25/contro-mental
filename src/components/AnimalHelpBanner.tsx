@@ -11,7 +11,7 @@ interface AnimalHelpBannerProps {
 
 export default function AnimalHelpBanner({ imageSrc = '/cap2.png', imageAlt = 'Animal rescatado' }: AnimalHelpBannerProps) {
 	return (
-		<section id="animal-help" className="bg-gradient-to-r from-[#0B2342] to-[#133A66] py-16 md:py-28">
+		<section id="animal-help" className="bg-gradient-to-r from-[#0B2342] to-[#133A66] py-6 md:py-10">
 			<div className="max-w-8xl mx-auto px-6 md:px-12 lg:px-20 flex flex-col-reverse lg:flex-row items-center justify-between gap-12">
 				{/* Texto */}
 				<div className="w-full lg:w-1/2 text-center lg:text-left">

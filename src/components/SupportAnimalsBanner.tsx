@@ -118,11 +118,6 @@ export default function SupportAnimalsBanner({ message = 'Todos nuestros product
 							<p className="mt-1 text-sm text-slate-700 leading-snug line-clamp-3">{message}</p>
 
 							<div className="mt-3 flex items-center gap-2">
-								<button onClick={() => onDonate?.()} className="inline-flex items-center gap-2 px-3 py-2 bg-yellow-400 text-[#07203a] text-sm font-semibold rounded-md shadow-sm focus:outline-none focus:ring-4 focus:ring-[#0B2342]/25 transition-transform transform hover:-translate-y-0.5">
-									<Heart className="w-4 h-4 text-[#07203a]" />
-									Donar
-								</button>
-
 								<button onClick={() => setMinimized(true)} className="px-3 py-2 text-sm bg-slate-50 text-slate-700 rounded-md border border-slate-100 hover:bg-slate-100 focus:outline-none focus:ring-4 focus:ring-[#0B2342]/12" aria-expanded={!minimized}>
 									Minimizar
 								</button>

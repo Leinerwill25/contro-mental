@@ -15,11 +15,11 @@ export default function Home() {
 	const books = [
 		{
 			id: 2,
-			title: 'CUMPLE TUS DESEOS - Mentoría Y Sistema Internacional Método Bértoli',
-			subtitle: 'Control Mental Alpha - Tu Mente Cumple Tus Deseos - Duración: 34 Dias, Resultados Inmediatos Garantizados. Control Mental Externo Individual y/o Masivo. Aprende a Materializar tus Deseos.',
+			title: 'CUMPLE TUS DESEOS',
+			subtitle: 'Mentoría Y Sistema Internacional Método Bértoli',
 			price: '250.00',
 			image: '/2.jpg',
-			info: 'Investigación profunda y contundente.',
+			info: 'Control Mental Alpha - Tu Mente Cumple Tus Deseos - Duración: 34 Dias, Resultados Inmediatos Garantizados. Control Mental Externo Individual y/o Masivo. Aprende a Materializar tus Deseos.',
 			details: 'Detalles extendidos sobre "Mentoría Y Sistema Internacional Método Bértoli". Contenido adicional: características clave, beneficios y uso recomendado. Precio: €250.00. Para más información específica del producto por favor contáctanos.',
 			tag: 'Mentoría',
 			format: 'Digital / Física',
@@ -66,12 +66,11 @@ export default function Home() {
 			<HeroWithAuthorModal />
 			<section id="libros" className="py-16">
 				<div className="max-w-6xl mx-auto px-6">
-					{/* Si quieres autoplay: <BookCarousel books={books} autoplay={5000} /> */}
 					<BookCarousel books={books} />
 				</div>
 			</section>
+
 			<SupportAnimalsBanner />
-			<InternationalReviews />
 			<SeduccionPromo />
 			{/* TAROT SHOWCASE */}
 			<TarotShowcase />
@@ -82,6 +81,7 @@ export default function Home() {
 					<TarjetaTuristica />
 				</div>
 			</section>
+			<InternationalReviews />
 			<AnimalHelpBanner />
 		</>
 	);

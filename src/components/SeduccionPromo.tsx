@@ -2,19 +2,21 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 interface SeduccionPromoFinalProps {
 	title?: string;
 	subtitle?: string;
 	bullets?: string[];
 	email?: string;
-	/** URL de imagen opcional para fondo; si se omite se usa degradado azul */
+	/** ruta a imagen de fondo (public/) - opcional */
 	bgImageUrl?: string | null;
-	/** 0..1 intensidad del overlay oscuro sobre la imagen (cuando bgImageUrl está presente) */
+	/** imagen lateral (pareja) - opcional, ruta pública */
+	sideImageUrl?: string | null;
 	darkness?: number;
 }
 
-export default function SeduccionPromoFinal({ title = 'Cómo Tener Éxito en el Amor', subtitle = 'Cómo Aprender — Seducción Subliminal', bullets = ['Si eres persona cansada de la soledad', 'Si deseas volver a creer en el amor', 'Si tienes fracasos continuos en romances', 'Si deseas ser una persona experta en conquistar', 'Si quieres un verdadero amor de por vida'], email = 'alphadeseos@gmail.com', bgImageUrl = null, darkness = 0.72 }: SeduccionPromoFinalProps) {
+export default function SeduccionPromoFinal({ title = 'I.- Como Tener Éxito en el Amor', subtitle = 'II.- Como Aprender — Seducción Subliminal', bullets = ['Si eres persona CANSADA de la SOLEDAD', 'Si deseas volver a Creer en EL AMOR', 'Si tienes Fracasos Continuos en Romances', 'Si deseas ser una Persona Experta en CONQUISTAR', 'Si quieres Un Verdadero AMOR de por VIDA'], email = 'alphadeseos@gmail.com', bgImageUrl = null, sideImageUrl = '/pexels-jmendezrf-1066801.jpg', darkness = 0.64 }: SeduccionPromoFinalProps) {
 	const [mounted, setMounted] = useState(false);
 
 	useEffect(() => {
@@ -23,99 +25,141 @@ export default function SeduccionPromoFinal({ title = 'Cómo Tener Éxito en el 
 	}, []);
 
 	const mailto = `mailto:${email}`;
-	const overlayColor = `rgba(2,20,55, ${darkness})`; // tono azul oscuro semi-opaco
+	const overlayColor = `rgba(2,20,55, ${darkness})`;
 
-	// si hay imagen, aplicamos overlay sobre la imagen; si no, usamos degradado azul por defecto
-	const sectionStyle: React.CSSProperties = bgImageUrl ? { background: `linear-gradient(${overlayColor}, ${overlayColor}), url(${bgImageUrl}) center/cover no-repeat` } : { background: 'linear-gradient(135deg, #02102a 0%, #06243f 50%, #083055 100%)' };
+	const sectionStyle: React.CSSProperties = bgImageUrl
+		? {
+				background: `linear-gradient(${overlayColor}, ${overlayColor}), url(${bgImageUrl}) center/cover no-repeat`,
+		  }
+		: {
+				background: 'linear-gradient(180deg, #99d0f3 0%, #9fd7ff 25%, #bfe7ff 50%, #d9f2ff 100%)',
+		  };
+
+	// gradient text helpers
+	const bigTitleGradient = {
+		background: 'linear-gradient(90deg, #0b4efc 0%, #ff3b8a 50%, #ffccdd 100%)',
+		WebkitBackgroundClip: 'text' as const,
+		backgroundClip: 'text' as const,
+		color: 'transparent',
+		WebkitTextFillColor: 'transparent' as const,
+		textShadow: '0 6px 30px rgba(2,6,23,0.12)',
+	};
+
+	const highlightGradient = {
+		background: 'linear-gradient(90deg, #ff9ac4 0%, #ff74a1 60%)',
+		WebkitBackgroundClip: 'text' as const,
+		backgroundClip: 'text' as const,
+		color: 'transparent',
+		WebkitTextFillColor: 'transparent' as const,
+	};
 
 	return (
-		<section aria-labelledby="promo-title" className="w-full max-w-6xl mx-auto rounded-2xl overflow-hidden shadow-2xl" style={sectionStyle}>
-			<div className={`p-6 md:p-8 lg:p-10 transition-transform duration-700 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-3 opacity-0'}`}>
-				{/* panel interior con ligero glass / contraste */}
-				<div className="rounded-xl backdrop-blur-sm bg-blue-900/20 border border-blue-800/20 shadow-inner p-5 md:p-8">
-					{/* HEADER */}
-					<header className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
-						<div className="md:max-w-2xl">
-							<h1
-								id="promo-title"
-								className="font-serif text-3xl md:text-4xl lg:text-5xl leading-tight tracking-tight"
-								style={{
-									background: 'linear-gradient(90deg,#ffd6e0 0%, #ff9ac4 60%)',
-									WebkitBackgroundClip: 'text',
-									backgroundClip: 'text',
-									color: 'transparent',
-								}}>
-								{title}
-							</h1>
+		<section aria-labelledby="promo-title" className="w-full max-w-5xl mx-auto rounded-xl overflow-hidden shadow-2xl my-8" style={sectionStyle}>
+			{/* translucent inner container to improve legibility */}
+			<div className={`p-4 md:p-6 lg:p-8 transition-transform duration-700 ${mounted ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'}`}>
+				<div className="rounded-lg backdrop-blur-sm bg-white/20 border border-white/30 p-4 md:p-6 lg:p-8 flex flex-col md:flex-row gap-6 items-start">
+					{/* left content */}
+					<div className="flex-1 min-w-0">
+						{/* top header: title and small icon */}
+						<div className="flex items-start gap-4">
+							{/* small heart icon like the original design */}
+							<div className="flex-shrink-0 mt-1">
+								<div className="w-14 h-14 rounded-full bg-gradient-to-br from-rose-400 to-pink-300 flex items-center justify-center shadow-md ring-1 ring-white/30">
+									<svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden>
+										<path d="M12 21s-6-3.8-9-6.5C0.5 11 3 7 6.5 7c1.7 0 2.8 1.2 5.5 3.9 2.7-2.7 3.8-3.9 5.5-3.9C21 7 23.5 11 21 14.5 18 17.2 12 21 12 21z" fill="#ffffff" opacity="0.9" />
+									</svg>
+								</div>
+							</div>
 
-							<h2 className="mt-2 text-xl md:text-2xl font-medium italic text-rose-100/90">{subtitle}</h2>
+							<div className="min-w-0">
+								{/* Title: very large, italic, serif, gradient */}
+								<h1 id="promo-title" className="font-serif italic leading-tight text-3xl md:text-4xl lg:text-5xl tracking-tight" style={bigTitleGradient}>
+									{title}
+								</h1>
 
-							<p className="mt-4 text-sky-100/90 text-sm md:text-base leading-relaxed">Programa breve, práctico y personalizado — diseñado para reconectar con tus capacidades de atracción y construir relaciones duraderas.</p>
-						</div>
-
-						<div className="flex-shrink-0">
-							<div className="rounded-lg px-4 py-3 bg-blue-800/30 border border-blue-700/40 text-right">
-								<p className="text-sky-100 font-semibold text-sm md:text-base">Curso Short Time</p>
-								<p className="text-sky-200 text-xs md:text-sm mt-1">Online • 19 días • Grabado y personalizado</p>
+								{/* Subtitle: bigger, pink gradient script-like */}
+								<h2 className="mt-1 text-2xl md:text-3xl lg:text-4xl font-semibold italic" style={highlightGradient}>
+									{subtitle}
+								</h2>
 							</div>
 						</div>
-					</header>
 
-					{/* DIVISOR */}
-					<div className="my-6 h-px bg-gradient-to-r from-transparent via-blue-700/30 to-transparent" />
+						{/* Decorative sample image (small) - optional */}
+						<div className="mt-4">
+							<p className="text-sm md:text-base text-blue-900/95 font-medium">
+								Programa Curso Short Time — On Line grabado y Personalizado • <span className="font-bold">19 días</span> • <span className="italic">21 Minutos</span>
+							</p>
+						</div>
 
-					{/* MAIN */}
-					<main className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-start">
-						{/* CONTENIDO PRINCIPAL (2/3) */}
-						<div className="md:col-span-2 bg-blue-900/08 border border-blue-800/16 rounded-lg p-5 md:p-6">
-							<h3 className="text-sky-100 font-semibold text-lg md:text-xl">¿Para quién es este programa?</h3>
-
-							<ul className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sky-100 text-sm md:text-base">
+						{/* bullets list styled like the poster (asterisk + emphasis) */}
+						<div className="mt-6">
+							<ul className="space-y-3">
 								{bullets.map((b, i) => (
-									<li key={i} className="flex gap-3 items-start leading-tight bg-blue-800/5 p-3 rounded-md border border-blue-800/8">
-										<span className="mt-0.5 inline-flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 text-white text-sm font-semibold shadow-sm">{i + 1}</span>
-										<span className="text-sky-100/95">{b}</span>
+									<li key={i} className="flex items-start gap-4">
+										{/* large asterisk bullet */}
+										<div className="text-2xl md:text-3xl font-extrabold text-rose-600 leading-none mt-0.5 select-none">*</div>
+
+										<div>
+											{/* try to mimic the original emphasis: keep capitalization and bold words */}
+											<p className="text-sm md:text-base lg:text-lg leading-snug text-slate-900" dangerouslySetInnerHTML={{ __html: b.replace(/\b([A-Z]{2,})\b/g, '<span class="font-bold">$1</span>') }} />
+										</div>
 									</li>
 								))}
 							</ul>
-
-							<div className="mt-6 text-sky-100/85 text-sm md:text-base">
-								<p>Si buscas reconectar con el amor y transformar tus resultados románticos mediante técnicas prácticas, éticas y personalizadas, este curso ofrece un camino claro con seguimiento y herramientas aplicables.</p>
-							</div>
-
-							<div className="mt-6 flex flex-wrap items-center gap-3">
-								<span className="text-sky-200 text-xs md:text-sm italic">Todo uso sujeto a reglamento en la página web.</span>
-								<span className="mx-2 text-sky-500">•</span>
-								<span className="text-sky-200 text-xs md:text-sm">Garantizado • 19 días</span>
-							</div>
 						</div>
 
-						{/* TARJETA CTA (1/3) */}
-						<aside className="flex flex-col gap-4 p-5 rounded-lg bg-gradient-to-b from-blue-800/12 to-blue-900/08 border border-blue-800/16">
-							<div className="flex items-center gap-3">
-								<div className="w-12 h-12 rounded-md flex items-center justify-center bg-rose-200/6 border border-rose-300/10">
-									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden>
+						{/* short descriptive paragraph */}
+						<div className="mt-6 text-sm md:text-base text-slate-800">
+							<p>Este Programa Curso Short Time es para TI — Online grabado y Personalizado. Ideal para personas que desean reconectar con su potencial afectivo, aprender técnicas éticas de atracción y mejorar sus resultados románticos.</p>
+						</div>
+					</div>
+
+					{/* right column: image + CTA area */}
+					<aside className="w-full md:w-80 lg:w-96 flex flex-col gap-4">
+						{/* side image similar to the reference (si se proporciona) */}
+						<div className="rounded-lg overflow-hidden bg-white/10 border border-white/20 shadow-lg">
+							{sideImageUrl ? (
+								// next/image si deseas optimización; si no, puedes usar <img>
+								<Image src={sideImageUrl} alt="Imagen promocional" width={520} height={360} className="object-cover w-full h-48 md:h-56" priority />
+							) : (
+								<div className="w-full h-48 md:h-56 bg-gradient-to-br from-pink-200/30 to-rose-200/20 flex items-center justify-center">
+									<span className="text-sm md:text-base text-rose-700">Imagen promocional</span>
+								</div>
+							)}
+						</div>
+
+						{/* info card */}
+						<div className="rounded-lg p-4 bg-rose-50/30 border border-rose-200/30">
+							<div className="flex items-start gap-3">
+								<div className="w-12 h-12 rounded-md flex items-center justify-center bg-rose-200/60 border border-rose-300/40">
+									<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
 										<path d="M12 21s-6-3.8-9-6.5C0.5 11 3 7 6.5 7c1.7 0 2.8 1.2 5.5 3.9 2.7-2.7 3.8-3.9 5.5-3.9C21 7 23.5 11 21 14.5 18 17.2 12 21 12 21z" fill="#FF97B6" opacity="0.95" />
 									</svg>
 								</div>
 
-								<div>
-									<p className="text-sky-100 font-semibold text-sm md:text-base">Informes sin compromiso</p>
-									<p className="text-sky-200 text-xs md:text-sm">Respuesta personalizada</p>
+								<div className="flex-1">
+									<p className="text-sm md:text-base font-semibold text-slate-900">Informes sin Compromiso</p>
+									<p className="text-xs md:text-sm text-slate-700 mt-1">On Line • Grabado y Personalizado • 19 días</p>
 								</div>
 							</div>
 
-							<div>
-								<a href={mailto} className="block w-full text-center px-4 py-3 rounded-md bg-gradient-to-r from-rose-400 to-pink-500 text-slate-900 font-semibold shadow-lg transform hover:-translate-y-0.5 transition" aria-label={`Enviar correo a ${email}`}>
+							{/* email CTA styled like poster (pink box) */}
+							<div className="mt-4">
+								<a href={mailto} className="block text-center px-3 py-2 rounded-md bg-gradient-to-r from-rose-400 to-pink-400 text-white font-bold shadow-md hover:scale-[1.02] transition-transform" aria-label={`Enviar correo a ${email}`}>
 									{email}
 								</a>
 							</div>
 
-							<div className="mt-auto pt-2 text-center text-sky-200/80 text-xs">
-								<p>Contacto directo • Modalidad Online • Cupos limitados</p>
+							<div className="mt-3 text-xs text-slate-600 text-center">
+								<p>Informes sin Compromiso • Garantizado</p>
 							</div>
-						</aside>
-					</main>
+						</div>
+					</aside>
+				</div>
+
+				{/* footer strip like the poster bottom */}
+				<div className="mt-4 text-center">
+					<p className="text-xs md:text-sm text-slate-700 italic">Informes sin compromiso • alphadeseos@gmail.com</p>
 				</div>
 			</div>
 		</section>
