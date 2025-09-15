@@ -73,11 +73,9 @@ export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitl
 	const [showOverlay, setShowOverlay] = useState<boolean>(true);
 	const [useDriveDirect, setUseDriveDirect] = useState<boolean>(Boolean(driveInfo));
 	const [showDriveModal, setShowDriveModal] = useState<boolean>(false);
-	const [driveCheckDone, setDriveCheckDone] = useState<boolean>(false);
 
 	useEffect(() => {
 		if (!driveInfo) {
-			setDriveCheckDone(true);
 			setUseDriveDirect(false);
 			return;
 		}
@@ -91,13 +89,12 @@ export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitl
 				} else {
 					setUseDriveDirect(true);
 				}
-			} catch (err) {
+			} catch (error) {
+				// registrar advertencia para diagnóstico; seguimos con fallback
+				console.warn('Drive direct check failed:', error);
 				setUseDriveDirect(true);
-			} finally {
-				setDriveCheckDone(true);
 			}
 		})();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [driveInfo]);
 
 	useEffect(() => {
@@ -130,8 +127,8 @@ export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitl
 					v.pause();
 				}
 				return;
-			} catch (err) {
-				console.warn('Control de reproducción directo falló, abriendo modal como fallback:', err);
+			} catch (error) {
+				console.warn('Control de reproducción directo falló, abriendo modal como fallback:', error);
 				setShowDriveModal(true);
 				setShowOverlay(false);
 				return;
@@ -291,7 +288,7 @@ export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitl
 										href={`mailto:${contactEmail}?subject=${encodeURIComponent(contactSubject)}`}
 										onClick={(e) => {
 											e.preventDefault();
-											openMailCompose(contactEmail!, contactSubject, contactBody);
+											openMailCompose(contactEmail, contactSubject, contactBody);
 										}}
 										className="inline-flex items-center justify-center px-4 py-3 rounded-lg bg-gradient-to-r from-sky-700 to-indigo-600 text-white font-semibold text-lg shadow hover:scale-[1.02] transition"
 										target="_blank"

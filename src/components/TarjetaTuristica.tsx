@@ -62,10 +62,7 @@ export default function TarjetaTuristica({ ticketImage = '/C.png', email = 'Corp
 	const emailHighlight = 'inline-block px-3 py-1 rounded-md bg-amber-400 text-slate-900 font-semibold shadow-sm hover:brightness-95 transition text-base';
 
 	return (
-		<section
-			id="tarjeta-turistica"
-			className="w-full max-w-6xl mx-auto p-8 md:p-12 bg-slate-900 text-slate-100 rounded-2xl shadow-2xl border border-slate-800
-                       text-lg md:text-xl">
+		<section id="tarjeta-turistica" className="w-full max-w-6xl mx-auto p-8 md:p-12 bg-slate-900 text-slate-100 rounded-2xl shadow-2xl border border-slate-800 text-lg md:text-xl">
 			<header className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-0">
 				<div className="flex items-center gap-5">
 					<div className="w-20 h-20 rounded-lg bg-gradient-to-br from-yellow-400 via-amber-400 to-red-500 flex items-center justify-center shadow-inner">
@@ -82,8 +79,8 @@ export default function TarjetaTuristica({ ticketImage = '/C.png', email = 'Corp
 					<div className="mt-3 flex items-center justify-end gap-4">
 						{displayFlags && displayFlags.length > 0 ? (
 							displayFlags.map((f, i) => (
-								<div key={i} className="group relative flex items-center" aria-hidden={false}>
-									<Image src={f.src} alt={f.name} width={48} height={32} tabIndex={0} className="object-cover rounded-sm shadow-sm border border-slate-700 transform transition-transform duration-200 group-hover:scale-110 group-focus:scale-110" />
+								<div key={i} className="group relative flex items-center">
+									<Image src={f.src} alt={f.name} width={48} height={32} className="object-cover rounded-sm shadow-sm border border-slate-700 transform transition-transform duration-200 group-hover:scale-110 group-focus:scale-110" />
 									<span
 										className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 z-10 whitespace-nowrap rounded-md bg-slate-800 text-amber-300 text-sm px-3 py-1
                      opacity-0 translate-y-1 transition-all duration-200 ease-out
@@ -186,7 +183,7 @@ export default function TarjetaTuristica({ ticketImage = '/C.png', email = 'Corp
 								e.preventDefault();
 								openMailCompose(email, 'Información - Corporación Ejecutiva Internacional', 'Hola,\n\nEstoy interesado en recibir información sobre afiliaciones y beneficios.\n\nGracias.');
 							}}
-							className="mt-3 inline-block text-sm md:text-base font-medium underline text-amber-600">
+							className={`${emailHighlight} mt-3 inline-block`}>
 							{email}
 						</a>
 					</div>

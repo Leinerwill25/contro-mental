@@ -23,6 +23,25 @@ const SAMPLE_AUTHOR: Author = {
 	linkedin: 'https://linkedin.com/in/alejandro-ramirez',
 };
 
+// Helper: abre Gmail en desktop; en mobile usa mailto como fallback.
+// subject y body serán codificados automáticamente.
+function openMailCompose(email: string | undefined, subject = '', body = ''): void {
+	if (!email || typeof window === 'undefined') return;
+
+	const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent || '');
+	const encodedSubject = encodeURIComponent(subject);
+	const encodedBody = encodeURIComponent(body);
+
+	const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${encodedSubject}&body=${encodedBody}&tf=1`;
+
+	if (!isMobile) {
+		window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+	} else {
+		// fallback a mailto para abrir app nativa
+		window.location.href = `mailto:${email}?subject=${encodedSubject}&body=${encodedBody}`;
+	}
+}
+
 export default function HeroWithAuthorModal(): React.ReactElement {
 	const [isOpen, setIsOpen] = useState(false);
 	const triggerRef = useRef<HTMLButtonElement | null>(null);
@@ -261,7 +280,9 @@ export default function HeroWithAuthorModal(): React.ReactElement {
 												<a
 													href={`mailto:${SAMPLE_AUTHOR.email}`}
 													onClick={(e) => {
-														/* si quieres usar helper openMailCompose, agrégalo aquí */
+														e.preventDefault();
+														// usamos el helper para abrir Gmail en desktop o mailto en mobile
+														openMailCompose(SAMPLE_AUTHOR.email, 'Contacto - Autor', 'Hola, me interesa recibir información.');
 													}}
 													className="inline-flex items-center gap-2 text-xs text-amber-200 hover:underline truncate"
 													aria-label={`Enviar correo a ${SAMPLE_AUTHOR.email}`}>

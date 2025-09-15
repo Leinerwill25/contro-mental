@@ -1,6 +1,8 @@
+// src/components/HeroProfesional.tsx
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import FlagCircularCarousel from './FlagCircularCarousel';
 
 interface Flag {
@@ -38,7 +40,7 @@ export default function HeroProfesional({
 	const mailtoContactar = `mailto:${email}?subject=${encodeURIComponent('Contacto - Corporación Ejecutiva Internacional')}`;
 
 	// Helper: open Gmail compose on desktop, fallback to mailto on mobile.
-	function openMailCompose(targetEmail: string, subject = '', body = '') {
+	function openMailCompose(targetEmail: string, subject = '', body = ''): void {
 		if (typeof window === 'undefined') return;
 
 		const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent || '');
@@ -115,7 +117,10 @@ export default function HeroProfesional({
 							<div className="flex items-center gap-2">
 								{flags.map((f, i) => (
 									<div key={i} className="hidden md:block">
-										<img src={f.src} alt={f.name} className="w-7 h-4 object-cover rounded-sm border border-slate-300 shadow-sm" />
+										{/* Reemplazado por next/image para mejor LCP */}
+										<div className="w-7 h-4 relative">
+											<Image src={f.src} alt={f.name} fill style={{ objectFit: 'cover' }} className="rounded-sm border border-slate-300 shadow-sm" />
+										</div>
 									</div>
 								))}
 							</div>
