@@ -3,16 +3,12 @@
 
 import React, { useEffect, useRef, useState, ReactElement } from 'react';
 
-type Product = {
-	id: string;
-	title: string;
-	price: number;
-};
+type Product = { id: string; title: string; price: number };
 
 const PRODUCTS: Product[] = [
-	{ id: 'p1', title: 'Mentoria CUMPLE TUS DESEOS', price: 250 },
-	{ id: 'p2', title: 'Mentoria COMO TENER EXITO EN EL AMOR', price: 144 },
-	{ id: 'p3', title: 'Literatura - Second Pearl Harbor', price: 12 },
+	{ id: 'Mentoria Cumple Tus Deseos', title: 'Mentoria CUMPLE TUS DESEOS', price: 250 },
+	{ id: 'Mentoria Como Tener Exito En El Amor', title: 'Mentoria COMO TENER EXITO EN EL AMOR', price: 144 },
+	{ id: 'Literatura - Second Pearl Harbor', title: 'Literatura - Second Pearl Harbor', price: 12 },
 ];
 
 const PAYMENT_METHODS = [
@@ -20,8 +16,13 @@ const PAYMENT_METHODS = [
 	{ id: 'paypal', label: 'PayPal' },
 	{ id: 'binance', label: 'Binance / Crypto' },
 	{ id: 'mobile', label: 'Pago móvil / Banesco' },
-	{ id: 'zelle', label: 'Zelle' }, // nuevo método agregado
+	{ id: 'zelle', label: 'Zelle' },
 ];
+
+/** REEMPLAZA con la URL de tu Apps Script desplegado (Web app exec URL) */
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzLFE3Xj20jnSCt-xq9hB7bSVzv1SX0uygbxeNPBdEP6vsbEzRDMrjk3OznPfRzogca/exec';
+/** REEMPLAZA con el secreto que usarás en Apps Script (mismo valor) */
+const SCRIPT_SECRET = 'my-super-secret-2025-abcdef';
 
 export default function PagosPage(): ReactElement {
 	const [mounted, setMounted] = useState(false);
@@ -66,7 +67,6 @@ export default function PagosPage(): ReactElement {
 	}
 
 	const total = PRODUCTS.reduce((sum, p) => (selected[p.id] ? sum + p.price : sum), 0);
-
 	function formatCurrency(n: number) {
 		return `$ ${n.toFixed(2)}`;
 	}
@@ -92,6 +92,23 @@ export default function PagosPage(): ReactElement {
 		return /\S+@\S+\.\S+/.test(mail);
 	}
 
+	// Helper: convierte File a base64 (sin prefijo data:)
+	function fileToBase64(file: File): Promise<{ base64: string; mime: string }> {
+		return new Promise((resolve, reject) => {
+			const fr = new FileReader();
+			fr.onerror = () => reject(new Error('Error leyendo archivo'));
+			fr.onload = () => {
+				const result = fr.result as string;
+				const match = result.match(/^data:(.+);base64,(.*)$/);
+				if (!match) return reject(new Error('Formato de archivo inesperado al convertir a base64'));
+				const mime = match[1];
+				const base64 = match[2];
+				resolve({ base64, mime });
+			};
+			fr.readAsDataURL(file);
+		});
+	}
+
 	async function handleSubmit(e: React.FormEvent) {
 		e.preventDefault();
 		setMessage(null);
@@ -110,51 +127,70 @@ export default function PagosPage(): ReactElement {
 			return;
 		}
 
-		const form = new FormData();
-		form.append('email', email);
-		form.append('products', JSON.stringify(chosen));
-		form.append('total', String(total));
-		form.append('paymentMethod', paymentMethod);
-		if (fileRef.current?.files?.[0]) form.append('comprobante', fileRef.current.files[0]);
+		// payload básico
+		const payload: any = {
+			secret: SCRIPT_SECRET,
+			timestamp: new Date().toISOString(),
+			email,
+			products: chosen,
+			total: total,
+			paymentMethod,
+		};
+
+		// si hay archivo, convertir a base64 y adjuntar (precaución: no subir archivos gigantes)
+		const file = fileRef.current?.files?.[0] ?? null;
+		if (file) {
+			try {
+				setUploading(true);
+				setMessage('Codificando archivo...');
+				const { base64, mime } = await fileToBase64(file);
+				payload.fileName = file.name;
+				payload.fileType = mime;
+				payload.fileBase64 = base64;
+			} catch (err) {
+				console.error(err);
+				setMessage('Error al procesar el archivo. Intenta con un archivo más pequeño o JPG/PDF.');
+				setUploading(false);
+				return;
+			}
+		}
 
 		try {
 			setUploading(true);
-			setProgress(0);
-			// Ejemplo de subida con progreso (reemplaza URL por tu endpoint real)
-			await new Promise<void>((resolve, reject) => {
-				const xhr = new XMLHttpRequest();
-				xhr.open('POST', '/api/pagos');
-				xhr.upload.onprogress = (ev) => {
-					if (ev.lengthComputable) setProgress(Math.round((ev.loaded / ev.total) * 100));
-				};
-				xhr.onload = () => {
-					setUploading(false);
-					if (xhr.status >= 200 && xhr.status < 300) {
-						setMessage('Comprobante enviado con éxito. Nos pondremos en contacto.');
-						setSelected({});
-						setEmail('');
-						setFileName(null);
-						setFilePreview(null);
-						setConfirmed(false);
-						if (fileRef.current) fileRef.current.value = '';
-						resolve();
-					} else {
-						setMessage('Hubo un error al enviar. Intenta de nuevo.');
-						reject();
-					}
-				};
-				xhr.onerror = () => {
-					setUploading(false);
-					setMessage('Error de red. Intenta nuevamente.');
-					reject();
-				};
-				xhr.send(form);
+			setProgress(5);
+			setMessage('Enviando comprobante...');
+
+			// --- USAR text/plain para evitar problemas de preflight / CORS con Apps Script ---
+			const res = await fetch(GOOGLE_SCRIPT_URL, {
+				method: 'POST',
+				redirect: 'follow',
+				headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+				body: JSON.stringify(payload),
 			});
+
+			setProgress(70);
+			// intento parsear JSON (Apps Script responde JSON)
+			const json = await res.json();
+			setProgress(100);
+
+			if (!res.ok) {
+				console.error('Respuesta no OK', json);
+				setMessage('Error al enviar: ' + (json?.error || res.statusText || 'error desconocido'));
+			} else if (json?.ok) {
+				setMessage('Comprobante enviado con éxito. Nos pondremos en contacto.');
+				setSelected({});
+				setEmail('');
+				removeFile();
+				setConfirmed(false);
+			} else {
+				setMessage('Servidor respondió con error: ' + (json?.error || JSON.stringify(json)));
+			}
 		} catch (err) {
-			console.error(err);
+			console.error('Fetch error:', err);
+			setMessage('Error de red al enviar. Comprueba que el Apps Script está desplegado y accesible (CORS / despliegue).');
 		} finally {
 			setUploading(false);
-			setProgress(0);
+			setTimeout(() => setProgress(0), 800);
 		}
 	}
 
@@ -194,7 +230,6 @@ export default function PagosPage(): ReactElement {
 					<h3 className={`${headingCls} text-xl md:text-2xl font-semibold text-rose-700`}>Métodos de pago</h3>
 
 					<div className={`${paraCls} mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4`}>
-						{/* payment methods */}
 						{PAYMENT_METHODS.map((m) => (
 							<div key={m.id} className="p-4 border border-slate-700 rounded-md bg-slate-800">
 								<h4 className="font-medium text-slate-100">{m.label}</h4>
@@ -235,9 +270,7 @@ export default function PagosPage(): ReactElement {
 						</div>
 					</section>
 
-					{/* FORM MEJORADO: estructura en grid con previsualización y resumen */}
 					<form className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4" onSubmit={handleSubmit}>
-						{/* Left column: inputs */}
 						<div className="md:col-span-3 bg-slate-800 p-4 rounded-md border border-slate-700">
 							<h4 className="text-sm text-slate-300 mb-3 font-semibold">Enviar comprobante</h4>
 
@@ -257,15 +290,10 @@ export default function PagosPage(): ReactElement {
 								</select>
 							</label>
 
-							{/* Improved upload UI */}
 							<div className="block mb-3">
 								<span className="text-sm font-medium text-slate-300">Subir comprobante (foto o PDF)</span>
-
 								<div className="mt-2 flex items-center gap-3">
-									{/* Hidden input */}
 									<input ref={fileRef} onChange={onFileChange} type="file" accept="image/*,application/pdf" className="sr-only" id="comprobante-input" />
-
-									{/* Visible button to trigger file picker */}
 									<label htmlFor="comprobante-input" className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-blue-600 text-white cursor-pointer hover:brightness-95 shadow">
 										<svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
 											<path d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V7.414A2 2 0 0016.414 6L13 2.586A2 2 0 0011.586 2H4z" />
@@ -273,7 +301,6 @@ export default function PagosPage(): ReactElement {
 										<span className="text-sm font-medium">Seleccionar archivo</span>
 									</label>
 
-									{/* Show filename or placeholder */}
 									<div className="flex-1 text-sm text-slate-400">
 										{fileName ? (
 											<div className="flex items-center justify-between gap-3">
@@ -288,7 +315,6 @@ export default function PagosPage(): ReactElement {
 									</div>
 								</div>
 
-								{/* Preview for images */}
 								{filePreview && (
 									<div className="mt-3">
 										<img src={filePreview} alt="preview" className="max-h-40 rounded-md border border-gray-200 object-contain" />
@@ -357,7 +383,6 @@ export default function PagosPage(): ReactElement {
 						</a>
 					</div>
 
-					{/* Right column: resumen y CTA */}
 					<aside className={`${cardCls} bg-slate-800 p-4 rounded-md border border-amber-500/10`}>
 						<div className="w-full text-center">
 							<p className="text-sm text-slate-300">Resumen de la orden</p>
