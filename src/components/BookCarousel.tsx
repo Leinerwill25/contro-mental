@@ -1,5 +1,5 @@
 'use client';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -110,16 +110,6 @@ export default function BookCarousel({ books, autoplay = 0, backgroundImage = '/
 		paddingTop: '32px',
 		paddingBottom: '32px',
 	};
-
-	function formatCurrencyVal(priceStr: string) {
-		const num =
-			Number(
-				String(priceStr)
-					.replace(/[^\d.,]/g, '')
-					.replace(',', '.')
-			) || 0;
-		return `€${num}`;
-	}
 
 	return (
 		<section id="libro" className="w-full max-w-7xl mx-auto p-8 md:p-16 relative rounded-3xl overflow-visible" style={{ ...sectionBgStyle, ...sectionExtraStyle }} aria-label="Carrusel de libros">
