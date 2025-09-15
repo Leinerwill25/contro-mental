@@ -38,6 +38,26 @@ export default function HeroProfesional({
 	const mailtoContacto = `mailto:${email}?subject=${encodeURIComponent('Información - Corporación Ejecutiva Internacional')}`;
 	const mailtoContactar = `mailto:${email}?subject=${encodeURIComponent('Contacto - Corporación Ejecutiva Internacional')}`;
 
+	// Helper: open Gmail compose on desktop, fallback to mailto on mobile.
+	function openMailCompose(targetEmail: string, subject = '', body = '') {
+		if (typeof window === 'undefined') return;
+
+		const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent || '');
+		const encodedSubject = encodeURIComponent(subject);
+		const encodedBody = encodeURIComponent(body || '');
+
+		// Gmail web compose URL (opens in new tab)
+		const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(targetEmail)}&su=${encodedSubject}&body=${encodedBody}&tf=1`;
+
+		if (!isMobile) {
+			// Desktop: open Gmail web compose in a new tab
+			window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+		} else {
+			// Mobile: use mailto to open native mail app
+			window.location.href = `mailto:${targetEmail}?subject=${encodedSubject}&body=${encodedBody}`;
+		}
+	}
+
 	return (
 		<header id="hero" className="w-full bg-gradient-to-b from-slate-100 to-slate-50 text-slate-900" aria-label="Hero Corporativo - Corporación Ejecutiva Internacional">
 			<div className="relative overflow-hidden">
@@ -61,11 +81,31 @@ export default function HeroProfesional({
 
 						{/* CTAs */}
 						<div className={`${ctasCls} mt-6 flex flex-wrap gap-3`}>
-							<a href={mailtoContacto} className="inline-flex items-center gap-3 px-5 py-3 rounded-md bg-amber-400 text-slate-900 font-semibold text-sm shadow hover:brightness-95 focus:outline-none focus:ring-2 focus:ring-amber-400" aria-label="Solicitar información">
+							{/* Solicitar información: usa openMailCompose en click; mantiene href fallback */}
+							<a
+								href={mailtoContacto}
+								onClick={(e) => {
+									e.preventDefault();
+									openMailCompose(email, 'Información - Corporación Ejecutiva Internacional', '');
+								}}
+								className="inline-flex items-center gap-3 px-5 py-3 rounded-md bg-amber-400 text-slate-900 font-semibold text-sm shadow hover:brightness-95 focus:outline-none focus:ring-2 focus:ring-amber-400"
+								aria-label="Solicitar información"
+								target="_blank"
+								rel="noopener noreferrer">
 								Solicitar información
 							</a>
 
-							<a href={mailtoContactar} className="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-transparent border border-amber-500 text-amber-700 font-medium text-sm hover:bg-amber-500/10 focus:outline-none focus:ring-2 focus:ring-amber-300" aria-label="Contactar">
+							{/* Contactar: mismo comportamiento */}
+							<a
+								href={mailtoContactar}
+								onClick={(e) => {
+									e.preventDefault();
+									openMailCompose(email, 'Contacto - Corporación Ejecutiva Internacional', '');
+								}}
+								className="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-transparent border border-amber-500 text-amber-700 font-medium text-sm hover:bg-amber-500/10 focus:outline-none focus:ring-2 focus:ring-amber-300"
+								aria-label="Contactar"
+								target="_blank"
+								rel="noopener noreferrer">
 								Contactar - Corporacion2025int@gmail.com
 							</a>
 						</div>

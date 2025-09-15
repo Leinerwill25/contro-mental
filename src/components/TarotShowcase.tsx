@@ -1,4 +1,3 @@
-// TarotShowcase.tsx
 'use client';
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
@@ -14,6 +13,26 @@ type TarotShowcaseProps = {
 	priceLabel?: string;
 	contactEmail?: string;
 };
+
+// Helper: abre Gmail en desktop; en mobile usa mailto como fallback.
+// subject y body serán codificados automáticamente.
+function openMailCompose(email: string, subject = '', body = ''): void {
+	if (typeof window === 'undefined') return;
+
+	const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+	const encodedSubject = encodeURIComponent(subject);
+	const encodedBody = encodeURIComponent(body);
+
+	const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${encodedSubject}&body=${encodedBody}&tf=1`;
+
+	if (!isMobile) {
+		// Desktop: abrir Gmail web en nueva pestaña
+		window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+	} else {
+		// Mobile: abrir app nativa con mailto
+		window.location.href = `mailto:${email}?subject=${encodedSubject}&body=${encodedBody}`;
+	}
+}
 
 export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitle = 'Visualización escrita de 9 Meses — Si deseas Ver y tener mejores decisiones, esta es tu oportunidad', lead = 'Conoce Tu Futuro', videoSrc = 'https://drive.google.com/file/d/1J0aSdJ3GCEdRJWXnA8bdaNE9ARJOodd7/view?usp=drive_link', posterSrc = '/cap.png', imageSrc = '/foto para  el  TAROT.png', priceLabel = 'Precio súper económico por promoción', contactEmail = 'alphadeseos@gmail.com' }: TarotShowcaseProps) {
 	const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -142,8 +161,11 @@ export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitl
 		return undefined;
 	}, [isMp4, driveInfo, useDriveDirect, videoSrc]);
 
-	// Clase reutilizable para destacar el email
 	const emailHighlight = 'inline-block px-3 py-1 rounded-md bg-amber-400 text-slate-900 font-semibold shadow-sm hover:brightness-95 transition text-base';
+
+	// Subject & body defaults for the contact button
+	const contactSubject = 'Interés Consulta Tarot Alpha';
+	const contactBody = 'Hola, estoy interesado en la consulta Tarot Alpha. Por favor, indíqueme detalles y pasos a seguir.';
 
 	return (
 		<section className="w-full max-w-6xl mx-auto px-6 py-12">
@@ -151,9 +173,7 @@ export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitl
 				{/* Header */}
 				<div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 p-6 md:p-8 bg-gradient-to-r from-sky-50 to-white">
 					<div>
-						{/* ============== TITULO MEJORADO ============== */}
-						<h1 id="promo-title" className="font-extrabold tracking-tight leading-tight text-4xl md:text-5xl lg:text-6xl " aria-label={title}>
-							{/* Usamos span para aplicar estilo de degradado y animación solo al texto */}
+						<h1 id="promo-title" className="font-extrabold tracking-tight leading-tight text-4xl md:text-5xl lg:text-6xl" aria-label={title}>
 							<span
 								className="block title-gradient hover:scale-[1.02] transition-transform"
 								style={{
@@ -163,14 +183,12 @@ export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitl
 									color: 'transparent',
 									WebkitTextFillColor: 'transparent',
 									textShadow: '0 6px 24px rgba(2,12,40,0.14)',
-									// backgroundSize/position para la animación definida abajo
 									backgroundSize: '200% 100%',
 								}}>
 								{title}
 							</span>
 						</h1>
 
-						{/* Subtitulo más grande y con mejor jerarquía */}
 						<p className="mt-2 text-lg md:text-xl lg:text-2xl text-slate-600 max-w-xl font-medium">{subtitle}</p>
 					</div>
 
@@ -179,7 +197,6 @@ export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitl
 							<span className="px-3 py-2 rounded-md bg-sky-50 text-sky-800 text-lg font-semibold border border-sky-100 shadow-sm">{priceLabel}</span>
 						</div>
 
-						{/* Email resaltado en header */}
 						<p className="mt-2 text-lg text-slate-700">
 							<span className="font-medium">Informes sin compromiso:</span>{' '}
 							<a className={emailHighlight} href={`mailto:${contactEmail}`}>
@@ -269,7 +286,16 @@ export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitl
 								</div>
 
 								<div className="mt-6 flex flex-col sm:flex-row gap-3">
-									<a href={`mailto:${contactEmail}?subject=Interés%20Consulta%20Tarot%20Alpha`} className="inline-flex items-center justify-center px-4 py-3 rounded-lg bg-gradient-to-r from-sky-700 to-indigo-600 text-white font-semibold text-lg shadow hover:scale-[1.02] transition">
+									{/* Aquí aplicamos el helper: el href es un fallback y onClick usa openMailCompose */}
+									<a
+										href={`mailto:${contactEmail}?subject=${encodeURIComponent(contactSubject)}`}
+										onClick={(e) => {
+											e.preventDefault();
+											openMailCompose(contactEmail!, contactSubject, contactBody);
+										}}
+										className="inline-flex items-center justify-center px-4 py-3 rounded-lg bg-gradient-to-r from-sky-700 to-indigo-600 text-white font-semibold text-lg shadow hover:scale-[1.02] transition"
+										target="_blank"
+										rel="noopener noreferrer">
 										Solicitar información
 									</a>
 								</div>

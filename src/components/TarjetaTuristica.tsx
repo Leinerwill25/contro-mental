@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 interface TarjetaTuristicaProps {
 	ticketImage?: string;
-	flags?: { src: string; name: string }[]; // si quieres pasar banderas desde props
+	flags?: { src: string; name: string }[];
 	email?: string;
 }
 
@@ -32,17 +32,35 @@ export default function TarjetaTuristica({ ticketImage = '/C.png', email = 'Corp
 
 	const displayFlags = propsFlags && propsFlags.length ? propsFlags : defaultFlags;
 
-	const mailtoMoreInfo = `mailto:${email}?subject=${encodeURIComponent('Información - Tarjeta Turística Internacional')}&body=${encodeURIComponent('Hola,\n\nQuisiera recibir más información sobre la Tarjeta Turística Internacional. Por favor, indíquenme los requisitos y beneficios.\n\nGracias.')}`;
+	// helper: abre Gmail en desktop; en mobile usa mailto como fallback
+	function openMailCompose(emailAddr: string, subject = '', body = ''): void {
+		if (typeof window === 'undefined') return;
+		const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+		const encodedSubject = encodeURIComponent(subject);
+		const encodedBody = encodeURIComponent(body);
+		const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(emailAddr)}&su=${encodedSubject}&body=${encodedBody}&tf=1`;
+		if (!isMobile) {
+			window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+		} else {
+			window.location.href = `mailto:${emailAddr}?subject=${encodedSubject}&body=${encodedBody}`;
+		}
+	}
 
-	const mailtoAffiliate = `mailto:${email}?subject=${encodeURIComponent('Afiliación - Tarjeta Turística Internacional')}&body=${encodeURIComponent('Hola,\n\nEstoy interesado en afiliar mi negocio / registrarme como beneficiario. Por favor, envíenme los pasos a seguir y condiciones.\n\nSaludos.')}`;
+	// Subjects & bodies por defecto
+	const moreInfoSubject = 'Información - Tarjeta Turística Internacional';
+	const moreInfoBody = 'Hola,\n\nQuisiera recibir más información sobre la Tarjeta Turística Internacional. Por favor, indíquenme los requisitos y beneficios.\n\nGracias.';
+
+	const affiliateSubject = 'Afiliación - Tarjeta Turística Internacional';
+	const affiliateBody = 'Hola,\n\nEstoy interesado en afiliar mi negocio / registrarme como beneficiario. Por favor, envíenme los pasos a seguir y condiciones.\n\nSaludos.';
+
+	// mailto fallbacks (útiles si JS está deshabilitado)
+	const mailtoMoreInfo = `mailto:${email}?subject=${encodeURIComponent(moreInfoSubject)}&body=${encodeURIComponent(moreInfoBody)}`;
+	const mailtoAffiliate = `mailto:${email}?subject=${encodeURIComponent(affiliateSubject)}&body=${encodeURIComponent(affiliateBody)}`;
+
+	const emailHighlight = 'inline-block text-amber-600 font-medium underline';
 
 	return (
-		<section
-			id="tarjeta-turistica"
-			className="w-full max-w-6xl mx-auto p-8 md:p-12 bg-slate-900 text-slate-100 rounded-2xl shadow-2xl border border-slate-800
-                       text-lg md:text-xl" /* base más grande */
-		>
-			{/* Encabezado principal con estilo corporativo */}
+		<section id="tarjeta-turistica" className="w-full max-w-6xl mx-auto p-8 md:p-12 bg-slate-900 text-slate-100 rounded-2xl shadow-2xl border border-slate-800 text-lg md:text-xl">
 			<header className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-0">
 				<div className="flex items-center gap-5">
 					<div className="w-20 h-20 rounded-lg bg-gradient-to-br from-yellow-400 via-amber-400 to-red-500 flex items-center justify-center shadow-inner">
@@ -60,21 +78,9 @@ export default function TarjetaTuristica({ ticketImage = '/C.png', email = 'Corp
 						{displayFlags && displayFlags.length > 0 ? (
 							displayFlags.map((f, i) => (
 								<div key={i} className="group relative flex items-center" aria-hidden={false}>
-									<img
-										src={f.src}
-										alt={f.name}
-										tabIndex={0}
-										role="img"
-										aria-label={f.name}
-										className="w-12 h-8 object-cover rounded-sm shadow-sm border border-slate-700 transform transition-transform duration-200
-                     group-hover:scale-110 group-focus:scale-110 focus:outline-none focus:ring-2 focus:ring-amber-400"
-									/>
+									<img src={f.src} alt={f.name} tabIndex={0} role="img" aria-label={f.name} className="w-12 h-8 object-cover rounded-sm shadow-sm border border-slate-700 transform transition-transform duration-200 group-hover:scale-110 group-focus:scale-110 focus:outline-none focus:ring-2 focus:ring-amber-400" />
 
-									<span
-										className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 z-10 whitespace-nowrap rounded-md bg-slate-800 text-amber-300 text-sm px-3 py-1
-                     opacity-0 translate-y-1 transition-all duration-200 ease-out
-                     group-hover:opacity-100 group-hover:translate-y-0 group-focus:opacity-100 group-focus:translate-y-0"
-										aria-hidden="true">
+									<span className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 z-10 whitespace-nowrap rounded-md bg-slate-800 text-amber-300 text-sm px-3 py-1 opacity-0 translate-y-1 transition-all duration-200 ease-out group-hover:opacity-100 group-hover:translate-y-0 group-focus:opacity-100 group-focus:translate-y-0" aria-hidden="true">
 										{f.name}
 									</span>
 								</div>
@@ -86,7 +92,6 @@ export default function TarjetaTuristica({ ticketImage = '/C.png', email = 'Corp
 				</div>
 			</header>
 
-			{/* Contenido principal */}
 			<main className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
 				<div className="md:col-span-2">
 					<h3 className={`${headingCls} text-2xl md:text-4xl font-semibold text-rose-50`}>El Sistema Turístico Internacional</h3>
@@ -124,7 +129,6 @@ export default function TarjetaTuristica({ ticketImage = '/C.png', email = 'Corp
 					</div>
 				</div>
 
-				{/* Columna lateral con tarjeta / imagen y CTA */}
 				<aside className="flex flex-col items-center gap-6">
 					<div className={`${cardCls} w-full max-w-md bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-xl shadow-xl border border-amber-500/10`}>
 						<div className="w-full h-56 rounded-md overflow-hidden bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center">
@@ -137,21 +141,45 @@ export default function TarjetaTuristica({ ticketImage = '/C.png', email = 'Corp
 						</div>
 
 						<div className="mt-5 flex items-center justify-center gap-4">
-							<a href={mailtoMoreInfo} className="px-6 py-3 rounded-lg bg-amber-400 text-slate-900 font-semibold text-base md:text-lg shadow hover:brightness-95 transition inline-flex items-center justify-center" aria-label="Enviar correo para más información">
+							{/* Más info: href como fallback; onClick llama al helper */}
+							<a
+								href={mailtoMoreInfo}
+								onClick={(e) => {
+									e.preventDefault();
+									openMailCompose(email, moreInfoSubject, moreInfoBody);
+								}}
+								className="px-6 py-3 rounded-lg bg-amber-400 text-slate-900 font-semibold text-base md:text-lg shadow hover:brightness-95 transition inline-flex items-center justify-center"
+								aria-label="Enviar correo para más información"
+								target="_blank"
+								rel="noopener noreferrer">
 								Más info
 							</a>
 
-							<a href={mailtoAffiliate} className="px-6 py-3 rounded-lg border border-amber-300 text-amber-300 font-semibold text-base md:text-lg shadow-sm hover:bg-amber-700/10 transition" aria-label="Enviar correo para afiliar">
+							{/* Afiliar */}
+							<a
+								href={mailtoAffiliate}
+								onClick={(e) => {
+									e.preventDefault();
+									openMailCompose(email, affiliateSubject, affiliateBody);
+								}}
+								className="px-6 py-3 rounded-lg border border-amber-300 text-amber-300 font-semibold text-base md:text-lg shadow-sm hover:bg-amber-700/10 transition"
+								aria-label="Enviar correo para afiliar">
 								Afiliar
 							</a>
 						</div>
 					</div>
 
-					{/* Banner CTA inferior */}
 					<div className={`${bannerCls} w-full max-w-md bg-amber-50 text-slate-900 p-4 rounded-md border border-amber-300 shadow-md`}>
 						<p className="text-base md:text-lg font-semibold">¿Eres empresario y deseas aumentar tus ventas?</p>
 						<p className="text-sm md:text-base mt-2 text-slate-700">Escríbenos sin compromiso para recibir más información:</p>
-						<a href={`mailto:${email}`} className="mt-3 inline-block text-sm md:text-base font-medium underline text-amber-600">
+						<a
+							href={`mailto:${email}`}
+							onClick={(e) => {
+								e.preventDefault();
+								openMailCompose(email, 'Información - Corporación Ejecutiva Internacional', 'Hola,\n\nEstoy interesado en recibir información sobre afiliaciones y beneficios.\n\nGracias.');
+							}}
+							className="mt-3 inline-block text-sm md:text-base font-medium underline text-amber-600"
+							aria-label={`Enviar correo a ${email}`}>
 							{email}
 						</a>
 					</div>
