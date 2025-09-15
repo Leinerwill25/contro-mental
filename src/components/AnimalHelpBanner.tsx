@@ -21,7 +21,7 @@ export default function AnimalHelpBanner({ imageSrc = '/cap2.png', imageAlt = 'A
 						Pre Fundación <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-200">PATITAS en la CALLE</span>
 					</h2>
 
-					<p className="mt-4 text-slate-300 text-lg md:text-xl lg:text-2xl">AYÚDANOS a AYUDAR</p>
+					<p className="mt-4 text-slate-300 text-lg md:text-xl lg:text-2xl">AYÚDANOS ah AYUDAR</p>
 				</div>
 
 				{/* Imagen apaisada (más ancha que larga) */}

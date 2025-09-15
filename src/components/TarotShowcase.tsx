@@ -1,3 +1,4 @@
+// TarotShowcase.tsx
 'use client';
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
@@ -150,9 +151,27 @@ export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitl
 				{/* Header */}
 				<div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 p-6 md:p-8 bg-gradient-to-r from-sky-50 to-white">
 					<div>
-						<h1 className="text-xl md:text-2xl lg:text-3xl font-extrabold text-sky-900 tracking-tight">{title}</h1>
-						{/* subtitle kept slightly larger */}
-						<p className="mt-1 text-lg md:text-xl text-slate-600 max-w-xl">{subtitle}</p>
+						{/* ============== TITULO MEJORADO ============== */}
+						<h1 id="promo-title" className="font-extrabold tracking-tight leading-tight text-4xl md:text-5xl lg:text-6xl " aria-label={title}>
+							{/* Usamos span para aplicar estilo de degradado y animación solo al texto */}
+							<span
+								className="block title-gradient hover:scale-[1.02] transition-transform"
+								style={{
+									backgroundImage: 'linear-gradient(90deg, #ff3b30 0%, #ff6fa3 45%, #0066ff 100%)',
+									WebkitBackgroundClip: 'text',
+									backgroundClip: 'text',
+									color: 'transparent',
+									WebkitTextFillColor: 'transparent',
+									textShadow: '0 6px 24px rgba(2,12,40,0.14)',
+									// backgroundSize/position para la animación definida abajo
+									backgroundSize: '200% 100%',
+								}}>
+								{title}
+							</span>
+						</h1>
+
+						{/* Subtitulo más grande y con mejor jerarquía */}
+						<p className="mt-2 text-lg md:text-xl lg:text-2xl text-slate-600 max-w-xl font-medium">{subtitle}</p>
 					</div>
 
 					<div className="ml-auto text-right">
@@ -173,11 +192,9 @@ export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitl
 				{/* Content grid */}
 				<div className="grid grid-cols-1 lg:grid-cols-12 gap-6 p-6 md:p-8">
 					{/* Left: Video */}
-					{/* <-- Cambiado: lg:col-span-7 -> lg:col-span-6 para ocupar menos ancho --> */}
 					<div className="lg:col-span-6 flex flex-col gap-4">
 						<div className="relative rounded-2xl overflow-hidden shadow-lg border border-slate-100 bg-black">
 							{playerSrc ? (
-								/* <-- Cambiado: alturas reducidas --> */
 								<video ref={videoRef} src={playerSrc} poster={posterSrc} controls preload="metadata" className="w-full h-[220px] md:h-[300px] lg:h-[360px] object-cover bg-black" aria-label="Video presentación Tarot Alpha">
 									Your browser does not support the <code>video</code> element.
 								</video>
@@ -189,7 +206,6 @@ export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitl
 
 							{showOverlay && (
 								<div className="absolute inset-0 flex items-center justify-center pointer-events-auto">
-									{/* <-- Cambiado: botón play más pequeño w-16 h-16, svg w-6 h-6 --> */}
 									<button type="button" aria-label="Reproducir / Pausar video" onClick={togglePlay} className="flex items-center justify-center bg-white/10 backdrop-blur-sm hover:bg-white/20 transition rounded-full w-16 h-16 focus:outline-none focus:ring-2 focus:ring-sky-400">
 										<svg className="w-6 h-6 text-white/95" viewBox="0 0 24 24" fill="none" aria-hidden>
 											<path d="M8 5v14l11-7L8 5z" fill="currentColor" />
@@ -199,7 +215,6 @@ export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitl
 							)}
 						</div>
 
-						{/* small file box / download */}
 						<div className="flex items-center gap-4">
 							<div className="flex-1">
 								<div className="rounded-md border border-slate-200 bg-slate-50 px-4 py-2 text-lg text-slate-700 shadow-sm">
@@ -229,7 +244,6 @@ export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitl
 							</div>
 
 							<div className="p-4 md:p-6">
-								{/* lead aumentado */}
 								<p className="text-lg text-slate-700">{lead}</p>
 
 								<div className="mt-4">
@@ -242,14 +256,12 @@ export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitl
 										<span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-sky-50 text-sky-700 font-semibold text-lg">α</span>
 										<div>
 											<div className="text-lg font-semibold text-slate-900">Tarot Alpha</div>
-											{/* aquí era text-sm -> ahora text-base */}
 											<div className="text-base text-slate-500">Visualización escrita • 9 meses</div>
 										</div>
 									</div>
 
 									<div className="text-right">
 										<div className="text-lg font-semibold text-sky-800">{priceLabel}</div>
-										{/* email resaltado en panel derecho */}
 										<a className={emailHighlight + ' mt-1 inline-block'} href={`mailto:${contactEmail}`}>
 											{contactEmail}
 										</a>
@@ -264,17 +276,15 @@ export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitl
 							</div>
 						</div>
 
-						{/* footer note aumentado */}
 						<div className="text-center text-base text-slate-500">© {new Date().getFullYear()} Tarot Alpha — Presentación profesional y segura.</div>
 					</aside>
 				</div>
 			</div>
 
-			{/* Modal fallback: muestra iframe de Drive IN-PAGE (no redirige). */}
+			{/* Modal fallback */}
 			{showDriveModal && driveInfo && (
 				<div className="fixed inset-0 z-50 flex items-center justify-center p-4">
 					<div className="absolute inset-0 bg-black/60" onClick={closeModal} />
-					{/* <-- Cambiado: modal más pequeño max-w-3xl y h-[50vh] --> */}
 					<div className="relative w-full max-w-3xl h-[50vh] bg-black rounded-lg overflow-hidden shadow-2xl">
 						<button onClick={closeModal} aria-label="Cerrar" className="absolute right-3 top-3 z-10 bg-white/10 hover:bg-white/20 p-2 rounded-full text-white">
 							✕
@@ -283,6 +293,37 @@ export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitl
 					</div>
 				</div>
 			)}
+
+			{/* Scoped styles for title shimmer animation */}
+			<style jsx>{`
+				.title-gradient {
+					background-repeat: no-repeat;
+					background-size: 200% 100%;
+					-webkit-background-clip: text;
+					background-clip: text;
+					color: transparent;
+					-webkit-text-fill-color: transparent;
+					animation: shimmer 6s linear infinite;
+					will-change: background-position, transform;
+					display: inline-block;
+				}
+				@keyframes shimmer {
+					0% {
+						background-position: 0% 50%;
+					}
+					50% {
+						background-position: 100% 50%;
+					}
+					100% {
+						background-position: 0% 50%;
+					}
+				}
+				/* pequeño extra: foco accesible */
+				.title-gradient:focus {
+					outline: 3px solid rgba(2, 132, 199, 0.14);
+					outline-offset: 3px;
+				}
+			`}</style>
 		</section>
 	);
 }

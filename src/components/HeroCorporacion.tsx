@@ -39,7 +39,7 @@ export default function HeroProfesional({
 	const mailtoContactar = `mailto:${email}?subject=${encodeURIComponent('Contacto - Corporación Ejecutiva Internacional')}`;
 
 	return (
-		<header id="hero" className="w-full bg-gradient-to-b from-slate-900 to-slate-800 text-slate-100" aria-label="Hero Corporativo - Corporación Ejecutiva Internacional">
+		<header id="hero" className="w-full bg-gradient-to-b from-slate-100 to-slate-50 text-slate-900" aria-label="Hero Corporativo - Corporación Ejecutiva Internacional">
 			<div className="relative overflow-hidden">
 				<div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-20 md:py-28 flex flex-col-reverse md:flex-row items-center gap-10">
 					{/* Texto principal */}
@@ -50,11 +50,11 @@ export default function HeroProfesional({
 						</div>
 
 						<div className={subtitleCls}>
-							<p className="mt-4 text-sm md:text-base text-slate-300 max-w-prose">
-								<strong className="text-amber-300">Gente Emprendedora — Empresarial</strong> · <span className="italic">Somos una empresa de conocimientos</span>.
+							<p className="mt-4 text-sm md:text-base text-slate-700 max-w-prose">
+								<strong className="text-amber-600">Gente Emprendedora — Empresarial</strong> · <span className="italic">Somos una empresa de conocimientos</span>.
 							</p>
 
-							<p className="mt-4 text-sm md:text-lg text-rose-50 leading-relaxed max-w-2xl">
+							<p className="mt-4 text-sm md:text-lg text-slate-800 leading-relaxed max-w-2xl">
 								<span className="font-normal">Somos Una Empresa Que Ofrece A Su Público Conocimientos Que Brindan A Su Clientela La Oportunidad De Tener Mayor Éxito En Sus Vidas Mediante Nuestras Mentorias Internacionales, Las Cuales Son Acompañadas De Métodos Y Sistemas Personalizados, Coaching Individuales, Todo Short-Time con Resultados Tangibles y Concretos.</span>
 							</p>
 						</div>
@@ -65,18 +65,18 @@ export default function HeroProfesional({
 								Solicitar información
 							</a>
 
-							<a href={mailtoContactar} className="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-transparent border border-amber-500 text-amber-300 font-medium text-sm hover:bg-amber-500/10 focus:outline-none focus:ring-2 focus:ring-amber-300" aria-label="Contactar">
+							<a href={mailtoContactar} className="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-transparent border border-amber-500 text-amber-700 font-medium text-sm hover:bg-amber-500/10 focus:outline-none focus:ring-2 focus:ring-amber-300" aria-label="Contactar">
 								Contactar - Corporacion2025int@gmail.com
 							</a>
 						</div>
 
 						{/* Texto pequeño / presencia */}
 						<div className="mt-6 flex items-center gap-4 flex-wrap">
-							<p className="text-xs text-slate-400">Presencia en países:</p>
+							<p className="text-xs text-slate-600">Presencia en países:</p>
 							<div className="flex items-center gap-2">
 								{flags.map((f, i) => (
 									<div key={i} className="hidden md:block">
-										<img src={f.src} alt={f.name} className="w-7 h-4 object-cover rounded-sm border border-slate-700 shadow-sm" />
+										<img src={f.src} alt={f.name} className="w-7 h-4 object-cover rounded-sm border border-slate-300 shadow-sm" />
 									</div>
 								))}
 							</div>
@@ -93,16 +93,17 @@ export default function HeroProfesional({
 			{/* Estilos locales que aplican el efecto de luces directamente al texto. */}
 			<style jsx>{`
 				.light-text {
-					/* Gradiente principal que se mueve */
-					background: linear-gradient(90deg, rgba(255, 235, 205, 1) 0%, rgba(255, 196, 0, 1) 25%, rgba(255, 140, 0, 1) 50%, rgba(255, 196, 0, 1) 75%, rgba(255, 235, 205, 1) 100%);
+					/* Gradiente principal oscuro para buen contraste sobre fondo claro */
+					background: linear-gradient(90deg, #0b4efc 0%, #0ea5e9 35%, #ff6fa3 70%);
 					background-size: 200% 100%;
 					-webkit-background-clip: text;
 					background-clip: text;
 					color: transparent; /* importante para mostrar el gradiente */
-					text-shadow: 0 8px 24px rgba(255, 160, 60, 0.06), 0 2px 8px rgba(255, 120, 40, 0.08);
+					/* sombra más marcada para separación del fondo */
+					text-shadow: 0 8px 28px rgba(6, 20, 40, 0.12), 0 2px 10px rgba(6, 20, 40, 0.06);
 					position: relative;
 					/* animación suave que desplaza el gradiente */
-					animation: gradientShift 5s linear infinite;
+					animation: gradientShift 6s linear infinite;
 				}
 
 				@keyframes gradientShift {

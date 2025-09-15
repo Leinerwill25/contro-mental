@@ -162,24 +162,24 @@ export default function PagosPage(): ReactElement {
 	const mailtoContact = `mailto:${contactEmail}?subject=${encodeURIComponent('Consulta sobre pago y comprobante')}`;
 
 	return (
-		<section className="w-full max-w-5xl mx-auto p-6 md:p-10 bg-slate-900 m-5 text-slate-100 rounded-2xl shadow-2xl border border-slate-800">
+		<section className="w-full max-w-5xl mx-auto p-6 md:p-10 bg-gradient-to-b from-sky-100 to-sky-50 m-5 text-slate-900 rounded-2xl shadow-2xl border border-slate-200">
 			<header className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-0">
 				<div className="flex items-center gap-4">
 					<div className="w-16 h-16 rounded-lg bg-gradient-to-br from-yellow-400 via-amber-400 to-red-500 flex items-center justify-center shadow-inner">
 						<span className="font-extrabold text-slate-900">PD</span>
 					</div>
 					<div>
-						<h2 className="text-2xl md:text-3xl font-serif text-amber-300 tracking-wide">Pagos y Comprobantes</h2>
-						<p className="text-sm text-slate-300">Envía tu comprobante y selecciona los libros o mentorías que deseas comprar.</p>
+						<h2 className="text-2xl md:text-3xl font-serif text-sky-800 tracking-wide">Pagos y Comprobantes</h2>
+						<p className="text-sm text-slate-600">Envía tu comprobante y selecciona los libros o mentorías que deseas comprar.</p>
 					</div>
 				</div>
 
 				<div className="text-right">
-					<p className="text-sm md:text-base text-slate-300">Aceptamos transferencias, PayPal, tarjetas, crypto y más</p>
+					<p className="text-sm md:text-base text-slate-600">Aceptamos transferencias, PayPal, tarjetas, crypto y más</p>
 					<div className="mt-2 flex items-center justify-end gap-3">
 						{flags.map((f, i) => (
 							<div key={i} className="group relative flex items-center" aria-hidden={false}>
-								<img src={f.src} alt={f.name} tabIndex={0} role="img" aria-label={f.name} className="w-8 h-5 object-cover rounded-sm shadow-sm border border-slate-700 transform transition-transform duration-200 group-hover:scale-110 group-focus:scale-110 focus:outline-none focus:ring-2 focus:ring-amber-400" />
+								<img src={f.src} alt={f.name} tabIndex={0} role="img" aria-label={f.name} className="w-8 h-5 object-cover rounded-sm shadow-sm border border-slate-300 transform transition-transform duration-200 group-hover:scale-110 group-focus:scale-110 focus:outline-none focus:ring-2 focus:ring-amber-400" />
 								<span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 z-10 whitespace-nowrap rounded-md bg-slate-800 text-amber-300 text-xs px-2 py-1 opacity-0 translate-y-1 transition-all duration-200 ease-out group-hover:opacity-100 group-hover:translate-y-0 group-focus:opacity-100 group-focus:translate-y-0" aria-hidden="true">
 									{f.name}
 								</span>
@@ -191,7 +191,7 @@ export default function PagosPage(): ReactElement {
 
 			<main className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
 				<div className="md:col-span-2">
-					<h3 className={`${headingCls} text-xl md:text-2xl font-semibold text-rose-50`}>Métodos de pago</h3>
+					<h3 className={`${headingCls} text-xl md:text-2xl font-semibold text-rose-700`}>Métodos de pago</h3>
 
 					<div className={`${paraCls} mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4`}>
 						{/* payment methods */}
@@ -228,7 +228,7 @@ export default function PagosPage(): ReactElement {
 
 							<div className="text-right text-sm text-slate-300">
 								<div>{Object.keys(selected).filter((k) => selected[k]).length} producto(s)</div>
-								<a href={mailtoContact} className="mt-2 inline-block text-xs underline text-amber-200">
+								<a href={mailtoContact} className="mt-2 inline-block text-xs underline text-amber-600">
 									¿Necesitas ayuda?
 								</a>
 							</div>
@@ -259,7 +259,7 @@ export default function PagosPage(): ReactElement {
 
 							{/* Improved upload UI */}
 							<div className="block mb-3">
-								<span className="text-sm font-medium">Subir comprobante (foto o PDF)</span>
+								<span className="text-sm font-medium text-slate-300">Subir comprobante (foto o PDF)</span>
 
 								<div className="mt-2 flex items-center gap-3">
 									{/* Hidden input */}
@@ -274,7 +274,7 @@ export default function PagosPage(): ReactElement {
 									</label>
 
 									{/* Show filename or placeholder */}
-									<div className="flex-1 text-sm text-gray-700">
+									<div className="flex-1 text-sm text-slate-400">
 										{fileName ? (
 											<div className="flex items-center justify-between gap-3">
 												<span className="truncate">{fileName}</span>
@@ -283,7 +283,7 @@ export default function PagosPage(): ReactElement {
 												</button>
 											</div>
 										) : (
-											<span className="text-sm text-gray-500">No hay archivo seleccionado</span>
+											<span className="text-sm text-slate-400">No hay archivo seleccionado</span>
 										)}
 									</div>
 								</div>
@@ -326,7 +326,7 @@ export default function PagosPage(): ReactElement {
 								</div>
 							)}
 
-							{message && <div className="mt-4 text-sm text-amber-200">{message}</div>}
+							{message && <div className="mt-4 text-sm text-amber-600">{message}</div>}
 						</div>
 					</form>
 				</div>
@@ -356,6 +356,7 @@ export default function PagosPage(): ReactElement {
 							{contactEmail}
 						</a>
 					</div>
+
 					{/* Right column: resumen y CTA */}
 					<aside className={`${cardCls} bg-slate-800 p-4 rounded-md border border-amber-500/10`}>
 						<div className="w-full text-center">
@@ -386,7 +387,7 @@ export default function PagosPage(): ReactElement {
 				</aside>
 			</main>
 
-			<footer className="mt-8 text-center text-xs text-slate-500">Todo uso sujeto a reglamento en la página web.</footer>
+			<footer className="mt-8 text-center text-xs text-slate-600">Todo uso sujeto a reglamento en la página web.</footer>
 		</section>
 	);
 }
