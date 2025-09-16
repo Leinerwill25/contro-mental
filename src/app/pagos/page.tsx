@@ -2,8 +2,28 @@
 'use client';
 
 import React, { useEffect, useRef, useState, ReactElement } from 'react';
+import Image from 'next/image';
 
 type Product = { id: string; title: string; price: number };
+type PaymentMethodId = 'bank' | 'paypal' | 'binance' | 'mobile' | 'zelle';
+
+type Payload = {
+	secret: string;
+	timestamp: string;
+	email: string;
+	products: string[];
+	total: number;
+	paymentMethod: PaymentMethodId | string;
+	fileName?: string;
+	fileType?: string;
+	fileBase64?: string;
+};
+
+type ScriptResponse = {
+	ok?: boolean;
+	error?: string;
+	[key: string]: unknown;
+};
 
 const PRODUCTS: Product[] = [
 	{ id: 'Mentoria Cumple Tus Deseos', title: 'Mentoria CUMPLE TUS DESEOS', price: 250 },
@@ -11,7 +31,7 @@ const PRODUCTS: Product[] = [
 	{ id: 'Literatura - Second Pearl Harbor', title: 'Literatura - Second Pearl Harbor', price: 12 },
 ];
 
-const PAYMENT_METHODS = [
+const PAYMENT_METHODS: { id: PaymentMethodId; label: string }[] = [
 	{ id: 'bank', label: 'Transferencia bancaria (Master Card - España)' },
 	{ id: 'paypal', label: 'PayPal' },
 	{ id: 'binance', label: 'Binance / Crypto' },
@@ -49,7 +69,7 @@ export default function PagosPage(): ReactElement {
 	const [email, setEmail] = useState('');
 	const [fileName, setFileName] = useState<string | null>(null);
 	const [filePreview, setFilePreview] = useState<string | null>(null);
-	const [paymentMethod, setPaymentMethod] = useState(PAYMENT_METHODS[0].id);
+	const [paymentMethod, setPaymentMethod] = useState<PaymentMethodId | string>(PAYMENT_METHODS[0].id);
 	const [confirmed, setConfirmed] = useState(false);
 	const [uploading, setUploading] = useState(false);
 	const [progress, setProgress] = useState(0);
@@ -127,8 +147,8 @@ export default function PagosPage(): ReactElement {
 			return;
 		}
 
-		// payload básico
-		const payload: any = {
+		// payload tipado
+		const payload: Payload = {
 			secret: SCRIPT_SECRET,
 			timestamp: new Date().toISOString(),
 			email,
@@ -148,6 +168,7 @@ export default function PagosPage(): ReactElement {
 				payload.fileType = mime;
 				payload.fileBase64 = base64;
 			} catch (err) {
+				// eslint-disable-next-line no-console
 				console.error(err);
 				setMessage('Error al procesar el archivo. Intenta con un archivo más pequeño o JPG/PDF.');
 				setUploading(false);
@@ -170,10 +191,11 @@ export default function PagosPage(): ReactElement {
 
 			setProgress(70);
 			// intento parsear JSON (Apps Script responde JSON)
-			const json = await res.json();
+			const json = (await res.json()) as ScriptResponse;
 			setProgress(100);
 
 			if (!res.ok) {
+				// eslint-disable-next-line no-console
 				console.error('Respuesta no OK', json);
 				setMessage('Error al enviar: ' + (json?.error || res.statusText || 'error desconocido'));
 			} else if (json?.ok) {
@@ -186,6 +208,7 @@ export default function PagosPage(): ReactElement {
 				setMessage('Servidor respondió con error: ' + (json?.error || JSON.stringify(json)));
 			}
 		} catch (err) {
+			// eslint-disable-next-line no-console
 			console.error('Fetch error:', err);
 			setMessage('Error de red al enviar. Comprueba que el Apps Script está desplegado y accesible (CORS / despliegue).');
 		} finally {
@@ -215,7 +238,7 @@ export default function PagosPage(): ReactElement {
 					<div className="mt-2 flex items-center justify-end gap-3">
 						{flags.map((f, i) => (
 							<div key={i} className="group relative flex items-center" aria-hidden={false}>
-								<img src={f.src} alt={f.name} tabIndex={0} role="img" aria-label={f.name} className="w-8 h-5 object-cover rounded-sm shadow-sm border border-slate-300 transform transition-transform duration-200 group-hover:scale-110 group-focus:scale-110 focus:outline-none focus:ring-2 focus:ring-amber-400" />
+								<Image src={f.src} alt={f.name} width={32} height={20} className="object-cover rounded-sm shadow-sm border border-slate-300 transform transition-transform duration-200 group-hover:scale-110 group-focus:scale-110 focus:outline-none focus:ring-2 focus:ring-amber-400" />
 								<span className="pointer-events-none absolute -top-8 left-1/2 -translate-x-1/2 z-10 whitespace-nowrap rounded-md bg-slate-800 text-amber-300 text-xs px-2 py-1 opacity-0 translate-y-1 transition-all duration-200 ease-out group-hover:opacity-100 group-hover:translate-y-0 group-focus:opacity-100 group-focus:translate-y-0" aria-hidden="true">
 									{f.name}
 								</span>
@@ -317,6 +340,8 @@ export default function PagosPage(): ReactElement {
 
 								{filePreview && (
 									<div className="mt-3">
+										{/* filePreview proviene de createObjectURL: usar img aquí es apropiado */}
+										{/* eslint-disable-next-line @next/next/no-img-element */}
 										<img src={filePreview} alt="preview" className="max-h-40 rounded-md border border-gray-200 object-contain" />
 									</div>
 								)}
@@ -360,7 +385,7 @@ export default function PagosPage(): ReactElement {
 				<aside className={`${cardCls} flex flex-col items-center gap-4`}>
 					<div className="w-full max-w-xs bg-gradient-to-br from-slate-800 to-slate-900 p-4 rounded-xl shadow-xl border border-amber-500/10">
 						<div className="w-full h-40 rounded-md overflow-hidden bg-gradient-to-br from-slate-700 to-slate-800 flex items-center justify-center">
-							<img src="/caratula.png" alt="Libros" className="object-contain h-full" />
+							<Image src="/caratula.png" alt="Libros" width={240} height={320} className="object-contain h-full" />
 						</div>
 
 						<div className="mt-3 text-center">
