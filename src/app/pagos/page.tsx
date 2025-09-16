@@ -26,7 +26,7 @@ type ScriptResponse = {
 };
 
 const PRODUCTS: Product[] = [
-	{ id: 'Mentoria Cumple Tus Deseos', title: 'Mentoria CUMPLE TUS DESEOS', price: 250 },
+	{ id: 'Mentoria Cumple Tus Deseos', title: 'Mentoria CUMPLE TUS DESEOS', price: 225 },
 	{ id: 'Mentoria Como Tener Exito En El Amor', title: 'Mentoria COMO TENER EXITO EN EL AMOR', price: 144 },
 	{ id: 'Literatura - Second Pearl Harbor', title: 'Literatura - Second Pearl Harbor', price: 12 },
 ];

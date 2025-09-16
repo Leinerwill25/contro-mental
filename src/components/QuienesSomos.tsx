@@ -17,9 +17,9 @@ const defaultTeam: TeamMember[] = [
 	{ name: 'Dr. Jesus', role: 'Gerencia', image: '/jesus.jpg', description: 'Compromiso con la excelencia y crecimiento sostenible.' },
 	{ name: 'Dr. Tullio', role: 'Gerencia', image: '/Tullio.jpg', description: 'Experto en gestión operativa y planeación empresarial.' },
 	{ name: 'Erica', role: 'Directora de Control', image: '/Erica.png', description: 'Supervisión rigurosa de procesos y cumplimiento.' },
-	{ name: 'Lourdes', role: 'Directora de Internet', image: '/W.jpeg', description: 'Lidera innovación tecnológica y transformación digital.' },
+	{ name: 'Lourdes', role: 'Directora de Internet', image: '/Lourdes.jpg', description: 'Lidera innovación tecnológica y transformación digital.' },
 	{ name: 'Dereck Ruiz', role: 'Director Desarrollo Web', image: '/pexels-djordje-petrovic-590080-2102416.jpg', description: 'Desarrollo web con enfoque en sostenibilidad y control.' },
-	{ name: 'Directora', role: 'Directora', image: '/1077063.png', description: 'Estrategias de comunicación modernas y efectivas.' },
+	{ name: 'Alejandra Méndez', role: 'Directora', image: '/W.jpeg', description: 'Estrategias de comunicación modernas y efectivas.' },
 	{ name: 'Gerencia', role: 'Gerencia', image: '/1077063.png', description: 'Impulsa el talento humano con visión global.' },
 ];
 
@@ -128,12 +128,6 @@ export default function QuienesSomos({ team = defaultTeam }: { team?: TeamMember
 							</span>
 							&nbsp;
 							<span className="inline-block px-2 py-0.5 rounded-md bg-yellow-50 border border-yellow-100 text-yellow-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105">Desarrollador Web · Genio en el mundo del Internet</span>
-							&nbsp;*
-							<span title="Luishaidy Gil" className="inline-block px-2 py-0.5 rounded-md bg-indigo-50 border border-indigo-100 text-indigo-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105">
-								LUISHAIDY GIL
-							</span>
-							&nbsp;
-							<span className="inline-block px-2 py-0.5 rounded-md bg-yellow-50 border border-yellow-100 text-yellow-700 font-semibold tracking-wide uppercase text-xs md:text-sm transform transition-transform duration-150 hover:scale-105">Excelencia y juventud como Directora</span>
 							.&nbsp;Ahora ellos no están&nbsp;
 							<span className="uppercase text-blue-700 font-bold">MÁS</span>
 							&nbsp;DIOS mediante esperamos tener la suerte de volver pronto a tenerlos en nuestra familia empresarial.
