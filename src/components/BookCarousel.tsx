@@ -201,7 +201,7 @@ export default function BookCarousel({ books, autoplay = 0, backgroundImage = '/
 							{/* Price & CTA */}
 							<div className="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-start gap-4">
 								<div className="flex items-center gap-3 ml-0 sm:ml-6">
-									<Link href={`/pagos?product=${encodeURIComponent(String(book.id))}`} className="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-gradient-to-r from-green-500 to-green-900 text-white font-semibold shadow-lg hover:scale-[1.03] transform transition focus:outline-none focus:ring-4 focus:ring-indigo-200" aria-label={`Adquirir ${book.title} - Ir a pagos`}>
+									<Link href={`/pagos?product=${encodeURIComponent(String(book.id))}`} className="inline-flex items-center gap-3 px-6 md:px-8 py-3 md:py-4 rounded-xl bg-gradient-to-r from-green-500 to-green-900 text-white text-lg md:text-xl font-semibold shadow-lg hover:scale-[1.03] transform transition focus:outline-none focus:ring-4 focus:ring-amber-300" aria-label={`Adquirir ${book.title} - Ir a pagos`}>
 										Adquirir
 									</Link>
 
