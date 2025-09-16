@@ -42,6 +42,19 @@ export default function AnimalHelpBanner({ imageSrc = '/cap2.png', imageAlt = 'A
 					<span>Tu apoyo marca la diferencia</span>
 				</div>
 			</div>
+			<div className="flex justify-center mt-6">
+				<a
+					href="/pagos"
+					aria-label="Adquirir cualquier producto"
+					className="inline-flex items-center px-6 py-3 rounded-md font-semibold text-sm shadow-md transition-transform transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-amber-300"
+					style={{
+						background: 'linear-gradient(90deg,#E9C96A 0%, #D4AF37 100%)',
+						color: '#042f42',
+						textDecoration: 'none',
+					}}>
+					Adquirir cualquier producto
+				</a>
+			</div>
 		</section>
 	);
 }

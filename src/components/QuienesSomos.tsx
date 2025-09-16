@@ -17,7 +17,7 @@ const defaultTeam: TeamMember[] = [
 	{ name: 'Dr. Jesus', role: 'Gerencia', image: '/jesus.jpg', description: 'Compromiso con la excelencia y crecimiento sostenible.' },
 	{ name: 'Dr. Tullio', role: 'Gerencia', image: '/Tullio.jpg', description: 'Experto en gestión operativa y planeación empresarial.' },
 	{ name: 'Erica', role: 'Directora de Control', image: '/Erica.png', description: 'Supervisión rigurosa de procesos y cumplimiento.' },
-	{ name: 'Lourdes', role: 'Directora de Internet', image: '/Lourdes.jpg', description: 'Lidera innovación tecnológica y transformación digital.' },
+	{ name: 'Lourdes', role: 'Directora de Internet', image: '/W.jpeg', description: 'Lidera innovación tecnológica y transformación digital.' },
 	{ name: 'Dereck Ruiz', role: 'Director Desarrollo Web', image: '/pexels-djordje-petrovic-590080-2102416.jpg', description: 'Desarrollo web con enfoque en sostenibilidad y control.' },
 	{ name: 'Directora', role: 'Directora', image: '/1077063.png', description: 'Estrategias de comunicación modernas y efectivas.' },
 	{ name: 'Gerencia', role: 'Gerencia', image: '/1077063.png', description: 'Impulsa el talento humano con visión global.' },

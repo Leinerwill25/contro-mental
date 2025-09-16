@@ -174,7 +174,7 @@ export default function TarotShowcase({ title = 'CONSULTAS TAROT ALPHA', subtitl
 							<span
 								className="block title-gradient hover:scale-[1.02] transition-transform"
 								style={{
-									backgroundImage: 'linear-gradient(90deg, #ff3b30 0%, #ff6fa3 45%, #0066ff 100%)',
+									backgroundImage: 'linear-gradient(90deg, #98ffe0 0%, #5ccda7 45%, #009d71 100%)',
 									WebkitBackgroundClip: 'text',
 									backgroundClip: 'text',
 									color: 'transparent',

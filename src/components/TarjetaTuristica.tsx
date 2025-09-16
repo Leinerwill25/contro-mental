@@ -175,7 +175,7 @@ export default function TarjetaTuristica({ ticketImage = '/C.png', email = 'Corp
 					</div>
 
 					<div className={`${bannerCls} w-full max-w-md bg-amber-50 text-slate-900 p-4 rounded-md border border-amber-300 shadow-md`}>
-						<p className="text-base md:text-lg font-semibold">¿Eres empresario y deseas aumentar tus ventas?</p>
+						<p className="text-xl md:text-2xl lg:text-3xl font-semibold leading-tight">¿Eres empresario y deseas aumentar tus ventas?</p>
 						<p className="text-sm md:text-base mt-2 text-slate-700">Escríbenos sin compromiso para recibir más información:</p>
 						<a
 							href={`mailto:${email}`}

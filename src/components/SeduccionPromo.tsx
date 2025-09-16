@@ -145,7 +145,7 @@ export default function SeduccionPromoFinal({ title = 'I.- Como Tener Éxito en 
 
 							{/* email CTA styled like poster (pink box) */}
 							<div className="mt-4">
-								<a href={mailto} className="block text-center px-3 py-2 rounded-md bg-gradient-to-r from-rose-400 to-pink-400 text-white font-bold shadow-md hover:scale-[1.02] transition-transform" aria-label={`Enviar correo a ${email}`}>
+								<a href={mailto} className="block text-center px-3 py-2 rounded-md bg-gradient-to-r from-rose-200 to-pink-300 text-white font-bold shadow-md hover:scale-[1.02] transition-transform" aria-label={`Enviar correo a ${email}`}>
 									{email}
 								</a>
 							</div>
